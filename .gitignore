@@ -1,0 +1,10 @@
+# Ignore large raw data files
+tbl_SearchTracking_Merged.csv
+
+# Ignore environments and caches
+.venv/
+__pycache__/
+.DS_Store
+
+# Optionally ignore other models/runs
+catboost_info/
