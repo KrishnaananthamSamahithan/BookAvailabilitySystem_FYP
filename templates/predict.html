@@ -1,0 +1,351 @@
+﻿{% extends "base.html" %}
+{% block title %}Real-Time Predict - Flight Bookability{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+
+  <!-- Left: Prediction Form -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-dark text-white fw-semibold">
+        <i class="bi bi-lightning-fill me-2"></i>Real-Time Flight Bookability Prediction
+      </div>
+      <div class="card-body">
+
+        {% if not bundle_loaded %}
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          No model loaded. Run <code>python -m src.train</code> first.
+        </div>
+        {% endif %}
+
+        <form method="POST" action="/predict" id="predictForm">
+
+          <h6 class="fw-bold text-muted mb-3 mt-1">
+            <i class="bi bi-airplane me-1"></i> Flight Details
+          </h6>
+
+          <div class="row g-2">
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Origin Airport</label>
+              <input type="text" name="origin_airport" class="form-control form-control-sm text-uppercase"
+                     placeholder="e.g. LHR" maxlength="4"
+                     value="{{ form_data.get('origin_airport', 'LHR') }}" required />
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Destination Airport</label>
+              <input type="text" name="destination_airport" class="form-control form-control-sm text-uppercase"
+                     placeholder="e.g. JFK" maxlength="4"
+                     value="{{ form_data.get('destination_airport', 'JFK') }}" required />
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Airline Code</label>
+              <input type="text" name="airline_code" class="form-control form-control-sm text-uppercase"
+                     placeholder="e.g. BA" maxlength="3"
+                     value="{{ form_data.get('airline_code', 'BA') }}" />
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Departure Date</label>
+              <input type="date" name="departure_date" class="form-control form-control-sm"
+                     value="{{ form_data.get('departure_date', '') }}" required />
+            </div>
+          </div>
+
+          <hr class="my-3" />
+          <h6 class="fw-bold text-muted mb-3">
+            <i class="bi bi-search me-1"></i> Search Context
+          </h6>
+
+          <div class="row g-2">
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Trip Type</label>
+              <select name="trip_type" class="form-select form-select-sm">
+                {% for opt in ['OneWay', 'Return', 'Multicity'] %}
+                <option {% if form_data.get('trip_type') == opt %}selected{% endif %}>{{ opt }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Cabin Class</label>
+              <select name="cabin_class" class="form-select form-select-sm">
+                {% for opt in ['M', 'W', 'C', 'F'] %}
+                <option {% if form_data.get('cabin_class') == opt %}selected{% endif %}>{{ opt }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Meta Engine</label>
+              <select name="meta_engine" class="form-select form-select-sm">
+                {% for opt in ['Skyscanner', 'Google', 'Kayak', 'Momondo', 'TripAdvisor', 'Direct', 'Other'] %}
+                <option {% if form_data.get('meta_engine') == opt %}selected{% endif %}>{{ opt }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Provider Key</label>
+              <input type="text" name="provider_key" class="form-control form-control-sm"
+                     placeholder="provider name/ID"
+                     value="{{ form_data.get('provider_key', '') }}" />
+            </div>
+          </div>
+
+          <hr class="my-3" />
+          <h6 class="fw-bold text-muted mb-3">
+            <i class="bi bi-person me-1"></i> Passengers & Price
+          </h6>
+
+          <div class="row g-2">
+            <div class="col-4">
+              <label class="form-label small fw-semibold">Adults</label>
+              <input type="number" name="adults" class="form-control form-control-sm"
+                     min="1" max="9" value="{{ form_data.get('adults', 1) }}" />
+            </div>
+            <div class="col-4">
+              <label class="form-label small fw-semibold">Children</label>
+              <input type="number" name="children" class="form-control form-control-sm"
+                     min="0" max="9" value="{{ form_data.get('children', 0) }}" />
+            </div>
+            <div class="col-4">
+              <label class="form-label small fw-semibold">Stops</label>
+              <input type="number" name="stop_count" class="form-control form-control-sm"
+                     min="0" max="5" value="{{ form_data.get('stop_count', 0) }}" />
+            </div>
+            <div class="col-6">
+              <label class="form-label small fw-semibold">Price (optional)</label>
+              <input type="number" name="price_total" class="form-control form-control-sm"
+                     placeholder="total fare" min="0"
+                     value="{{ form_data.get('price_total', '') }}" />
+            </div>
+          </div>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary" {% if not bundle_loaded %}disabled{% endif %}>
+              <i class="bi bi-lightning-fill me-2"></i>Predict Bookability
+            </button>
+          </div>
+        </form>
+
+        <!-- API Snippet -->
+        <div class="mt-3">
+          <button class="btn btn-outline-secondary btn-sm w-100" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#apiSnippet">
+            <i class="bi bi-code-slash me-1"></i>Show REST API Example
+          </button>
+          <div class="collapse mt-2" id="apiSnippet">
+            <pre class="bg-dark text-light p-3 rounded small"><code>POST /api/predict
+Content-Type: application/json
+
+{
+  "origin_airport": "LHR",
+  "destination_airport": "JFK",
+  "airline_code": "BA",
+  "cabin_class": "M",
+  "trip_type": "OneWay",
+  "departure_date": "2025-08-01",
+  "meta_engine": "Skyscanner",
+  "price_total": 450.0,
+  "stop_count": 0,
+  "passenger_count": 1
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Results -->
+  <div class="col-lg-7">
+
+    {% if result and not result.get('error') %}
+    <!-- Prediction result card -->
+    <div class="card shadow border-0 mb-4">
+      <div class="card-header bg-{{ result.badge_class }} text-white fw-bold">
+        <i class="bi bi-check-circle me-2"></i>Prediction Result
+      </div>
+      <div class="card-body">
+        <div class="text-center mb-4">
+          <div class="display-5 fw-bold text-{{ result.badge_class }}">
+            {{ result.predicted_label_display }}
+          </div>
+          <div class="text-muted mt-1">
+            Confidence: <b>{{ result.confidence }}%</b>
+            &nbsp;|&nbsp;
+            Latency: <b>{{ result.latency_ms }} ms</b>
+            &nbsp;|&nbsp;
+            Model: <b>{{ result.model_name | replace('_',' ') | title }}</b>
+            + <b>{{ result.calibrator_name | replace('_',' ') | title }}</b> calibration
+          </div>
+        </div>
+
+        <div class="alert alert-info">
+          <i class="bi bi-link-45deg me-1"></i>
+          <b>Feedback Required:</b> this prediction is not used for history features until true outcome is submitted.
+          <div class="small mt-1">
+            <b>prediction_id:</b> <code>{{ result.prediction_id }}</code>
+          </div>
+          <div class="small mt-1">
+            POST <code>/api/feedback</code> with <code>{"prediction_id":"{{ result.prediction_id }}","true_label":"bookable"}</code>
+          </div>
+        </div>
+
+        <!-- Probability bars -->
+        <h6 class="fw-semibold text-muted">Calibrated Probability Distribution</h6>
+        {% for label, prob in result.probabilities.items() %}
+        {% set pct = (prob * 100) | round(1) %}
+        {% set bar_color = {'bookable': 'success', 'price_changed': 'warning', 'unavailable': 'danger', 'technical_failure': 'secondary'} %}
+        <div class="mb-2">
+          <div class="d-flex justify-content-between small mb-1">
+            <span class="fw-semibold">{{ label | replace('_',' ') | title }}</span>
+            <span>{{ pct }}%</span>
+          </div>
+          <div class="progress" style="height: 18px;">
+            <div class="progress-bar bg-{{ bar_color.get(label, 'primary') }}"
+                 style="width: {{ pct }}%">
+              {% if pct > 10 %}{{ pct }}%{% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- Probability chart -->
+        <canvas id="probChart" height="140" class="mt-3"></canvas>
+
+        <!-- Interpretation -->
+        <div class="alert alert-{{ result.badge_class }} mt-3 mb-0">
+          {% if result.predicted_label == 'bookable' %}
+            <i class="bi bi-check-circle me-1"></i>
+            <b>Bookable.</b> High confidence this offer can be completed. Show to the user.
+          {% elif result.predicted_label == 'price_changed' %}
+            <i class="bi bi-exclamation-triangle me-1"></i>
+            <b>Price Changed.</b> Offer exists but the displayed price likely differs. Warn the user.
+          {% elif result.predicted_label == 'unavailable' %}
+            <i class="bi bi-x-circle me-1"></i>
+            <b>Unavailable.</b> This offer is likely sold out. Consider suppressing.
+          {% else %}
+            <i class="bi bi-exclamation-octagon me-1"></i>
+            <b>Technical Failure.</b> Provider may be experiencing issues. Retry or suppress.
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% elif result and result.get('error') %}
+    <div class="alert alert-danger">
+      <i class="bi bi-exclamation-circle me-2"></i>{{ result.error }}
+    </div>
+    {% endif %}
+
+    <!-- Latency stats panel -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-dark text-white fw-semibold">
+        <i class="bi bi-stopwatch me-2"></i>Live Inference Latency
+      </div>
+      <div class="card-body">
+        <div class="row text-center">
+          {% set ls = latency_stats %}
+          <div class="col-3">
+            <div class="fw-bold {% if ls.p50_ms and ls.p50_ms < 50 %}text-success{% elif ls.p50_ms %}text-warning{% else %}text-muted{% endif %}">
+              {{ ls.p50_ms if ls.p50_ms else '-' }} ms
+            </div>
+            <div class="text-muted small">p50</div>
+          </div>
+          <div class="col-3">
+            <div class="fw-bold {% if ls.p95_ms and ls.p95_ms < 100 %}text-success{% elif ls.p95_ms %}text-warning{% else %}text-muted{% endif %}">
+              {{ ls.p95_ms if ls.p95_ms else '-' }} ms
+            </div>
+            <div class="text-muted small">p95</div>
+          </div>
+          <div class="col-3">
+            <div class="fw-bold {% if ls.p99_ms and ls.p99_ms < 200 %}text-success{% elif ls.p99_ms %}text-warning{% else %}text-muted{% endif %}">
+              {{ ls.p99_ms if ls.p99_ms else '-' }} ms
+            </div>
+            <div class="text-muted small">p99</div>
+          </div>
+          <div class="col-3">
+            <div class="fw-bold text-primary">{{ ls.count }}</div>
+            <div class="text-muted small">Total Requests</div>
+          </div>
+        </div>
+        {% if ls.count > 0 %}
+        <div class="mt-2 small text-muted text-center">
+          Real-time inference latency benchmarks. Target: p50 &lt; 50ms, p99 &lt; 200ms.
+        </div>
+        {% else %}
+        <div class="mt-2 text-muted text-center small">Submit a prediction to see latency measurements.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Recent events -->
+    {% if recent_predictions %}
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-dark text-white fw-semibold">
+        <i class="bi bi-clock me-2"></i>Recent Events (Predictions + Feedback)
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-sm mb-0">
+          <thead class="table-dark">
+            <tr><th>Time</th><th>Route</th><th>Provider</th><th>Type</th><th>Label</th></tr>
+          </thead>
+          <tbody>
+            {% for pred in recent_predictions | reverse %}
+            <tr>
+              <td class="text-muted small">{{ pred.timestamp[11:19] }}</td>
+              <td><code>{{ pred.route }}</code></td>
+              <td class="text-muted small">{{ pred.provider_key }}</td>
+              <td>
+                <span class="badge bg-dark">{{ pred.source | default('prediction') }}</span>
+              </td>
+              <td>
+                {% set bc = {'bookable':'success','price_changed':'warning','unavailable':'danger','technical_failure':'secondary'} %}
+                {% set event_label = pred.predicted_label if pred.predicted_label is defined else pred.outcome_label %}
+                <span class="badge bg-{{ bc.get(event_label, 'dark') }}">
+                  {{ event_label | replace('_',' ') | title }}
+                </span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{% if result and not result.get('error') %}
+<script>
+const probLabels = {{ result.probabilities.keys() | list | tojson }};
+const probVals   = {{ result.probabilities.values() | list | tojson }};
+const probColors = probLabels.map(l => {
+  const m = {bookable:'#198754', price_changed:'#ffc107', unavailable:'#dc3545', technical_failure:'#6c757d'};
+  return m[l] || '#0d6efd';
+});
+
+new Chart(document.getElementById('probChart'), {
+  type: 'bar',
+  data: {
+    labels: probLabels.map(l => l.replace(/_/g, ' ')),
+    datasets: [{
+      label: 'Calibrated Probability',
+      data: probVals.map(v => (v * 100).toFixed(2)),
+      backgroundColor: probColors,
+      borderRadius: 5,
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, max: 100, title: { display: true, text: 'Probability (%)' } }
+    },
+    responsive: true,
+  }
+});
+</script>
+{% endif %}
+{% endblock %}
+

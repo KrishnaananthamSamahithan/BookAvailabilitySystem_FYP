@@ -1,0 +1,270 @@
+{
+  "dataset_shape": {
+    "rows": 366126,
+    "columns": 31
+  },
+  "label_distribution": {
+    "counts": {
+      "bookable": 288481,
+      "unavailable": 51903,
+      "price_changed": 25742
+    },
+    "proportions": {
+      "bookable": 0.7879,
+      "unavailable": 0.1418,
+      "price_changed": 0.0703
+    },
+    "imbalance_ratio_max_to_min": 11.21,
+    "dominant_class": "bookable"
+  },
+  "missing_rates": {
+    "price_total": 1.0
+  },
+  "columns_with_any_missing": 1,
+  "columns_fully_present": 30,
+  "numeric_summaries": {
+    "days_to_departure": {
+      "count": 366126,
+      "mean": 97.02905283973277,
+      "std": 91.87808806128395,
+      "min": 0.0,
+      "p25": 24.0,
+      "median": 63.0,
+      "p75": 154.0,
+      "p95": 299.0,
+      "p99": 339.0,
+      "max": 359.0,
+      "missing_rate": 0.0
+    },
+    "passenger_count": {
+      "count": 366126,
+      "mean": 1.8808825377055987,
+      "std": 1.3267992214643092,
+      "min": 0.0,
+      "p25": 1.0,
+      "median": 1.0,
+      "p75": 2.0,
+      "p95": 5.0,
+      "p99": 6.0,
+      "max": 12.0,
+      "missing_rate": 0.0
+    },
+    "stop_count": {
+      "count": 366126,
+      "mean": 2.02862402560867,
+      "std": 1.3247544863842802,
+      "min": 0.0,
+      "p25": 1.0,
+      "median": 2.0,
+      "p75": 3.0,
+      "p95": 4.0,
+      "p99": 5.0,
+      "max": 12.0,
+      "missing_rate": 0.0
+    },
+    "adults": {
+      "count": 366126,
+      "mean": 1.5915122116429863,
+      "std": 0.9562436229518385,
+      "min": 0.0,
+      "p25": 1.0,
+      "median": 1.0,
+      "p75": 2.0,
+      "p95": 4.0,
+      "p99": 5.0,
+      "max": 9.0,
+      "missing_rate": 0.0
+    },
+    "children": {
+      "count": 366126,
+      "mean": 0.2445933913461486,
+      "std": 0.6358799026379257,
+      "min": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 0.0,
+      "p95": 2.0,
+      "p99": 3.0,
+      "max": 6.0,
+      "missing_rate": 0.0
+    },
+    "infants": {
+      "count": 366126,
+      "mean": 0.04477693471646373,
+      "std": 0.2146045419106841,
+      "min": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 0.0,
+      "p95": 0.0,
+      "p99": 1.0,
+      "max": 3.0,
+      "missing_rate": 0.0
+    }
+  },
+  "categorical_cardinality": {
+    "origin_airport": {
+      "unique_values": 103,
+      "top_5": {
+        "LON": 129950,
+        "LHR": 112159,
+        "MAN": 60823,
+        "LGW": 15517,
+        "BHX": 14293
+      },
+      "coverage_top_5_pct": 90.88
+    },
+    "destination_airport": {
+      "unique_values": 1088,
+      "top_5": {
+        "ISB": 18156,
+        "DEL": 16784,
+        "BKK": 15234,
+        "DXB": 14969,
+        "JED": 13668
+      },
+      "coverage_top_5_pct": 21.53
+    },
+    "airline_code": {
+      "unique_values": 6054,
+      "top_5": {
+        "BA": 51459,
+        "EK": 27869,
+        "EY": 24114,
+        "QR": 21312,
+        "AI": 18827
+      },
+      "coverage_top_5_pct": 39.22
+    },
+    "cabin_class": {
+      "unique_values": 7,
+      "top_5": {
+        "ANY": 331153,
+        "C": 13260,
+        "W": 10864,
+        "M": 10178,
+        "F": 668
+      },
+      "coverage_top_5_pct": 100.0
+    },
+    "trip_type": {
+      "unique_values": 3,
+      "top_5": {
+        "Return": 203669,
+        "Multicity": 90331,
+        "Oneway": 72126
+      },
+      "coverage_top_5_pct": 100.0
+    },
+    "meta_engine": {
+      "unique_values": 1,
+      "top_5": {
+        "Direct": 366126
+      },
+      "coverage_top_5_pct": 100.0
+    },
+    "provider_key": {
+      "unique_values": 1,
+      "top_5": {
+        "Direct": 366126
+      },
+      "coverage_top_5_pct": 100.0
+    },
+    "referrer_domain": {
+      "unique_values": 1,
+      "top_5": {
+        "Unknown": 366126
+      },
+      "coverage_top_5_pct": 100.0
+    },
+    "market": {
+      "unique_values": 1,
+      "top_5": {
+        "Unknown": 366126
+      },
+      "coverage_top_5_pct": 100.0
+    },
+    "locale": {
+      "unique_values": 1922,
+      "top_5": {
+        "en-GB,en;q%3d0.9": 147274,
+        "en-US": 70496,
+        "en-GB,en-US;q%3d0.9,en;q%3d0.8": 64600,
+        "en-US,en;q%3d0.9": 28204,
+        "en-GB,en;q%3d0.9,en-US;q%3d0.8": 11705
+      },
+      "coverage_top_5_pct": 88.02
+    },
+    "device_os": {
+      "unique_values": 1,
+      "top_5": {
+        "Unknown": 366126
+      },
+      "coverage_top_5_pct": 100.0
+    }
+  },
+  "records_per_month": {
+    "2025-12": 102207,
+    "2026-01": 214547,
+    "2026-02": 49372
+  },
+  "date_range": {
+    "earliest": "2025-12-11 03:01:10.020000",
+    "latest": "2026-02-10 18:27:18",
+    "total_days": 61
+  },
+  "days_to_departure_by_label": {
+    "bookable": {
+      "median_days": 62.0,
+      "mean_days": 95.5761280638933,
+      "pct_same_day": 2.7731462384004494e-05,
+      "pct_short_lead": 0.08678214509794406,
+      "pct_long_lead": 0.512779004509829
+    },
+    "price_changed": {
+      "median_days": 69.0,
+      "mean_days": 103.34577732887888,
+      "pct_same_day": 0.0,
+      "pct_short_lead": 0.08317147074819362,
+      "pct_long_lead": 0.5452179317846321
+    },
+    "unavailable": {
+      "median_days": 68.0,
+      "mean_days": 101.9716586709824,
+      "pct_same_day": 5.780012716027975e-05,
+      "pct_short_lead": 0.0861029227597634,
+      "pct_long_lead": 0.5403733888214554
+    }
+  },
+  "top_10_routes": {
+    "LHR_DEL": 10211,
+    "LHR_BOM": 6735,
+    "MAN_ISB": 6607,
+    "LHR_DXB": 5257,
+    "LHR_HKG": 5155,
+    "LHR_CMB": 5129,
+    "MAN_JED": 4986,
+    "LHR_BKK": 4468,
+    "LON_BKK": 4247,
+    "LON_CMB": 3992
+  },
+  "top_10_airlines": {
+    "BA": 51459,
+    "EK": 27869,
+    "EY": 24114,
+    "QR": 21312,
+    "AI": 18827,
+    "SV": 18548,
+    "ALL": 14620,
+    "VS": 12655,
+    "TK": 10177,
+    "CZ": 7936
+  },
+  "label_by_meta_engine": {
+    "Direct": {
+      "bookable": 288481,
+      "price_changed": 25742,
+      "unavailable": 51903
+    }
+  }
+}

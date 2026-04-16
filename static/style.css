@@ -1,0 +1,87 @@
+/* Real-Time Flight Bookability Prediction System — Custom Styles */
+
+body {
+  font-size: 0.92rem;
+}
+
+.navbar-brand {
+  letter-spacing: 0.5px;
+}
+
+/* Cards */
+.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+  font-size: 0.88rem;
+  padding: 0.6rem 1rem;
+}
+
+/* Tables */
+.table-sm td, .table-sm th {
+  padding: 0.35rem 0.6rem;
+  vertical-align: middle;
+}
+
+/* Stat big numbers */
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Progress bars */
+.progress {
+  border-radius: 6px;
+}
+
+/* Code blocks */
+pre code {
+  font-size: 0.78rem;
+}
+
+/* Badge sizing */
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* Form tweaks */
+.form-label {
+  margin-bottom: 0.2rem;
+}
+
+/* Prediction result highlight */
+.result-highlight {
+  border: 3px solid;
+  border-radius: 12px;
+}
+
+/* Chart containers */
+canvas {
+  max-height: 280px;
+}
+
+/* Alert sizing */
+.alert {
+  font-size: 0.88rem;
+}
+
+/* Navbar */
+.navbar .nav-link {
+  font-size: 0.88rem;
+}
+
+/* Footer */
+footer {
+  font-size: 0.8rem;
+  letter-spacing: 0.2px;
+}
+
+/* Utility — subtle section separator */
+.section-sep {
+  border-top: 2px solid #e9ecef;
+  margin: 1.5rem 0;
+}

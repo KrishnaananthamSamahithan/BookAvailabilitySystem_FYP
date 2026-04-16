@@ -1,0 +1,23 @@
+{
+  "configured_labels": [
+    "bookable",
+    "price_changed",
+    "unavailable",
+    "technical_failure"
+  ],
+  "processed_label_counts": {
+    "bookable": 288481,
+    "price_changed": 25742,
+    "unavailable": 51903,
+    "technical_failure": 0
+  },
+  "active_labels": [
+    "bookable",
+    "price_changed",
+    "unavailable"
+  ],
+  "inactive_labels": [
+    "technical_failure"
+  ],
+  "zero_support_warning": "The following classes are absent from training data and will receive F1=0.0: ['technical_failure']. Headline metric is macro_f1_present_classes (excludes zero-support classes)."
+}
