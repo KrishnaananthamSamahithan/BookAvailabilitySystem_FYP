@@ -1,0 +1,5 @@
+{
+  "selected_raw_column": "LandingTime",
+  "matched_alias": "LandingTime",
+  "assumption": "LandingTime is used as the prediction-time proxy because it is the best available timestamp for the real-time decision moment in the current raw log export."
+}

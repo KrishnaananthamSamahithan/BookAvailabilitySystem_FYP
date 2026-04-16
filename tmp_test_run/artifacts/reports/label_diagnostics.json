@@ -1,0 +1,14 @@
+{
+  "raw_status_frequencies": {
+    "Not Booked": 10651,
+    "Booked": 4738,
+    "Not Available": 3073,
+    "Price Mismatch": 1538
+  },
+  "canonical_label_counts": {
+    "bookable": 15389,
+    "unavailable": 3073,
+    "price_changed": 1538
+  },
+  "unmapped_to_ambiguous_count": 0
+}

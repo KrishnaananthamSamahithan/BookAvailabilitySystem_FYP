@@ -1,0 +1,16 @@
+{
+    "total_rows_read": 406505,
+    "dropped_schema_invalid": 0,
+    "dropped_missing_required": 0,
+    "dropped_negative_days": 218,
+    "dropped_outside_24h_window": 99990,
+    "dropped_duplicates": 303,
+    "total_rows_written": 305994,
+    "label_distribution": {
+        "ambiguous": 154960,
+        "unavailable": 44309,
+        "bookable": 85038,
+        "price_changed": 21990
+    },
+    "missing_values_audit": {}
+}

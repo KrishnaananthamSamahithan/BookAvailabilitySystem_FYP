@@ -1,0 +1,48 @@
+{
+  "rows": [
+    {
+      "name": "temperature_scaling",
+      "selection_score": 0.2727880436213803,
+      "accuracy": 0.4306589279617617,
+      "balanced_accuracy": 0.44398821556149265,
+      "macro_f1": 0.33646894163961516,
+      "weighted_f1": 0.5162607559337832,
+      "log_loss": 0.9160177488987875,
+      "multiclass_brier": 0.5378462271355374,
+      "ece_macro": 0.17880010573295474
+    },
+    {
+      "name": "ovr_isotonic",
+      "selection_score": 0.26885470555642077,
+      "accuracy": 0.7997814953909184,
+      "balanced_accuracy": 0.3333333333333333,
+      "macro_f1": 0.2962513310417915,
+      "weighted_f1": 0.7108089976564621,
+      "log_loss": 0.5477283102391726,
+      "multiclass_brier": 0.3118183421416857,
+      "ece_macro": 0.00010209973412103927
+    },
+    {
+      "name": "multinomial_logistic",
+      "selection_score": 0.2687087152029306,
+      "accuracy": 0.7997814953909184,
+      "balanced_accuracy": 0.3333333333333333,
+      "macro_f1": 0.2962513310417915,
+      "weighted_f1": 0.7108089976564621,
+      "log_loss": 0.5494005291189558,
+      "multiclass_brier": 0.31218400089374443,
+      "ece_macro": 0.0007258938291308582
+    },
+    {
+      "name": "none",
+      "selection_score": 0.2680699210960683,
+      "accuracy": 0.4306589279617617,
+      "balanced_accuracy": 0.44398821556149265,
+      "macro_f1": 0.33646894163961516,
+      "weighted_f1": 0.5162607559337832,
+      "log_loss": 0.9616868328112455,
+      "multiclass_brier": 0.5641771788516914,
+      "ece_macro": 0.20314678902984568
+    }
+  ]
+}

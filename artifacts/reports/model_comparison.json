@@ -1,0 +1,52 @@
+{
+  "rows": [
+    {
+      "name": "random_forest",
+      "selection_score": 0.28838459999905286,
+      "accuracy": 0.4306589279617617,
+      "balanced_accuracy": 0.44398821556149265,
+      "macro_f1": 0.33646894163961516,
+      "weighted_f1": 0.5162607559337832,
+      "log_loss": 0.9616868328112455,
+      "multiclass_brier": 0.5641771788516914,
+      "ece_macro": 0.20314678902984568,
+      "tuning_metadata": {
+        "strategy": "fixed_reasonable_defaults"
+      }
+    },
+    {
+      "name": "catboost",
+      "selection_score": 0.2743142187034673,
+      "accuracy": 0.3875179242062137,
+      "balanced_accuracy": 0.4551948081361505,
+      "macro_f1": 0.31814035069120045,
+      "weighted_f1": 0.47742875527269657,
+      "log_loss": 0.8765226397546636,
+      "multiclass_brier": 0.5327789920979781,
+      "ece_macro": 0.1603564886025516,
+      "tuning_metadata": {
+        "best_params": {
+          "depth": 8,
+          "learning_rate": 0.05,
+          "iterations": 250
+        },
+        "trial_count": 4
+      }
+    },
+    {
+      "name": "logistic_regression",
+      "selection_score": 0.2507807512352927,
+      "accuracy": 0.7813861386138614,
+      "balanced_accuracy": 0.3379261267767051,
+      "macro_f1": 0.3165555417697322,
+      "weighted_f1": 0.710285198542859,
+      "log_loss": 1.3154958106887904,
+      "multiclass_brier": 0.3858117261912362,
+      "ece_macro": 0.08634783109228028,
+      "tuning_metadata": {
+        "best_C": 0.5,
+        "trial_count": 3
+      }
+    }
+  ]
+}

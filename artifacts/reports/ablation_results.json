@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "feature_group": "topology_basic",
+      "macro_f1": 0.33392678127657,
+      "weighted_f1": 0.4981823504352106,
+      "balanced_accuracy": 0.4530150698564153,
+      "log_loss": 0.9665940830820775,
+      "multiclass_brier": 0.5681244806067082,
+      "ece_macro": 0.20507150029091556
+    },
+    {
+      "feature_group": "temporal",
+      "macro_f1": 0.3355989177932576,
+      "weighted_f1": 0.4996719731904526,
+      "balanced_accuracy": 0.455714818131465,
+      "log_loss": 0.9627142200040505,
+      "multiclass_brier": 0.5652994165690471,
+      "ece_macro": 0.203922235408094
+    },
+    {
+      "feature_group": "price",
+      "macro_f1": 0.33526853934320905,
+      "weighted_f1": 0.5007261747126575,
+      "balanced_accuracy": 0.45338625344277866,
+      "log_loss": 0.9652608024696212,
+      "multiclass_brier": 0.567126933253589,
+      "ece_macro": 0.2046502344075417
+    },
+    {
+      "feature_group": "reliability_history",
+      "macro_f1": 0.3375559688147911,
+      "weighted_f1": 0.5142882597968063,
+      "balanced_accuracy": 0.44338406299991195,
+      "log_loss": 0.9553813819429935,
+      "multiclass_brier": 0.559734029607554,
+      "ece_macro": 0.2013885875475612
+    },
+    {
+      "feature_group": "full_valid_model",
+      "macro_f1": 0.33646894163961516,
+      "weighted_f1": 0.5162607559337832,
+      "balanced_accuracy": 0.44398821556149265,
+      "log_loss": 0.9616868328112455,
+      "multiclass_brier": 0.5641771788516914,
+      "ece_macro": 0.20314678902984568
+    }
+  ]
+}

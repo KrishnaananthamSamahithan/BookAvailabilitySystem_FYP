@@ -1,0 +1,12 @@
+{
+    "LogLoss":{
+        "Base":0.6578857496,
+        "Base+Temporal":0.5901108911,
+        "FullPipeline":0.2992596114
+    },
+    "MacroF1":{
+        "Base":0.5714902067,
+        "Base+Temporal":0.5848819165,
+        "FullPipeline":0.7915579609
+    }
+}

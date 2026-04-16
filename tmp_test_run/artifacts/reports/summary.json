@@ -1,0 +1,12 @@
+{
+  "best_model": "random_forest",
+  "best_model_selection_score": 0.258086419899305,
+  "best_calibrator": "ovr_isotonic",
+  "final_test_macro_f1": 0.2784053749048631,
+  "final_test_log_loss": 1.8695076957287238,
+  "final_test_balanced_accuracy": 0.33303213328894593,
+  "final_test_weighted_f1": 0.5947911692139922,
+  "processed_rows": 17119,
+  "supervised_rows": 17119,
+  "artifacts_dir": "/Users/samahithan/Desktop/Fyp/20210863_IPD/tmp_test_run/artifacts"
+}

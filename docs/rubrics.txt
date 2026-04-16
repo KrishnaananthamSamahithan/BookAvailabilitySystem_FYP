@@ -1,0 +1,239 @@
+Implementation Marking Rubric
+Project title
+
+Develop and Evaluate a Real-Time Bookability Prediction System for Flight Metasearch Using Calibrated Multi-Class Machine Learning
+
+1. Problem formulation and target design — 4 / 10
+What is present
+A 4-class target is defined.
+The notebook attempts a multiclass framing.
+Why marks are lost
+The class design is not fully defensible.
+"Not Booked" is still being treated as a target class even though the notebook itself later implies it is closer to abandonment than true unbookability.
+There is no explicit technical_failure class.
+There is no proper ambiguous / unknown class.
+There is no comparison of:
+binary vs multiclass,
+flat vs hierarchical design,
+coarse vs fine-grained targets.
+The real-time inference point is still not clearly defined.
+Examiner comment
+
+The target exists, but it is not rigorously justified and remains conceptually weak.
+
+2. Data engineering and preprocessing — 6 / 10
+What is present
+Chunked CSV processing.
+Timestamp parsing.
+Basic cleaning.
+Processed dataset generation.
+Some defensive schema checking before final feature extraction.
+Chronological ordering.
+Why marks are lost
+Schema validation still happens too late.
+Columns are accessed before complete validation.
+No proper missingness audit.
+No duplicate removal.
+No detailed row-loss accounting by reason.
+No robust data quality report.
+Processed file reuse can become stale and inconsistent with revised preprocessing logic.
+Examiner comment
+
+Reasonable baseline preprocessing exists, but it is still notebook-grade rather than a robust research pipeline.
+
+3. Feature engineering — 5 / 20
+What is present
+Route endpoints.
+Airline.
+Cabin.
+Meta-engine/referrer heuristic.
+Days to departure.
+Search hour/day/month/weekend.
+One interaction feature: airline_origin.
+Why marks are lost
+
+This is the biggest technical weakness.
+
+The implementation still lacks most of the critical feature families expected for this project:
+
+price / total fare,
+relative price features,
+provider reliability history,
+freshness/staleness,
+route-provider rolling rates,
+technical health signals,
+itinerary complexity,
+competition/ranking context,
+device/platform,
+market/locale,
+passenger mix,
+session behavior.
+Examiner comment
+
+The feature space is far too shallow for a serious bookability prediction problem. The model is likely learning only broad route-time priors rather than true bookability dynamics.
+
+4. Experimental methodology and alternatives — 3 / 10
+What is present
+One main model is trained.
+One calibration approach is applied.
+Some evaluation diagnostics are compared before/after calibration.
+Why marks are lost
+No model comparison across alternative model families.
+No comparison of target formulations.
+No feature group ablations.
+No calibration method comparison.
+No hierarchy experiments.
+No structured experiment matrix.
+Examiner comment
+
+The notebook does not demonstrate research-led selection of alternatives. It mainly shows one chosen path.
+
+5. Model development — 6 / 10
+What is present
+CatBoost multiclass model.
+Class balancing enabled.
+Early stopping enabled.
+Validation set used.
+Why marks are lost
+No comparison against simpler baselines such as logistic regression.
+No comparison against other strong tabular models such as LightGBM or XGBoost.
+No hyperparameter search.
+No hierarchical model design.
+No model latency or deployment suitability comparison.
+Examiner comment
+
+A valid baseline model is implemented, but model development is not broad or rigorous enough for a strong research study.
+
+6. Calibration methodology — 6 / 10
+What is present
+One-vs-rest isotonic calibration on validation probabilities.
+Log loss, ECE, Brier, PR-AUC comparison.
+Reliability diagrams.
+Why marks are lost
+Still only one calibration method is used.
+Independent isotonic calibration with renormalization is a weak multiclass solution.
+No temperature scaling.
+No multinomial/vector/Dirichlet-style alternative.
+No subgroup calibration.
+No calibration drift analysis.
+Examiner comment
+
+Calibration is attempted meaningfully, which is a positive, but it is still incomplete relative to the title’s explicit emphasis on calibrated multiclass learning.
+
+7. Evaluation and analysis — 7 / 10
+What is present
+Log loss.
+Brier score.
+PR-AUC.
+ECE.
+Reliability plots.
+Classification report.
+Confusion matrix.
+Feature importance plot.
+Why marks are lost
+No provider-segmented evaluation.
+No route-segmented evaluation.
+No time-slice robustness analysis.
+No top-k ranking or retained-coverage metrics.
+No subgroup failure analysis.
+No high-confidence error analysis.
+Examiner comment
+
+This is one of the stronger sections of the notebook compared with earlier versions, but still lacks the deeper operational and subgroup analysis expected for a metasearch system.
+
+8. Policy / operational simulation — 5 / 10
+What is present
+Threshold-based suppression logic.
+Liability probability defined using mismatch and unavailable classes.
+Some trade-off analysis.
+Why marks are lost
+One simulation is still poorly aligned to the actual metasearch problem.
+No realistic reranking evaluation.
+No coverage-quality frontier.
+No business cost matrix.
+No provider fairness impact.
+No uncertainty-aware abstention.
+Examiner comment
+
+The notebook attempts operational evaluation, which is good, but the simulation design remains too simplistic and only partially aligned to the real use case.
+
+9. Robustness, drift, and stress testing — 1 / 5
+What is present
+A single chronological holdout gives a minimal out-of-time element.
+Why marks are lost
+No rolling backtest in the actual notebook implementation.
+No provider outage stress analysis.
+No volatility-period testing.
+No cold-start testing.
+No feature corruption sensitivity.
+No drift evaluation.
+Examiner comment
+
+Robustness analysis is essentially absent.
+
+10. Engineering completeness and system maturity — 3 / 5
+What is present
+End-to-end baseline notebook.
+Model save.
+Calibrator save.
+Reasonably readable code.
+Some plots and metrics.
+Why marks are lost
+Still a notebook prototype, not a structured pipeline.
+No deployment architecture.
+No monitoring plan.
+No retraining plan.
+No feature availability audit.
+No reproducible experiment framework.
+Examiner comment
+
+Technically functional as a prototype, but still lacking engineering maturity for a real-time production-oriented research project.
+
+Final mark table
+Category	Mark
+Problem formulation and target design	4 / 10
+Data engineering and preprocessing	6 / 10
+Feature engineering	5 / 20
+Experimental methodology and alternatives	3 / 10
+Model development	6 / 10
+Calibration methodology	6 / 10
+Evaluation and analysis	7 / 10
+Policy / operational simulation	5 / 10
+Robustness, drift, and stress testing	1 / 5
+Engineering completeness	3 / 5
+Total: 46 / 100
+Final strict examiner judgment
+Implementation mark: 46 / 100
+
+This places the implementation in the range of:
+
+working baseline prototype
+some meaningful technical effort
+clear signs of improvement over an early proof-of-concept
+but still significantly below a strong research-grade implementation
+Classification of this mark
+
+A strict examiner would likely interpret this as:
+
+Pass: yes
+Strong pass / merit level: not yet
+Distinction-level implementation: no
+
+Why it passes:
+
+the notebook is functional,
+the model trains,
+calibration is attempted,
+evaluation is more than superficial,
+some operational thinking is present.
+
+Why it does not score highly:
+
+core feature engineering is underdeveloped,
+target design is still weak,
+alternatives were not rigorously tested,
+calibration is incomplete,
+robustness and deployment aspects are largely missing.
+Examiner-style summary comment
+
+The implementation demonstrates a functioning multiclass machine learning prototype with chronological validation, probability calibration, and a reasonable set of evaluation diagnostics. The addition of a classification report, confusion matrix, and reliability analysis strengthens the technical submission. However, the work remains limited by a shallow feature space, a weakly justified target design, and the absence of systematic comparison of alternative models, feature groups, and calibration strategies. The operational simulations are only partially aligned to the metasearch problem, and there is minimal robustness, deployment, or monitoring consideration. Overall, this is a competent baseline implementation, but it does not yet achieve the depth or completeness expected of a strong research implementation for the stated project title.

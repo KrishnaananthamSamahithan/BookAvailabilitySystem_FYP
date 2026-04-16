@@ -1,0 +1,55 @@
+Loading data...
+Classes distribution (Train):
+outcome_label
+bookable         67025
+price_changed    17861
+unavailable      36097
+Name: count, dtype: int64
+Training Logistic Regression...
+LR took 8.0s
+--- Logistic Regression Baseline ---
+Log Loss: 0.4815 | Multiclass Brier: 0.0975
+               precision    recall  f1-score   support
+
+     bookable       0.99      0.89      0.94     17975
+price_changed       0.28      0.47      0.35      4107
+  unavailable       0.58      0.53      0.55      8164
+
+     accuracy                           0.73     30246
+    macro avg       0.62      0.63      0.61     30246
+ weighted avg       0.79      0.73      0.75     30246
+
+
+
+Training Random Forest...
+Random Forest took 2.6s
+--- Random Forest ---
+Log Loss: 0.6532 | Multiclass Brier: 0.1194
+               precision    recall  f1-score   support
+
+     bookable       0.95      0.92      0.93     17975
+price_changed       0.29      0.32      0.30      4107
+  unavailable       0.58      0.60      0.59      8164
+
+     accuracy                           0.75     30246
+    macro avg       0.61      0.61      0.61     30246
+ weighted avg       0.76      0.75      0.75     30246
+
+
+
+Training CatBoost...
+CatBoost took 7.4s
+--- CatBoost ---
+Log Loss: 0.4081 | Multiclass Brier: 0.0837
+               precision    recall  f1-score   support
+
+     bookable       0.98      0.92      0.95     17975
+price_changed       0.00      0.00      0.00      4107
+  unavailable       0.59      0.97      0.74      8164
+
+     accuracy                           0.81     30246
+    macro avg       0.52      0.63      0.56     30246
+ weighted avg       0.74      0.81      0.76     30246
+
+
+

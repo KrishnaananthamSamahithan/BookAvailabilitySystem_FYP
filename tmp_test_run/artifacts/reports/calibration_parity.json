@@ -1,0 +1,142 @@
+{
+  "provider_key": [
+    {
+      "group_column": "provider_key",
+      "group_value": "carltonleisure.com",
+      "row_count": 3424,
+      "macro_f1": 0.20880403117864735,
+      "balanced_accuracy": 0.33303213328894593,
+      "log_loss": 1.8695076957287238,
+      "classwise_ece": {
+        "bookable": 0.08179744087629216,
+        "price_changed": 0.03763675782089733,
+        "unavailable": 0.048275178662383435,
+        "technical_failure": 1.0079305307947544e-09
+      },
+      "ece_macro": 0.041927344591875866
+    }
+  ],
+  "route": [],
+  "airline_code": [
+    {
+      "group_column": "airline_code",
+      "group_value": "BA",
+      "row_count": 471,
+      "macro_f1": 0.20599250936329588,
+      "balanced_accuracy": 0.3323262839879154,
+      "log_loss": 1.419466180571103,
+      "classwise_ece": {
+        "bookable": 0.04707462033532267,
+        "price_changed": 0.01911057038051209,
+        "unavailable": 0.03268693549400966,
+        "technical_failure": 1.0089775246263751e-09
+      },
+      "ece_macro": 0.024718031804705488
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "ALL",
+      "row_count": 232,
+      "macro_f1": 0.22576832151300236,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 3.6623012931500116,
+      "classwise_ece": {
+        "bookable": 0.17672413493103434,
+        "price_changed": 0.047413792103448274,
+        "unavailable": 0.12931034382758622,
+        "technical_failure": 9.999999970000002e-10
+      },
+      "ece_macro": 0.0883620679655172
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "EY",
+      "row_count": 231,
+      "macro_f1": 0.20906801007556677,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 1.7985307877859449,
+      "classwise_ece": {
+        "bookable": 0.09601428483714211,
+        "price_changed": 0.061728734606253194,
+        "unavailable": 0.06263806317423411,
+        "technical_failure": 1.0011035700266139e-09
+      },
+      "ece_macro": 0.05509527090468324
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "QR",
+      "row_count": 210,
+      "macro_f1": 0.19653179190751446,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 3.6809392431431425,
+      "classwise_ece": {
+        "bookable": 0.19539875576640559,
+        "price_changed": 0.08483575433153467,
+        "unavailable": 0.10979271139522018,
+        "technical_failure": 1.0001922782188837e-09
+      },
+      "ece_macro": 0.09750680562333817
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "EK",
+      "row_count": 205,
+      "macro_f1": 0.20203488372093023,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 1.625670291651371,
+      "classwise_ece": {
+        "bookable": 0.09032653948014743,
+        "price_changed": 0.04203984570431697,
+        "unavailable": 0.05265577759800374,
+        "technical_failure": 1.0041728504789193e-09
+      },
+      "ece_macro": 0.046255540946660255
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "AI",
+      "row_count": 179,
+      "macro_f1": 0.20941558441558442,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 2.2523057195309266,
+      "classwise_ece": {
+        "bookable": 0.1294555227043906,
+        "price_changed": 0.05400955938459189,
+        "unavailable": 0.07666434908798408,
+        "technical_failure": 1.0053767201250033e-09
+      },
+      "ece_macro": 0.06503235804558583
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "VS",
+      "row_count": 151,
+      "macro_f1": 0.2084942084942085,
+      "balanced_accuracy": 0.32432432432432434,
+      "log_loss": 2.5517047249648686,
+      "classwise_ece": {
+        "bookable": 0.13218979044760043,
+        "price_changed": 0.01749894375497003,
+        "unavailable": 0.0937252203384161,
+        "technical_failure": 1.059234762075017e-09
+      },
+      "ece_macro": 0.060853488900055326
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "TK",
+      "row_count": 132,
+      "macro_f1": 0.21551724137931033,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 1.6898322869152036,
+      "classwise_ece": {
+        "bookable": 0.08769238286102611,
+        "price_changed": 0.04966084228703156,
+        "unavailable": 0.09189867952145377,
+        "technical_failure": 9.902403577847533e-10
+      },
+      "ece_macro": 0.057312976414937954
+    }
+  ]
+}

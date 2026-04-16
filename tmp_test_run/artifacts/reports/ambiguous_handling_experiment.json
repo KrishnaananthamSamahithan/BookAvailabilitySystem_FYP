@@ -1,0 +1,6 @@
+{
+  "ambiguous_row_count": 0,
+  "default_training_policy": "exclude_ambiguous_rows",
+  "experimental_policy": "keep_ambiguous_as_fifth_class_for_diagnostic_comparison",
+  "status": "skipped_no_ambiguous_rows"
+}

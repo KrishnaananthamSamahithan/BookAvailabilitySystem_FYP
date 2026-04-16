@@ -1,0 +1,412 @@
+{
+  "rows": [
+    {
+      "feature_name": "airline_code",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "airline_route",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "airline_route_prior_rate_unavailable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "cabin_class",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "days_to_departure",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "days_to_departure_bucket",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "departure_month",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "destination_airport",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "device_os",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "is_long_lead",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "is_multi_stop",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "is_short_lead",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "is_weekend_search",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "locale",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "market",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "meta_engine",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "missing_price",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "offers_in_route_day",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "origin_airport",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "passenger_count",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "price_gap_to_min",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "price_rank_in_route_day",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "price_ratio_to_median",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "price_total",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_airline",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_key",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_minutes_since_prev",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_offer_density",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_prior_count",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_prior_rate_bookable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_prior_rate_price_changed",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_prior_rate_technical_failure",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_prior_rate_unavailable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_route_minutes_since_prev",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_route_prior_rate_bookable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "provider_route_prior_rate_unavailable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "referrer_domain",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_day_median_price",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_day_min_price",
+      "feature_family": "price",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_minutes_since_prev",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_prior_count",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_prior_rate_bookable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_prior_rate_unavailable",
+      "feature_family": "reliability_history",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": true,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "route_search_density",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "search_dayofweek",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "search_hour",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "search_month",
+      "feature_family": "temporal",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "stop_count",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "trip_type",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    },
+    {
+      "feature_name": "unknown_provider",
+      "feature_family": "topology_basic",
+      "available_at_prediction_time": true,
+      "derived_from_prior_only_history": false,
+      "used_in_final_model": true,
+      "non_null_fraction": 1.0
+    }
+  ]
+}

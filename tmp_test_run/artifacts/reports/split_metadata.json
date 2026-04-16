@@ -1,0 +1,29 @@
+{
+  "n_rows": 17119,
+  "train_rows": 10271,
+  "validation_rows": 3424,
+  "test_rows": 3424,
+  "train_start": "2026-02-06 03:57:27.790000",
+  "train_end": "2026-02-08 02:02:29.410000",
+  "validation_start": "2026-02-08 02:02:47.397000",
+  "validation_end": "2026-02-08 18:50:45.590000",
+  "test_start": "2026-02-08 18:50:57.917000",
+  "test_end": "2026-02-10 18:27:18",
+  "class_distribution": {
+    "train": {
+      "bookable": 8146,
+      "unavailable": 1394,
+      "price_changed": 731
+    },
+    "validation": {
+      "bookable": 2697,
+      "unavailable": 508,
+      "price_changed": 219
+    },
+    "test": {
+      "bookable": 2445,
+      "unavailable": 645,
+      "price_changed": 334
+    }
+  }
+}

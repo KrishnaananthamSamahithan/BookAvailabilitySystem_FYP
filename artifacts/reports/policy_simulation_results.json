@@ -1,0 +1,55 @@
+{
+  "suppression_policy": [
+    {
+      "threshold": 0.2,
+      "suppressed_rows": 54738,
+      "retained_rows": 18488,
+      "suppressed_true_bookable": 39831,
+      "suppressed_true_unbookable": 14907,
+      "retained_true_bookable": 18330,
+      "retained_true_unbookable": 158,
+      "retained_bookable_rate": 0.9914539160536564
+    },
+    {
+      "threshold": 0.4,
+      "suppressed_rows": 51803,
+      "retained_rows": 21423,
+      "suppressed_true_bookable": 36938,
+      "suppressed_true_unbookable": 14865,
+      "retained_true_bookable": 21223,
+      "retained_true_unbookable": 200,
+      "retained_bookable_rate": 0.9906642393689026
+    },
+    {
+      "threshold": 0.6,
+      "suppressed_rows": 49934,
+      "retained_rows": 23292,
+      "suppressed_true_bookable": 35598,
+      "suppressed_true_unbookable": 14336,
+      "retained_true_bookable": 22563,
+      "retained_true_unbookable": 729,
+      "retained_bookable_rate": 0.9687017001545595
+    },
+    {
+      "threshold": 0.8,
+      "suppressed_rows": 0,
+      "retained_rows": 73226,
+      "suppressed_true_bookable": 0,
+      "suppressed_true_unbookable": 0,
+      "retained_true_bookable": 58161,
+      "retained_true_unbookable": 15065,
+      "retained_bookable_rate": 0.7942670636112856
+    }
+  ],
+  "reranking_proxy": {
+    "grouping_key": "search_group_proxy",
+    "baseline_name": "cheapest_offer_baseline",
+    "num_groups": 54194,
+    "baseline_top1_bookable_rate": 0.7802339742406909,
+    "ml_top1_bookable_rate": 0.7836107318153301,
+    "baseline_top1_unavailable_rate": 0.14711960733660553,
+    "ml_top1_unavailable_rate": 0.14488688784736317,
+    "baseline_top1_technical_failure_rate": 0.0,
+    "ml_top1_technical_failure_rate": 0.0
+  }
+}

@@ -1,7 +1,10 @@
 pandas
 numpy
 scikit-learn
+scipy
 catboost
+joblib
 matplotlib
 seaborn
+nbformat
 streamlit
