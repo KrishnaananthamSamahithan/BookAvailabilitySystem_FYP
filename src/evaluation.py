@@ -18,6 +18,7 @@ def comparison_table(rows: List[Dict[str, object]]) -> pd.DataFrame:
         "accuracy",
         "balanced_accuracy",
         "macro_f1",
+        "macro_f1_present_classes",
         "weighted_f1",
         "log_loss",
         "multiclass_brier",

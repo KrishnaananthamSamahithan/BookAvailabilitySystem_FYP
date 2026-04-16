@@ -29,7 +29,14 @@ class PreprocessingResult:
 
 def preprocess_raw_file(config: ProjectConfig) -> PreprocessingResult:
     config.ensure_directories()
-    raw = pd.read_csv(config.raw_data_path)
+    source_path = config.raw_data_path
+    if not source_path.exists() and config.processed_data_path.exists():
+        source_path = config.processed_data_path
+        print(
+            f"[WARNING] Raw data not found at {config.raw_data_path}. "
+            f"Falling back to {source_path}."
+        )
+    raw = pd.read_csv(source_path)
     result = preprocess_raw_frame(raw, config)
     save_csv(config.processed_data_path, result.frame)
     save_json(config.reports_dir / "preprocessing_audit.json", result.audit)

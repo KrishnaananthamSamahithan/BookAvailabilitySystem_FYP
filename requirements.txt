@@ -3,8 +3,13 @@ numpy
 scikit-learn
 scipy
 catboost
+xgboost
+lightgbm
+shap
 joblib
 matplotlib
 seaborn
+flask
+flask-cors
 nbformat
-streamlit
+statsmodels

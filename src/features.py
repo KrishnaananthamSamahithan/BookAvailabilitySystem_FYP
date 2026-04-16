@@ -186,7 +186,13 @@ def build_base_frame(df: pd.DataFrame) -> pd.DataFrame:
     frame["provider_route"] = frame["provider_key"] + "_" + frame["route"]
     frame["provider_airline"] = frame["provider_key"] + "_" + frame["airline_code"]
     frame["route_day"] = frame["route"] + "_" + frame["departure_date"].dt.strftime("%Y-%m-%d")
-    frame["search_group_proxy"] = frame["route"] + "_" + frame["trip_type"].astype("string") + "_" + frame["cabin_class"].astype("string") + "_" + frame["passenger_count"].astype("string") + "_" + frame["prediction_time"].dt.strftime("%Y-%m-%d-%H")
+    frame["search_group_proxy"] = (
+        frame["route"] + "_"
+        + frame["trip_type"].astype("string") + "_"
+        + frame["cabin_class"].astype("string") + "_"
+        + frame["passenger_count"].astype("string") + "_"
+        + frame["prediction_time"].dt.strftime("%Y-%m-%d-%H")
+    )
     frame["search_hour"] = frame["prediction_time"].dt.hour
     frame["search_dayofweek"] = frame["prediction_time"].dt.dayofweek
     frame["search_month"] = frame["prediction_time"].dt.month
@@ -200,8 +206,12 @@ def build_base_frame(df: pd.DataFrame) -> pd.DataFrame:
     frame["is_short_lead"] = frame["days_to_departure"].le(7).astype(int)
     frame["is_long_lead"] = frame["days_to_departure"].ge(60).astype(int)
     frame["missing_price"] = frame["price_total"].isna().astype(int)
-    frame["route_search_density"] = 0.0
-    frame["provider_offer_density"] = 0.0
+
+    # FIX: compute density from prior counts (not hardcoded zero)
+    # _count_per_time uses cumcount + elapsed days — forward-looking safe within training
+    frame["route_search_density"] = _count_per_time(frame, "route")
+    frame["provider_offer_density"] = _count_per_time(frame, "provider_key")
+
     return frame
 
 
@@ -471,6 +481,41 @@ def build_feature_availability(frame: pd.DataFrame, feature_groups: Dict[str, Li
     return rows
 
 
+def run_feature_selection(
+    X_train: pd.DataFrame,
+    y_train: np.ndarray,
+    feature_names: List[str],
+    categorical_features: List[str],
+    k: int = 35,
+) -> Dict[str, object]:
+    """Mutual information based feature selection. Works on mixed-type features."""
+    from sklearn.feature_selection import mutual_info_classif
+    from sklearn.preprocessing import OrdinalEncoder
+
+    X_encoded = X_train.copy()
+    cat_cols = [c for c in categorical_features if c in X_encoded.columns]
+    if cat_cols:
+        enc = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+        X_encoded[cat_cols] = enc.fit_transform(X_encoded[cat_cols].astype(str))
+
+    mi_scores = mutual_info_classif(
+        X_encoded[feature_names].fillna(0),
+        y_train,
+        discrete_features=[f in cat_cols for f in feature_names],
+        random_state=42,
+    )
+
+    scored = sorted(zip(feature_names, mi_scores.tolist()), key=lambda x: x[1], reverse=True)
+    selected = [f for f, _ in scored[:k]]
+    return {
+        "method": "mutual_information",
+        "k_selected": k,
+        "all_scores": {f: float(s) for f, s in scored},
+        "selected_features": selected,
+        "top_10": [{"feature": f, "mi_score": float(s)} for f, s in scored[:10]],
+    }
+
+
 def _prior_rate(frame: pd.DataFrame, key: str, indicator: str) -> pd.Series:
     group = frame.groupby(key)[indicator]
     cumulative = group.cumsum() - frame[indicator]
@@ -484,10 +529,11 @@ def _minutes_since_previous(frame: pd.DataFrame, key: str) -> pd.Series:
 
 
 def _count_per_time(frame: pd.DataFrame, key: str) -> pd.Series:
-    elapsed_days = (
-        frame["prediction_time"] - frame.groupby(key)["prediction_time"].transform("min")
-    ).dt.total_seconds() / 86400.0
-    return (frame.groupby(key).cumcount() + 1) / elapsed_days.clip(lower=1.0)
+    """Compute prior-safe events-per-day density for each row."""
+    cumcount = frame.groupby(key).cumcount()  # 0-based count of prior rows
+    first_time = frame.groupby(key)["prediction_time"].transform("min")
+    elapsed_days = (frame["prediction_time"] - first_time).dt.total_seconds() / 86400.0
+    return (cumcount + 1) / elapsed_days.clip(lower=1.0)
 
 
 def _minutes_since_snapshot(target: pd.DataFrame, key: str, last_time_map: Dict[str, pd.Timestamp]) -> pd.Series:

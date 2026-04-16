@@ -37,10 +37,22 @@ class ProjectConfig:
     train_fraction: float = 0.60
     validation_fraction: float = 0.20
     test_fraction: float = 0.20
-    rolling_backtest_windows: int = 3
+    rolling_backtest_windows: int = 5  # FIX: extended from 3 to 5 for academic rigor
 
     random_state: int = 42
     calibration_alpha: float = 0.05
+    calibration_min_balanced_accuracy: float = 0.40
+    calibration_min_macro_f1: float = 0.30
+    calibration_max_drop_vs_uncalibrated: float = 0.03
+    ablation_random_seeds: List[int] = field(default_factory=lambda: [13, 42, 77])
+    provider_holdout_fraction: float = 0.20
+    learning_curve_fractions: List[float] = field(
+        default_factory=lambda: [0.10, 0.25, 0.50, 0.75, 1.0]
+    )
+    error_analysis_n_samples: int = 200
+    cost_sensitive_thresholds: List[float] = field(
+        default_factory=lambda: [0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+    )
 
     final_target_labels: List[str] = field(
         default_factory=lambda: [
@@ -53,7 +65,7 @@ class ProjectConfig:
 
     column_aliases: Dict[str, List[str]] = field(
         default_factory=lambda: {
-            "status": ["Status", "status", "booking_status", "result_status"],
+            "status": ["Status", "status", "booking_status", "result_status", "raw_status"],
             "origin": ["Origin", "origin", "from", "origin_airport"],
             "destination": ["Destination", "destination", "to", "destination_airport"],
             "airline": ["Airline", "airline", "carrier", "airline_code"],
@@ -138,6 +150,14 @@ class ProjectConfig:
             "rolling_backtest_windows": self.rolling_backtest_windows,
             "random_state": self.random_state,
             "calibration_alpha": self.calibration_alpha,
+            "calibration_min_balanced_accuracy": self.calibration_min_balanced_accuracy,
+            "calibration_min_macro_f1": self.calibration_min_macro_f1,
+            "calibration_max_drop_vs_uncalibrated": self.calibration_max_drop_vs_uncalibrated,
+            "ablation_random_seeds": list(self.ablation_random_seeds),
+            "provider_holdout_fraction": self.provider_holdout_fraction,
+            "learning_curve_fractions": list(self.learning_curve_fractions),
+            "error_analysis_n_samples": self.error_analysis_n_samples,
+            "cost_sensitive_thresholds": list(self.cost_sensitive_thresholds),
             "final_target_labels": list(self.final_target_labels),
             "column_aliases": dict(self.column_aliases),
             "required_logical_fields": list(self.required_logical_fields),
