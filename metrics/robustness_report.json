@@ -1,0 +1,35 @@
+{
+  "best_single_model": "catboost",
+  "best_single_validation": {
+    "accuracy": 0.7780990242139502,
+    "macro_f1": 0.6332209595783195,
+    "log_loss": 0.4142918028123704
+  },
+  "best_calibrator": "temperature_scaling",
+  "calibration_validation": {
+    "balanced_accuracy": 0.6428632605073036,
+    "macro_f1": 0.6338154774906868,
+    "macro_f1_present_classes": 0.6338154774906868,
+    "log_loss": 0.40516088577701537,
+    "multiclass_brier": 0.2467951839538786,
+    "ece_macro": 0.048731545243984875,
+    "selection_score": 0.6086842786774375
+  },
+  "uncalibrated_test": {
+    "accuracy": 0.7337867139759511,
+    "macro_f1": 0.6204449623001729,
+    "log_loss": 0.5486526888844709,
+    "multiclass_brier": 0.31287452784860453,
+    "ece_macro": 0.063384411402708
+  },
+  "calibrated_test": {
+    "accuracy": 0.7337867139759511,
+    "macro_f1": 0.6204449623001729,
+    "log_loss": 0.531265783441038,
+    "multiclass_brier": 0.3112449121560242,
+    "ece_macro": 0.058334617968924245
+  },
+  "delta_log_loss": -0.01738690544343291,
+  "delta_ece_macro": -0.005049793433783749,
+  "delta_macro_f1": 0.0
+}

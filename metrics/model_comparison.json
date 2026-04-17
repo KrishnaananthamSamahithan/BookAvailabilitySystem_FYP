@@ -1,18 +1,71 @@
 {
   "rows": [
     {
+      "model_name": "catboost",
+      "params": {
+        "iterations": 180,
+        "learning_rate": 0.05,
+        "depth": 8,
+        "l2_leaf_reg": 5
+      },
+      "macro_f1": 0.6332209595783195,
+      "accuracy": 0.7780990242139502,
+      "log_loss": 0.4142918028123704,
+      "selection_score": 0.7292212230697935
+    },
+    {
+      "model_name": "lightgbm",
+      "params": {
+        "n_estimators": 260,
+        "learning_rate": 0.04,
+        "num_leaves": 63,
+        "max_depth": -1,
+        "min_child_samples": 25
+      },
+      "macro_f1": 0.6251129294390414,
+      "accuracy": 0.8060912704931498,
+      "log_loss": 0.39796024719505496,
+      "selection_score": 0.7261286076532611
+    },
+    {
       "model_name": "xgboost",
       "params": {
-        "n_estimators": 180,
-        "learning_rate": 0.06,
-        "max_depth": 8,
+        "n_estimators": 220,
+        "learning_rate": 0.05,
+        "max_depth": 6,
         "subsample": 0.9,
-        "colsample_bytree": 0.8
+        "colsample_bytree": 0.9
       },
-      "macro_f1": 0.8336117708429823,
-      "accuracy": 0.9005907247399048,
-      "log_loss": 0.22229056534662792,
-      "selection_score": 0.9575858512866366
+      "macro_f1": 0.625111174335792,
+      "accuracy": 0.8040542760456024,
+      "log_loss": 0.4007535804437634,
+      "selection_score": 0.7256816367204442
+    },
+    {
+      "model_name": "catboost",
+      "params": {
+        "iterations": 220,
+        "learning_rate": 0.05,
+        "depth": 6,
+        "l2_leaf_reg": 5
+      },
+      "macro_f1": 0.6291976890486053,
+      "accuracy": 0.7731708118408516,
+      "log_loss": 0.4128819962379284,
+      "selection_score": 0.7245292110128366
+    },
+    {
+      "model_name": "catboost",
+      "params": {
+        "iterations": 240,
+        "learning_rate": 0.04,
+        "depth": 8,
+        "l2_leaf_reg": 7
+      },
+      "macro_f1": 0.6284200330514111,
+      "accuracy": 0.7750106777934751,
+      "log_loss": 0.4121327115881155,
+      "selection_score": 0.7240649991410266
     },
     {
       "model_name": "lightgbm",
@@ -23,23 +76,52 @@
         "max_depth": -1,
         "min_child_samples": 30
       },
-      "macro_f1": 0.8326198551542808,
-      "accuracy": 0.9010315640980426,
-      "log_loss": 0.22031198496931764,
-      "selection_score": 0.9567589905205214
+      "macro_f1": 0.6225467910142394,
+      "accuracy": 0.8065512369813056,
+      "log_loss": 0.39719782330048337,
+      "selection_score": 0.723669585396411
     },
     {
-      "model_name": "catboost",
+      "model_name": "lightgbm",
       "params": {
-        "iterations": 180,
+        "n_estimators": 220,
         "learning_rate": 0.05,
-        "depth": 8,
-        "l2_leaf_reg": 5
+        "num_leaves": 95,
+        "max_depth": -1,
+        "min_child_samples": 35
       },
-      "macro_f1": 0.8295547538577926,
-      "accuracy": 0.8971521777464292,
-      "log_loss": 0.23555209422989312,
-      "selection_score": 0.9523499758082623
+      "macro_f1": 0.6187769068503463,
+      "accuracy": 0.8045799520320662,
+      "log_loss": 0.39724324064088956,
+      "selection_score": 0.7196017376231116
+    },
+    {
+      "model_name": "xgboost",
+      "params": {
+        "n_estimators": 180,
+        "learning_rate": 0.06,
+        "max_depth": 8,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8
+      },
+      "macro_f1": 0.6164590984338192,
+      "accuracy": 0.8108223543713243,
+      "log_loss": 0.39586485586207104,
+      "selection_score": 0.7182892087964142
+    },
+    {
+      "model_name": "xgboost",
+      "params": {
+        "n_estimators": 260,
+        "learning_rate": 0.04,
+        "max_depth": 8,
+        "subsample": 0.85,
+        "colsample_bytree": 0.8
+      },
+      "macro_f1": 0.6152523856334278,
+      "accuracy": 0.8139435555409534,
+      "log_loss": 0.39409555511625993,
+      "selection_score": 0.7176391412087577
     }
   ]
 }

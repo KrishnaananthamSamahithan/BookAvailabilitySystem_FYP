@@ -1,0 +1,64 @@
+{
+  "rows": [
+    {
+      "name": "temperature_scaling",
+      "accepted": true,
+      "rejection_reason": null,
+      "selection_score": 0.6086842786774375,
+      "balanced_accuracy": 0.6428632605073036,
+      "macro_f1": 0.6338154774906868,
+      "macro_f1_present_classes": 0.6338154774906868,
+      "log_loss": 0.40516088577701537,
+      "multiclass_brier": 0.2467951839538786,
+      "ece_macro": 0.048731545243984875
+    },
+    {
+      "name": "none",
+      "accepted": true,
+      "rejection_reason": null,
+      "selection_score": 0.6084226882231502,
+      "balanced_accuracy": 0.6428632605073036,
+      "macro_f1": 0.6338154774906868,
+      "macro_f1_present_classes": 0.6338154774906868,
+      "log_loss": 0.40920529074342243,
+      "multiclass_brier": 0.24816178425202065,
+      "ece_macro": 0.04932524730365487
+    },
+    {
+      "name": "ovr_isotonic",
+      "accepted": false,
+      "rejection_reason": "degrades_discrimination_vs_uncalibrated: ba_drop=0.0026, f1_drop=0.0680, max_allowed=0.03",
+      "selection_score": -1000000000.0,
+      "balanced_accuracy": 0.6402970783841834,
+      "macro_f1": 0.5657764058281859,
+      "macro_f1_present_classes": 0.5657764058281859,
+      "log_loss": 0.37215183274169694,
+      "multiclass_brier": 0.22645905568571703,
+      "ece_macro": 0.0021699731243476988
+    },
+    {
+      "name": "multinomial_logistic",
+      "accepted": false,
+      "rejection_reason": "degrades_discrimination_vs_uncalibrated: ba_drop=0.0038, f1_drop=0.0684, max_allowed=0.03",
+      "selection_score": -1000000000.0,
+      "balanced_accuracy": 0.6390685620621844,
+      "macro_f1": 0.5654125108280191,
+      "macro_f1_present_classes": 0.5654125108280191,
+      "log_loss": 0.373731711813988,
+      "multiclass_brier": 0.22695625140984074,
+      "ece_macro": 0.0012364187660239263
+    },
+    {
+      "name": "dirichlet",
+      "accepted": false,
+      "rejection_reason": "degrades_discrimination_vs_uncalibrated: ba_drop=0.0040, f1_drop=0.0687, max_allowed=0.03",
+      "selection_score": -1000000000.0,
+      "balanced_accuracy": 0.6389032056383112,
+      "macro_f1": 0.5651309870797693,
+      "macro_f1_present_classes": 0.5651309870797693,
+      "log_loss": 0.3737937886423938,
+      "multiclass_brier": 0.22692533075171056,
+      "ece_macro": 0.0017197378322387792
+    }
+  ]
+}

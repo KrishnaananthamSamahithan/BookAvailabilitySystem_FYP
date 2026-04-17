@@ -14,16 +14,17 @@ def canonicalize_status(value) -> str:
     if not status:
         return "ambiguous"
 
-    if any(token in status for token in ["booked", "success", "bookable"]):
-        return "bookable"
+    # Check ambiguous negative phrases before the broader "booked" match.
+    if any(token in status for token in ["not booked", "abandoned", "unknown", "cancelled"]):
+        return "ambiguous"
     if any(token in status for token in ["price mismatch", "price changed", "fare changed", "price mismatch/fare changed"]):
         return "price_changed"
     if any(token in status for token in ["not available", "unavailable", "sold out"]):
         return "unavailable"
     if any(token in status for token in ["technical failure", "timeout", "redirect error", "session expired", "failed", "error"]):
         return "technical_failure"
-    if any(token in status for token in ["not booked", "abandoned", "unknown", "cancelled"]):
-        return "ambiguous"
+    if any(token in status for token in ["booked", "success", "bookable"]):
+        return "bookable"
     return "ambiguous"
 
 

@@ -1,23 +1,29 @@
 {
-  "price_changed_support": 2897,
-  "price_changed_false_negatives": 706,
-  "price_changed_recall": 0.7562996202968588,
+  "price_changed_support": 3055,
+  "price_changed_false_negatives": 2005,
+  "price_changed_recall": 0.3436988543371522,
   "top_false_negative_slices": {
     "meta_engine": [
       {
         "meta_engine": "Skyscanner",
-        "false_negative_count": 561,
-        "price_changed_support": 2388,
-        "false_negative_rate_within_slice": 0.23492462311557788
+        "false_negative_count": 1780,
+        "price_changed_support": 2483,
+        "false_negative_rate_within_slice": 0.7168747482883608
       },
       {
         "meta_engine": "Direct",
-        "false_negative_count": 144,
-        "price_changed_support": 508,
-        "false_negative_rate_within_slice": 0.28346456692913385
+        "false_negative_count": 176,
+        "price_changed_support": 523,
+        "false_negative_rate_within_slice": 0.3365200764818356
       },
       {
-        "meta_engine": "Other",
+        "meta_engine": "Google",
+        "false_negative_count": 48,
+        "price_changed_support": 48,
+        "false_negative_rate_within_slice": 1.0
+      },
+      {
+        "meta_engine": "Wego",
         "false_negative_count": 1,
         "price_changed_support": 1,
         "false_negative_rate_within_slice": 1.0
@@ -26,273 +32,223 @@
     "trip_type": [
       {
         "trip_type": "Return",
-        "false_negative_count": 477,
-        "price_changed_support": 1995,
-        "false_negative_rate_within_slice": 0.23909774436090225
-      },
-      {
-        "trip_type": "Oneway",
-        "false_negative_count": 120,
-        "price_changed_support": 478,
-        "false_negative_rate_within_slice": 0.2510460251046025
+        "false_negative_count": 1263,
+        "price_changed_support": 1861,
+        "false_negative_rate_within_slice": 0.6786673831273509
       },
       {
         "trip_type": "Multicity",
-        "false_negative_count": 109,
-        "price_changed_support": 424,
-        "false_negative_rate_within_slice": 0.25707547169811323
+        "false_negative_count": 455,
+        "price_changed_support": 709,
+        "false_negative_rate_within_slice": 0.6417489421720733
+      },
+      {
+        "trip_type": "Oneway",
+        "false_negative_count": 287,
+        "price_changed_support": 485,
+        "false_negative_rate_within_slice": 0.5917525773195876
       }
     ],
     "days_to_departure_bucket": [
       {
         "days_to_departure_bucket": "121_plus",
-        "false_negative_count": 238,
-        "price_changed_support": 1037,
-        "false_negative_rate_within_slice": 0.22950819672131148
-      },
-      {
-        "days_to_departure_bucket": "61_120",
-        "false_negative_count": 151,
-        "price_changed_support": 592,
-        "false_negative_rate_within_slice": 0.25506756756756754
+        "false_negative_count": 713,
+        "price_changed_support": 1129,
+        "false_negative_rate_within_slice": 0.6315323294951284
       },
       {
         "days_to_departure_bucket": "31_60",
-        "false_negative_count": 129,
-        "price_changed_support": 560,
-        "false_negative_rate_within_slice": 0.23035714285714284
+        "false_negative_count": 383,
+        "price_changed_support": 618,
+        "false_negative_rate_within_slice": 0.6197411003236246
+      },
+      {
+        "days_to_departure_bucket": "61_120",
+        "false_negative_count": 380,
+        "price_changed_support": 593,
+        "false_negative_rate_within_slice": 0.6408094435075885
       },
       {
         "days_to_departure_bucket": "15_30",
-        "false_negative_count": 74,
-        "price_changed_support": 316,
-        "false_negative_rate_within_slice": 0.23417721518987342
+        "false_negative_count": 242,
+        "price_changed_support": 346,
+        "false_negative_rate_within_slice": 0.6994219653179191
       },
       {
         "days_to_departure_bucket": "8_14",
-        "false_negative_count": 52,
-        "price_changed_support": 162,
-        "false_negative_rate_within_slice": 0.32098765432098764
+        "false_negative_count": 126,
+        "price_changed_support": 164,
+        "false_negative_rate_within_slice": 0.7682926829268293
       },
       {
         "days_to_departure_bucket": "4_7",
-        "false_negative_count": 52,
-        "price_changed_support": 169,
-        "false_negative_rate_within_slice": 0.3076923076923077
+        "false_negative_count": 101,
+        "price_changed_support": 126,
+        "false_negative_rate_within_slice": 0.8015873015873016
       },
       {
         "days_to_departure_bucket": "0_3",
-        "false_negative_count": 10,
-        "price_changed_support": 61,
-        "false_negative_rate_within_slice": 0.16393442622950818
-      }
-    ],
-    "price_gap_bucket": [
-      {
-        "price_gap_bucket": "high",
-        "false_negative_count": 180,
-        "price_changed_support": 542,
-        "false_negative_rate_within_slice": 0.33210332103321033
-      },
-      {
-        "price_gap_bucket": "very_high",
-        "false_negative_count": 170,
-        "price_changed_support": 1090,
-        "false_negative_rate_within_slice": 0.1559633027522936
-      },
-      {
-        "price_gap_bucket": "mid",
-        "false_negative_count": 125,
-        "price_changed_support": 688,
-        "false_negative_rate_within_slice": 0.1816860465116279
-      },
-      {
-        "price_gap_bucket": "low",
-        "false_negative_count": 120,
-        "price_changed_support": 309,
-        "false_negative_rate_within_slice": 0.3883495145631068
-      },
-      {
-        "price_gap_bucket": "very_low",
-        "false_negative_count": 111,
-        "price_changed_support": 268,
-        "false_negative_rate_within_slice": 0.4141791044776119
+        "false_negative_count": 60,
+        "price_changed_support": 79,
+        "false_negative_rate_within_slice": 0.759493670886076
       }
     ],
     "cache_age_bucket": [
       {
-        "cache_age_bucket": "6_24h",
-        "false_negative_count": 367,
-        "price_changed_support": 1805,
-        "false_negative_rate_within_slice": 0.2033240997229917
-      },
-      {
-        "cache_age_bucket": "24h_plus",
-        "false_negative_count": 281,
-        "price_changed_support": 541,
-        "false_negative_rate_within_slice": 0.5194085027726433
-      },
-      {
-        "cache_age_bucket": "2_6h",
-        "false_negative_count": 37,
-        "price_changed_support": 502,
-        "false_negative_rate_within_slice": 0.07370517928286853
-      },
-      {
-        "cache_age_bucket": "1_2h",
-        "false_negative_count": 21,
-        "price_changed_support": 49,
-        "false_negative_rate_within_slice": 0.42857142857142855
+        "cache_age_bucket": "subhour",
+        "false_negative_count": 2005,
+        "price_changed_support": 3055,
+        "false_negative_rate_within_slice": 0.6563011456628478
       }
     ],
     "itinerary_segments_bucket": [
       {
         "itinerary_segments_bucket": "4_plus",
-        "false_negative_count": 384,
-        "price_changed_support": 1572,
-        "false_negative_rate_within_slice": 0.24427480916030533
+        "false_negative_count": 997,
+        "price_changed_support": 1581,
+        "false_negative_rate_within_slice": 0.6306135357368754
       },
       {
         "itinerary_segments_bucket": "2",
-        "false_negative_count": 244,
-        "price_changed_support": 973,
-        "false_negative_rate_within_slice": 0.25077081192189105
-      },
-      {
-        "itinerary_segments_bucket": "1",
-        "false_negative_count": 42,
-        "price_changed_support": 169,
-        "false_negative_rate_within_slice": 0.2485207100591716
+        "false_negative_count": 742,
+        "price_changed_support": 1039,
+        "false_negative_rate_within_slice": 0.714148219441771
       },
       {
         "itinerary_segments_bucket": "3",
-        "false_negative_count": 36,
-        "price_changed_support": 183,
-        "false_negative_rate_within_slice": 0.19672131147540983
+        "false_negative_count": 163,
+        "price_changed_support": 242,
+        "false_negative_rate_within_slice": 0.6735537190082644
+      },
+      {
+        "itinerary_segments_bucket": "1",
+        "false_negative_count": 103,
+        "price_changed_support": 193,
+        "false_negative_rate_within_slice": 0.533678756476684
       }
     ],
     "route": [
       {
-        "route": "MAN_ISB",
-        "false_negative_count": 15,
-        "price_changed_support": 39,
-        "false_negative_rate_within_slice": 0.38461538461538464
-      },
-      {
-        "route": "LON_BKK",
-        "false_negative_count": 14,
-        "price_changed_support": 54,
-        "false_negative_rate_within_slice": 0.25925925925925924
-      },
-      {
-        "route": "LHR_DEL",
-        "false_negative_count": 13,
-        "price_changed_support": 29,
-        "false_negative_rate_within_slice": 0.4482758620689655
-      },
-      {
         "route": "LHR_BOM",
-        "false_negative_count": 11,
-        "price_changed_support": 34,
-        "false_negative_rate_within_slice": 0.3235294117647059
-      },
-      {
-        "route": "LHR_CMB",
-        "false_negative_count": 11,
-        "price_changed_support": 38,
-        "false_negative_rate_within_slice": 0.2894736842105263
-      },
-      {
-        "route": "LON_CMB",
-        "false_negative_count": 10,
-        "price_changed_support": 42,
-        "false_negative_rate_within_slice": 0.23809523809523808
+        "false_negative_count": 43,
+        "price_changed_support": 55,
+        "false_negative_rate_within_slice": 0.7818181818181819
       },
       {
         "route": "LON_BOM",
-        "false_negative_count": 10,
-        "price_changed_support": 24,
-        "false_negative_rate_within_slice": 0.4166666666666667
+        "false_negative_count": 38,
+        "price_changed_support": 46,
+        "false_negative_rate_within_slice": 0.8260869565217391
       },
       {
-        "route": "LHR_LHE",
-        "false_negative_count": 7,
-        "price_changed_support": 22,
-        "false_negative_rate_within_slice": 0.3181818181818182
+        "route": "LHR_DEL",
+        "false_negative_count": 35,
+        "price_changed_support": 47,
+        "false_negative_rate_within_slice": 0.7446808510638298
       },
       {
-        "route": "LON_COK",
-        "false_negative_count": 7,
-        "price_changed_support": 25,
-        "false_negative_rate_within_slice": 0.28
+        "route": "LON_CMB",
+        "false_negative_count": 34,
+        "price_changed_support": 41,
+        "false_negative_rate_within_slice": 0.8292682926829268
       },
       {
-        "route": "LON_ISB",
-        "false_negative_count": 7,
-        "price_changed_support": 39,
-        "false_negative_rate_within_slice": 0.1794871794871795
+        "route": "LON_BKK",
+        "false_negative_count": 33,
+        "price_changed_support": 41,
+        "false_negative_rate_within_slice": 0.8048780487804879
+      },
+      {
+        "route": "LON_JED",
+        "false_negative_count": 32,
+        "price_changed_support": 35,
+        "false_negative_rate_within_slice": 0.9142857142857143
+      },
+      {
+        "route": "LHR_CMB",
+        "false_negative_count": 28,
+        "price_changed_support": 36,
+        "false_negative_rate_within_slice": 0.7777777777777778
+      },
+      {
+        "route": "LON_KUL",
+        "false_negative_count": 28,
+        "price_changed_support": 37,
+        "false_negative_rate_within_slice": 0.7567567567567568
+      },
+      {
+        "route": "MAN_JED",
+        "false_negative_count": 23,
+        "price_changed_support": 29,
+        "false_negative_rate_within_slice": 0.7931034482758621
+      },
+      {
+        "route": "LON_NYC",
+        "false_negative_count": 22,
+        "price_changed_support": 32,
+        "false_negative_rate_within_slice": 0.6875
       }
     ],
     "airline_code": [
       {
         "airline_code": "BA",
-        "false_negative_count": 126,
-        "price_changed_support": 576,
-        "false_negative_rate_within_slice": 0.21875
-      },
-      {
-        "airline_code": "EK",
-        "false_negative_count": 72,
-        "price_changed_support": 316,
-        "false_negative_rate_within_slice": 0.22784810126582278
+        "false_negative_count": 477,
+        "price_changed_support": 617,
+        "false_negative_rate_within_slice": 0.773095623987034
       },
       {
         "airline_code": "EY",
-        "false_negative_count": 48,
-        "price_changed_support": 187,
-        "false_negative_rate_within_slice": 0.25668449197860965
+        "false_negative_count": 149,
+        "price_changed_support": 197,
+        "false_negative_rate_within_slice": 0.7563451776649747
+      },
+      {
+        "airline_code": "EK",
+        "false_negative_count": 139,
+        "price_changed_support": 221,
+        "false_negative_rate_within_slice": 0.6289592760180995
       },
       {
         "airline_code": "AI",
-        "false_negative_count": 43,
-        "price_changed_support": 160,
-        "false_negative_rate_within_slice": 0.26875
+        "false_negative_count": 117,
+        "price_changed_support": 196,
+        "false_negative_rate_within_slice": 0.5969387755102041
       },
       {
         "airline_code": "QR",
-        "false_negative_count": 35,
-        "price_changed_support": 164,
-        "false_negative_rate_within_slice": 0.21341463414634146
+        "false_negative_count": 104,
+        "price_changed_support": 148,
+        "false_negative_rate_within_slice": 0.7027027027027027
       },
       {
         "airline_code": "TK",
-        "false_negative_count": 26,
-        "price_changed_support": 116,
-        "false_negative_rate_within_slice": 0.22413793103448276
-      },
-      {
-        "airline_code": "SV",
-        "false_negative_count": 26,
-        "price_changed_support": 81,
-        "false_negative_rate_within_slice": 0.32098765432098764
+        "false_negative_count": 93,
+        "price_changed_support": 135,
+        "false_negative_rate_within_slice": 0.6888888888888889
       },
       {
         "airline_code": "VS",
-        "false_negative_count": 23,
-        "price_changed_support": 77,
-        "false_negative_rate_within_slice": 0.2987012987012987
+        "false_negative_count": 78,
+        "price_changed_support": 113,
+        "false_negative_rate_within_slice": 0.6902654867256637
       },
       {
-        "airline_code": "AC",
-        "false_negative_count": 18,
-        "price_changed_support": 51,
-        "false_negative_rate_within_slice": 0.35294117647058826
+        "airline_code": "SV",
+        "false_negative_count": 63,
+        "price_changed_support": 81,
+        "false_negative_rate_within_slice": 0.7777777777777778
       },
       {
-        "airline_code": "MU",
-        "false_negative_count": 16,
-        "price_changed_support": 66,
-        "false_negative_rate_within_slice": 0.24242424242424243
+        "airline_code": "CX",
+        "false_negative_count": 54,
+        "price_changed_support": 130,
+        "false_negative_rate_within_slice": 0.4153846153846154
+      },
+      {
+        "airline_code": "CZ",
+        "false_negative_count": 44,
+        "price_changed_support": 67,
+        "false_negative_rate_within_slice": 0.6567164179104478
       }
     ]
   }

@@ -4,6 +4,8 @@ from urllib.parse import urlparse
 import os
 import json
 
+from src.labels import canonicalize_status
+
 # Configuration
 INPUT_FILE = 'data/raw/tbl_SearchTracking_Merged.csv'
 OUTPUT_FILE = 'data/processed/processed_flight_data_full.csv'
@@ -48,23 +50,6 @@ def get_meta_engine(url):
     except:
         return 'Other'
 
-def canonicalize_label(status_str):
-    if pd.isna(status_str):
-        return 'ambiguous'
-    status = str(status_str).strip().lower()
-    if status == 'booked':
-        return 'bookable'
-    elif status == 'price mismatch':
-        return 'price_changed'
-    elif status == 'not available':
-        return 'unavailable'
-    elif status in ['not booked', 'abandoned', 'cancelled']:
-        return 'ambiguous'
-    elif any(x in status for x in ['timeout', 'failed', 'error', 'technical']):
-        return 'technical_failure'
-    else:
-        return 'ambiguous'
-
 def extract_device_os(agent):
     if pd.isna(agent): return 'Unknown'
     agent = str(agent).lower()
@@ -80,7 +65,7 @@ def calculate_segments(fdtag):
     return str(fdtag).count('~') + 1
 
 def build_labels(chunk):
-    chunk['canonical_status'] = chunk['Status'].apply(canonicalize_label)
+    chunk['canonical_status'] = chunk['Status'].apply(canonicalize_status)
     
     # Confident vs ambiguous distinction for future training usage
     confident_classes = ['bookable', 'price_changed', 'unavailable', 'technical_failure']

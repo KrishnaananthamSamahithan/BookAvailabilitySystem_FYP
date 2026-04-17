@@ -139,7 +139,6 @@ class DirichletCalibrator:
         # Fit L2-regularized multinomial logistic regression on log-probabilities
         self._model = LogisticRegression(
             solver="lbfgs",
-            multi_class="multinomial",
             C=1.0 / (self.lambda_reg * len(y_true)),
             max_iter=1000,
         )
