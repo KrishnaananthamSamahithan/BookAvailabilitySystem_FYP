@@ -1,0 +1,45 @@
+{
+  "rows": [
+    {
+      "model_name": "xgboost",
+      "params": {
+        "n_estimators": 180,
+        "learning_rate": 0.06,
+        "max_depth": 8,
+        "subsample": 0.9,
+        "colsample_bytree": 0.8
+      },
+      "macro_f1": 0.8336117708429823,
+      "accuracy": 0.9005907247399048,
+      "log_loss": 0.22229056534662792,
+      "selection_score": 0.9575858512866366
+    },
+    {
+      "model_name": "lightgbm",
+      "params": {
+        "n_estimators": 180,
+        "learning_rate": 0.06,
+        "num_leaves": 63,
+        "max_depth": -1,
+        "min_child_samples": 30
+      },
+      "macro_f1": 0.8326198551542808,
+      "accuracy": 0.9010315640980426,
+      "log_loss": 0.22031198496931764,
+      "selection_score": 0.9567589905205214
+    },
+    {
+      "model_name": "catboost",
+      "params": {
+        "iterations": 180,
+        "learning_rate": 0.05,
+        "depth": 8,
+        "l2_leaf_reg": 5
+      },
+      "macro_f1": 0.8295547538577926,
+      "accuracy": 0.8971521777464292,
+      "log_loss": 0.23555209422989312,
+      "selection_score": 0.9523499758082623
+    }
+  ]
+}

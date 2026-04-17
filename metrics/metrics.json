@@ -1,0 +1,123 @@
+{
+  "source_path": "data/processed/training_data.csv",
+  "validation": {
+    "best_model": "xgboost",
+    "best_params": {
+      "n_estimators": 180,
+      "learning_rate": 0.06,
+      "max_depth": 8,
+      "subsample": 0.9,
+      "colsample_bytree": 0.8
+    },
+    "macro_f1": 0.8336117708429823,
+    "accuracy": 0.9005907247399048,
+    "log_loss": 0.22229056534662792,
+    "selection_score": 0.9575858512866366
+  },
+  "test": {
+    "macro_f1": 0.8336585842032278,
+    "accuracy": 0.9054882080670046,
+    "log_loss": 0.21007922881295174,
+    "selection_score": 0.9589778539726309,
+    "weighted_f1": 0.9082231696784842,
+    "classification_report": {
+      "bookable": {
+        "precision": 0.9946835627412425,
+        "recall": 0.9808962941683425,
+        "f1-score": 0.9877418188392696,
+        "support": 13924.0
+      },
+      "price_changed": {
+        "precision": 0.6212078253473207,
+        "recall": 0.7562996202968588,
+        "f1-score": 0.6821295143212951,
+        "support": 2897.0
+      },
+      "unavailable": {
+        "precision": 0.8645660585959093,
+        "recall": 0.8001364256480218,
+        "f1-score": 0.8311044194491187,
+        "support": 5864.0
+      },
+      "accuracy": 0.9054882080670046,
+      "macro avg": {
+        "precision": 0.8268191488948241,
+        "recall": 0.8457774467044077,
+        "f1-score": 0.8336585842032278,
+        "support": 22685.0
+      },
+      "weighted avg": {
+        "precision": 0.9133536859266768,
+        "recall": 0.9054882080670046,
+        "f1-score": 0.9082231696784842,
+        "support": 22685.0
+      }
+    }
+  },
+  "features": {
+    "categorical": [
+      "trip_type",
+      "cabin_class",
+      "meta_engine",
+      "origin_airport",
+      "destination_airport",
+      "airline_code",
+      "device_os",
+      "route",
+      "route_airline",
+      "days_to_departure_bucket",
+      "itinerary_segments_bucket",
+      "cache_age_bucket",
+      "price_bucket",
+      "price_gap_bucket"
+    ],
+    "numerical": [
+      "days_to_departure",
+      "search_hour",
+      "search_day",
+      "search_month",
+      "search_dayofweek",
+      "search_weekofyear",
+      "dep_month",
+      "is_weekend",
+      "itinerary_segments",
+      "missing_airline",
+      "is_short_lead",
+      "is_last_minute",
+      "is_long_haul_booking_window",
+      "cache_age_hours",
+      "price_usd_imputed",
+      "price_gap_to_min",
+      "price_gap_ratio",
+      "log_price_usd",
+      "cache_gap_interaction",
+      "provider_prior_count",
+      "route_prior_count",
+      "airline_prior_count",
+      "route_airline_prior_count",
+      "provider_bookable_rate",
+      "provider_price_changed_rate",
+      "provider_unavailable_rate",
+      "route_bookable_rate",
+      "route_price_changed_rate",
+      "route_unavailable_rate",
+      "airline_bookable_rate",
+      "airline_price_changed_rate",
+      "airline_unavailable_rate",
+      "route_airline_bookable_rate",
+      "route_airline_price_changed_rate",
+      "route_airline_unavailable_rate",
+      "provider_instability_rate",
+      "route_instability_rate",
+      "price_change_pressure",
+      "unavailable_pressure",
+      "airline_success_rate_7d",
+      "airline_tech_fail_rate_7d",
+      "route_airline_success_rate_7d",
+      "airline_route_share_7d",
+      "route_airline_edge_vs_airline",
+      "price_pressure_interaction",
+      "route_share_success_interaction"
+    ]
+  }
+}
