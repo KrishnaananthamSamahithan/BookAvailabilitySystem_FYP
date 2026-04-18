@@ -26,8 +26,10 @@ Implements ALL academic requirements:
   Phase 20 — Error analysis (top N misclassified samples)
   Phase 21 — Ambiguous handling experiment
   Phase 22 — Provider holdout generalisation
-  Phase 23 — Save model bundle
-  Phase 24 — Summary
+  Phase 23 — Route holdout generalisation
+  Phase 24 — Snapshot parity audit
+  Phase 25 — Save model bundle
+  Phase 26 — Summary
 """
 
 import json
@@ -435,7 +437,32 @@ def run_training_pipeline(config: ProjectConfig | None = None) -> Dict[str, obje
     save_json(config.reports_dir / "provider_holdout_evaluation.json", provider_holdout)
 
     # -----------------------------------------------------------------------
-    # Phase 23: Save model bundle
+    # Phase 23: Route holdout generalisation
+    # -----------------------------------------------------------------------
+    route_holdout = run_route_holdout_generalization(
+        supervised=supervised,
+        model_name=best_model_result.name,
+        labels=active_labels,
+        random_state=config.random_state,
+        holdout_fraction=config.provider_holdout_fraction,
+    )
+    save_json(config.reports_dir / "route_holdout_evaluation.json", route_holdout)
+
+    # -----------------------------------------------------------------------
+    # Phase 24: Snapshot parity audit
+    # -----------------------------------------------------------------------
+    snapshot_parity = run_snapshot_parity_audit(
+        target_df=four_way.val_model,
+        history_df=four_way.train,
+        feature_columns=full_feature_columns,
+        labels=active_labels,
+        estimator=best_estimator,
+        calibrator=best_calibrator_result.calibrator,
+    )
+    save_json(config.reports_dir / "snapshot_parity_audit.json", snapshot_parity)
+
+    # -----------------------------------------------------------------------
+    # Phase 25: Save model bundle
     # -----------------------------------------------------------------------
     model_bundle = {
         "model_name": best_model_result.name,
@@ -455,7 +482,7 @@ def run_training_pipeline(config: ProjectConfig | None = None) -> Dict[str, obje
     joblib.dump(model_bundle, config.models_dir / "final_model_bundle.joblib")
 
     # -----------------------------------------------------------------------
-    # Phase 24: Summary
+    # Phase 26: Summary
     # -----------------------------------------------------------------------
     best_baseline_f1 = max(
         (r["macro_f1"] for r in baseline_rows), default=0.0
@@ -475,9 +502,40 @@ def run_training_pipeline(config: ProjectConfig | None = None) -> Dict[str, obje
         "significance_tests.json",
         "drift_analysis.json",
         "provider_holdout_evaluation.json",
+        "route_holdout_evaluation.json",
+        "snapshot_parity_audit.json",
         "class_presence.json",
         "experiment_manifest.json",
     ]
+
+    phase_status = {
+        "phase_1_preprocessing_eda": True,
+        "phase_2_label_presence": True,
+        "phase_3_temporal_split": True,
+        "phase_4_feature_selection": True,
+        "phase_5_naive_baselines": len(baseline_rows) > 0,
+        "phase_6_model_comparison": len(model_rows) > 0,
+        "phase_7_calibration": len(calibration_rows) > 0,
+        "phase_8_final_evaluation": bool(final_metrics),
+        "phase_9_significance": len(significance_report.get("mcnemar_pairwise", [])) > 0,
+        "phase_10_subgroup_calibration_parity": bool(subgroup_reports),
+        "phase_11_ablation": len(ablation_rows) > 0,
+        "phase_12_rolling_backtest": len(backtest_rows) > 0,
+        "phase_13_policy_simulation": bool(policy_results),
+        "phase_14_drift": bool(drift_report) and bool(pred_drift_report),
+        "phase_15_16_shap": shap_report.get("status") == "completed",
+        "phase_17_permutation_importance": perm_report.get("status") == "completed",
+        "phase_18_partial_dependence": pdp_report.get("status") == "completed",
+        "phase_19_learning_curves": len(learning_curve_rows) > 0,
+        "phase_20_error_analysis": error_report.get("status") in {"completed", "no_errors_found"},
+        "phase_21_ambiguous_handling": ambiguous_experiment.get("status") in {"completed", "skipped_no_ambiguous_rows"},
+        "phase_22_provider_holdout": provider_holdout.get("status") == "completed",
+        "phase_23_route_holdout": route_holdout.get("status") == "completed",
+        "phase_24_snapshot_parity": snapshot_parity.get("status") == "completed",
+        "phase_25_model_bundle": (config.models_dir / "final_model_bundle.joblib").exists(),
+        "phase_26_summary": True,
+    }
+    completed_phase_count = int(sum(1 for done in phase_status.values() if done))
 
     summary = {
         "best_model": best_model_result.name,
@@ -505,10 +563,15 @@ def run_training_pipeline(config: ProjectConfig | None = None) -> Dict[str, obje
         "rolling_backtest_windows": len(backtest_rows),
         "ablation_configs_run": len(ablation_rows),
         "learning_curve_points": len(learning_curve_rows),
+        "provider_holdout_status": provider_holdout.get("status"),
+        "route_holdout_status": route_holdout.get("status"),
+        "snapshot_parity_status": snapshot_parity.get("status"),
         "processed_rows": int(len(processed)),
         "supervised_rows": int(len(supervised)),
         "artifacts_dir": str(config.artifacts_dir),
-        "pipeline_phases_completed": 24,
+        "pipeline_phases_completed": completed_phase_count,
+        "pipeline_phases_total": len(phase_status),
+        "phase_status": phase_status,
         "pipeline_version": "v2.1_research_evidence_hardened",
         "generated_at_utc": pd.Timestamp.utcnow().isoformat(),
         "reproducibility": {
@@ -690,16 +753,32 @@ def run_shap_explainability(
         import shap
 
         sample = X_sample.sample(min(500, len(X_sample)), random_state=42)
+        explainer_input = sample
+        predict_target = estimator
+        feature_names = list(X_sample.columns)
+
+        # Explain the fitted classifier input space, not the sklearn Pipeline wrapper.
+        if hasattr(estimator, "named_steps") and "preprocessor" in estimator.named_steps and "classifier" in estimator.named_steps:
+            preprocessor = estimator.named_steps["preprocessor"]
+            classifier = estimator.named_steps["classifier"]
+            transformed = preprocessor.transform(sample)
+            if hasattr(transformed, "toarray"):
+                transformed = transformed.toarray()
+            explainer_input = transformed
+            predict_target = classifier
+            if hasattr(preprocessor, "get_feature_names_out"):
+                feature_names = preprocessor.get_feature_names_out().tolist()
+            else:
+                feature_names = [f"feature_{idx}" for idx in range(explainer_input.shape[1])]
 
         try:
-            explainer = shap.TreeExplainer(estimator)
-            shap_values = explainer.shap_values(sample)
+            explainer = shap.TreeExplainer(predict_target)
+            shap_values = explainer.shap_values(explainer_input)
         except Exception:
             background = shap.sample(sample, min(50, len(sample)))
             explainer = shap.KernelExplainer(estimator.predict_proba, background)
             shap_values = explainer.shap_values(sample, nsamples=100)
 
-        feature_names = list(X_sample.columns)
         per_class: Dict[str, object] = {}
 
         def _extract_class_shap(shap_array, class_idx):
@@ -737,14 +816,18 @@ def run_shap_explainability(
                 top_features = [entry["feature"] for entry in per_class.get(primary_label, [])[:3]]
 
                 for feat in top_features:
-                    if feat not in sample.columns:
+                    if feat not in feature_names:
                         continue
                     fig, ax = plt.subplots(figsize=(6, 4))
                     feat_idx = feature_names.index(feat)
                     sv_primary = _extract_class_shap(shap_values, 0)
                     if sv_primary is not None:
+                        if isinstance(explainer_input, pd.DataFrame):
+                            x_axis = explainer_input[feat].values
+                        else:
+                            x_axis = explainer_input[:, feat_idx]
                         ax.scatter(
-                            sample[feat].values,
+                            x_axis,
                             sv_primary[:, feat_idx],
                             alpha=0.4, s=8, color="#1f77b4",
                         )
@@ -1076,13 +1159,26 @@ def run_provider_holdout_generalization(
     if "provider_key" not in supervised.columns or supervised["provider_key"].isna().all():
         return {"status": "skipped_missing_provider_key"}
 
-    providers = supervised["provider_key"].dropna().astype("string").unique().tolist()
-    if len(providers) < 2:
-        return {"status": "skipped_insufficient_provider_diversity", "provider_count": len(providers)}
+    provider_series = supervised["provider_key"].dropna().astype("string")
+    provider_counts = provider_series.value_counts()
+    eligible_counts = provider_counts[provider_counts >= 500]
+    eligible_providers = eligible_counts.index.tolist()
+    if len(eligible_providers) < 5:
+        return {
+            "status": "skipped_insufficient_provider_support",
+            "provider_count": int(provider_counts.shape[0]),
+            "eligible_provider_count": int(len(eligible_providers)),
+            "min_rows_per_provider": 500,
+        }
 
     rng = np.random.default_rng(random_state)
-    holdout_count = min(len(providers) - 1, max(1, int(len(providers) * holdout_fraction)))
-    holdout_providers = set(rng.choice(providers, size=holdout_count, replace=False).tolist())
+    holdout_count = min(
+        len(eligible_providers) - 1,
+        max(2, int(np.ceil(len(eligible_providers) * holdout_fraction))),
+    )
+    holdout_providers = set(
+        rng.choice(eligible_providers, size=holdout_count, replace=False).tolist()
+    )
     train_df = supervised.loc[~supervised["provider_key"].astype("string").isin(holdout_providers)].copy()
     test_df = supervised.loc[supervised["provider_key"].astype("string").isin(holdout_providers)].copy()
     if train_df.empty or test_df.empty:
@@ -1108,11 +1204,151 @@ def run_provider_holdout_generalization(
     return {
         "status": "completed",
         "holdout_fraction_requested": holdout_fraction,
+        "eligible_provider_count": int(len(eligible_providers)),
+        "eligible_provider_min_rows": 500,
         "holdout_provider_count": len(holdout_providers),
         "holdout_providers": list(holdout_providers)[:10],
         "train_rows": int(len(train_df)),
         "test_rows": int(len(test_df)),
         "metrics": metrics,
+    }
+
+
+def run_route_holdout_generalization(
+    supervised: pd.DataFrame,
+    model_name: str,
+    labels: List[str],
+    random_state: int,
+    holdout_fraction: float,
+) -> Dict[str, object]:
+    if "route" not in supervised.columns or supervised["route"].isna().all():
+        return {"status": "skipped_missing_route"}
+
+    route_series = supervised["route"].dropna().astype("string")
+    route_counts = route_series.value_counts()
+    eligible_counts = route_counts[route_counts >= 500]
+    eligible_routes = eligible_counts.index.tolist()
+    if len(eligible_routes) < 5:
+        return {
+            "status": "skipped_insufficient_route_support",
+            "route_count": int(route_counts.shape[0]),
+            "eligible_route_count": int(len(eligible_routes)),
+            "min_rows_per_route": 500,
+        }
+
+    rng = np.random.default_rng(random_state)
+    holdout_count = min(
+        len(eligible_routes) - 1,
+        max(2, int(np.ceil(len(eligible_routes) * holdout_fraction))),
+    )
+    holdout_routes = set(
+        rng.choice(eligible_routes, size=holdout_count, replace=False).tolist()
+    )
+    train_df = supervised.loc[~supervised["route"].astype("string").isin(holdout_routes)].copy()
+    test_df = supervised.loc[supervised["route"].astype("string").isin(holdout_routes)].copy()
+    if train_df.empty or test_df.empty:
+        return {"status": "skipped_empty_split", "train_rows": int(len(train_df)), "test_rows": int(len(test_df))}
+
+    train_bundle = build_feature_bundle(train_df, include_labels=True)
+    test_bundle = build_snapshot_feature_bundle(test_df, train_df)
+    label_map = {label: idx for idx, label in enumerate(labels)}
+    train_bundle.frame["target"] = train_bundle.frame["outcome_label"].map(label_map)
+    test_bundle.frame["target"] = test_bundle.frame["outcome_label"].map(label_map)
+    feature_columns = [
+        f for f in train_bundle.feature_groups["full_valid_model"]
+        if f in train_bundle.frame.columns and f in test_bundle.frame.columns
+    ]
+    estimator = _fit_single_model(
+        model_name, train_bundle.frame, test_bundle.frame,
+        feature_columns, train_bundle, random_state,
+    )
+    probabilities = predict_proba_aligned(
+        estimator, test_bundle.frame[feature_columns], list(range(len(labels)))
+    )
+    metrics = evaluate_predictions(test_bundle.frame["target"].to_numpy(), probabilities, labels)
+    return {
+        "status": "completed",
+        "holdout_fraction_requested": holdout_fraction,
+        "eligible_route_count": int(len(eligible_routes)),
+        "eligible_route_min_rows": 500,
+        "holdout_route_count": len(holdout_routes),
+        "holdout_routes": list(holdout_routes)[:10],
+        "train_rows": int(len(train_df)),
+        "test_rows": int(len(test_df)),
+        "metrics": metrics,
+    }
+
+
+def run_snapshot_parity_audit(
+    target_df: pd.DataFrame,
+    history_df: pd.DataFrame,
+    feature_columns: List[str],
+    labels: List[str],
+    estimator,
+    calibrator,
+) -> Dict[str, object]:
+    if target_df.empty or history_df.empty:
+        return {"status": "skipped_empty_input"}
+
+    authoritative_bundle = build_snapshot_feature_bundle(target_df, history_df)
+    approximation_bundle = build_feature_bundle(target_df, include_labels=False)
+
+    authoritative = authoritative_bundle.frame.copy()
+    approximation = approximation_bundle.frame.copy()
+    shared_columns = [c for c in feature_columns if c in authoritative.columns and c in approximation.columns]
+    if not shared_columns:
+        return {"status": "skipped_no_shared_features"}
+
+    aligned_authoritative = authoritative[shared_columns].copy()
+    aligned_approximation = approximation[shared_columns].copy()
+    numeric_columns = [
+        c for c in shared_columns
+        if pd.api.types.is_numeric_dtype(aligned_authoritative[c]) and pd.api.types.is_numeric_dtype(aligned_approximation[c])
+    ]
+    categorical_columns = [c for c in shared_columns if c not in numeric_columns]
+
+    numeric_diffs = []
+    if numeric_columns:
+        diff_frame = (aligned_authoritative[numeric_columns] - aligned_approximation[numeric_columns]).abs()
+        for column in numeric_columns:
+            numeric_diffs.append(
+                {
+                    "feature": column,
+                    "mean_abs_diff": float(diff_frame[column].mean()),
+                    "max_abs_diff": float(diff_frame[column].max()),
+                }
+            )
+    categorical_agreement = []
+    for column in categorical_columns:
+        agreement = (
+            aligned_authoritative[column].astype("string").fillna("Unknown")
+            == aligned_approximation[column].astype("string").fillna("Unknown")
+        ).mean()
+        categorical_agreement.append({"feature": column, "agreement": float(agreement)})
+
+    auth_proba = predict_proba_aligned(estimator, authoritative[feature_columns], list(range(len(labels))))
+    approx_proba = predict_proba_aligned(estimator, approximation[feature_columns], list(range(len(labels))))
+    auth_cal = align_calibrated_probabilities(calibrator, auth_proba, list(range(len(labels))))
+    approx_cal = align_calibrated_probabilities(calibrator, approx_proba, list(range(len(labels))))
+
+    auth_pred = np.argmax(auth_cal, axis=1)
+    approx_pred = np.argmax(approx_cal, axis=1)
+    probability_delta = np.abs(auth_cal - approx_cal)
+    return {
+        "status": "completed",
+        "rows_compared": int(len(target_df)),
+        "feature_column_count": len(shared_columns),
+        "numeric_feature_count": len(numeric_columns),
+        "categorical_feature_count": len(categorical_columns),
+        "prediction_agreement": float((auth_pred == approx_pred).mean()),
+        "mean_abs_probability_delta": float(probability_delta.mean()),
+        "max_abs_probability_delta": float(probability_delta.max()),
+        "worst_numeric_features": sorted(numeric_diffs, key=lambda row: row["mean_abs_diff"], reverse=True)[:15],
+        "worst_categorical_features": sorted(categorical_agreement, key=lambda row: row["agreement"])[:15],
+        "note": (
+            "Authoritative snapshot features use historical rows available at prediction time. "
+            "Approximation uses default-only snapshot features without real history, which mirrors a weaker serving setup."
+        ),
     }
 
 

@@ -1,27 +1,30 @@
 {
   "dataset_shape": {
     "rows": 366126,
-    "columns": 31
+    "columns": 33
   },
   "label_distribution": {
     "counts": {
-      "bookable": 288481,
+      "ambiguous": 181590,
+      "bookable": 106891,
       "unavailable": 51903,
       "price_changed": 25742
     },
     "proportions": {
-      "bookable": 0.7879,
+      "ambiguous": 0.496,
+      "bookable": 0.292,
       "unavailable": 0.1418,
       "price_changed": 0.0703
     },
-    "imbalance_ratio_max_to_min": 11.21,
-    "dominant_class": "bookable"
+    "imbalance_ratio_max_to_min": 7.05,
+    "dominant_class": "ambiguous"
   },
   "missing_rates": {
+    "raw_price_total": 1.0,
     "price_total": 1.0
   },
-  "columns_with_any_missing": 1,
-  "columns_fully_present": 30,
+  "columns_with_any_missing": 2,
+  "columns_fully_present": 31,
   "numeric_summaries": {
     "days_to_departure": {
       "count": 366126,
@@ -157,25 +160,34 @@
       "coverage_top_5_pct": 100.0
     },
     "meta_engine": {
-      "unique_values": 1,
+      "unique_values": 4,
       "top_5": {
-        "Direct": 366126
+        "Skyscanner": 266735,
+        "Google": 79518,
+        "Other": 15742,
+        "Direct": 4131
       },
       "coverage_top_5_pct": 100.0
     },
     "provider_key": {
-      "unique_values": 1,
+      "unique_values": 3,
       "top_5": {
-        "Direct": 366126
+        "carltonleisure.com": 366096,
+        "localhost": 29,
+        "uatservice.carltonleisure.com": 1
       },
       "coverage_top_5_pct": 100.0
     },
     "referrer_domain": {
-      "unique_values": 1,
+      "unique_values": 18,
       "top_5": {
-        "Unknown": 366126
+        "skyscanner.net": 266691,
+        "google.com": 79460,
+        "carltonleisure.com": 14865,
+        "Unknown": 4131,
+        "handoff.wego.com": 850
       },
-      "coverage_top_5_pct": 100.0
+      "coverage_top_5_pct": 99.96
     },
     "market": {
       "unique_values": 1,
@@ -196,11 +208,15 @@
       "coverage_top_5_pct": 88.02
     },
     "device_os": {
-      "unique_values": 1,
+      "unique_values": 6,
       "top_5": {
-        "Unknown": 366126
+        "iOS": 152757,
+        "Android": 84162,
+        "Windows": 64285,
+        "MacOS": 35002,
+        "Linux": 28407
       },
-      "coverage_top_5_pct": 100.0
+      "coverage_top_5_pct": 99.59
     }
   },
   "records_per_month": {
@@ -215,11 +231,11 @@
   },
   "days_to_departure_by_label": {
     "bookable": {
-      "median_days": 62.0,
-      "mean_days": 95.5761280638933,
-      "pct_same_day": 2.7731462384004494e-05,
-      "pct_short_lead": 0.08678214509794406,
-      "pct_long_lead": 0.512779004509829
+      "median_days": 54.0,
+      "mean_days": 83.72960305357795,
+      "pct_same_day": 1.8710649165972814e-05,
+      "pct_short_lead": 0.08897849210878371,
+      "pct_long_lead": 0.4667464987697748
     },
     "price_changed": {
       "median_days": 69.0,
@@ -262,9 +278,28 @@
   },
   "label_by_meta_engine": {
     "Direct": {
-      "bookable": 288481,
-      "price_changed": 25742,
-      "unavailable": 51903
+      "ambiguous": 1994,
+      "bookable": 1276,
+      "price_changed": 289,
+      "unavailable": 572
+    },
+    "Google": {
+      "ambiguous": 317,
+      "bookable": 79049,
+      "price_changed": 44,
+      "unavailable": 108
+    },
+    "Other": {
+      "ambiguous": 96,
+      "bookable": 15596,
+      "price_changed": 14,
+      "unavailable": 36
+    },
+    "Skyscanner": {
+      "ambiguous": 179183,
+      "bookable": 10970,
+      "price_changed": 25395,
+      "unavailable": 51187
     }
   }
 }

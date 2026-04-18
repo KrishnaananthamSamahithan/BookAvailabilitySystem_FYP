@@ -1,25 +1,26 @@
 {
-  "rows_initial": 366126,
+  "rows_initial": 406505,
   "rows_bad_timestamp": 0,
   "rows_bad_depdate": 0,
-  "rows_negative_days_to_departure": 0,
+  "rows_negative_days_to_departure": 300,
   "rows_missing_required_postmap": 0,
-  "rows_duplicates_removed": 0,
-  "rows_unmapped_labels": 0,
+  "rows_duplicates_removed": 40079,
+  "rows_unmapped_labels": 203486,
   "rows_final": 366126,
   "prediction_time_assumption": "LandingTime is used as the prediction-time proxy because it is the best available timestamp for the real-time decision moment in the current raw log export.",
   "label_diagnostics": {
     "raw_status_frequencies": {
-      "Not Booked": 181590,
-      "Booked": 106891,
-      "Not Available": 51903,
-      "Price Mismatch": 25742
+      "Not Booked": 203486,
+      "Booked": 115896,
+      "Not Available": 58217,
+      "Price Mismatch": 28906
     },
     "canonical_label_counts": {
-      "bookable": 288481,
-      "unavailable": 51903,
-      "price_changed": 25742
+      "ambiguous": 203486,
+      "bookable": 115896,
+      "unavailable": 58217,
+      "price_changed": 28906
     },
-    "unmapped_to_ambiguous_count": 0
+    "unmapped_to_ambiguous_count": 203486
   }
 }

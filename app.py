@@ -85,6 +85,7 @@ class InMemoryFeatureStore:
 
     def __init__(self):
         self._lock = threading.Lock()
+        self._history_defaults: Dict[str, float] = {}
         # Per-provider: total count + per-outcome counts (all 4 classes)
         self._provider_counts: Dict[str, int] = {}
         self._provider_outcomes: Dict[str, Dict[str, int]] = {}   # FIX
@@ -106,6 +107,17 @@ class InMemoryFeatureStore:
             return 0.25  # uninformed prior: equal across 4 classes
         return float(outcome_dict.get(outcome, 0)) / total
 
+    def bootstrap_defaults(self, history_defaults: Optional[Dict[str, float]]) -> None:
+        """Seed live-serving priors from training-time inference defaults."""
+        if not history_defaults:
+            return
+        with self._lock:
+            self._history_defaults = {
+                str(key): float(value)
+                for key, value in history_defaults.items()
+                if value is not None
+            }
+
     def get_features(
         self,
         provider_key: str,
@@ -114,30 +126,49 @@ class InMemoryFeatureStore:
     ) -> Dict[str, float]:
         """Return real-time history features for the given provider/route."""
         with self._lock:
-            p_count = self._provider_counts.get(provider_key, 0)
-            r_count = self._route_counts.get(route, 0)
+            p_count = self._provider_counts.get(
+                provider_key,
+                int(round(self._history_defaults.get("provider_prior_count", 0.0))),
+            )
+            r_count = self._route_counts.get(
+                route,
+                int(round(self._history_defaults.get("route_prior_count", 0.0))),
+            )
 
             p_outcomes = self._provider_outcomes.get(provider_key, {})
             r_outcomes = self._route_outcomes.get(route, {})
             pr_outcomes = self._prov_route_outcomes.get(f"{provider_key}_{route}", {})
 
             # FIX: compute each rate independently from per-outcome counters
-            p_rate_bookable = self._rate(p_outcomes, "bookable")
-            p_rate_price_changed = self._rate(p_outcomes, "price_changed")
-            p_rate_unavailable = self._rate(p_outcomes, "unavailable")
-            p_rate_technical = self._rate(p_outcomes, "technical_failure")
+            p_rate_bookable = self._rate(p_outcomes, "bookable") if p_outcomes else self._history_defaults.get("provider_prior_rate_bookable", 0.25)
+            p_rate_price_changed = self._rate(p_outcomes, "price_changed") if p_outcomes else self._history_defaults.get("provider_prior_rate_price_changed", 0.25)
+            p_rate_unavailable = self._rate(p_outcomes, "unavailable") if p_outcomes else self._history_defaults.get("provider_prior_rate_unavailable", 0.25)
+            p_rate_technical = self._rate(p_outcomes, "technical_failure") if p_outcomes else self._history_defaults.get("provider_prior_rate_technical_failure", 0.25)
 
-            r_rate_bookable = self._rate(r_outcomes, "bookable")
-            r_rate_unavailable = self._rate(r_outcomes, "unavailable")
+            r_rate_bookable = self._rate(r_outcomes, "bookable") if r_outcomes else self._history_defaults.get("route_prior_rate_bookable", 0.25)
+            r_rate_price_changed = self._rate(r_outcomes, "price_changed") if r_outcomes else self._history_defaults.get("route_prior_rate_price_changed", 0.25)
+            r_rate_unavailable = self._rate(r_outcomes, "unavailable") if r_outcomes else self._history_defaults.get("route_prior_rate_unavailable", 0.25)
 
-            pr_rate_bookable = self._rate(pr_outcomes, "bookable")
-            pr_rate_unavailable = self._rate(pr_outcomes, "unavailable")
+            pr_rate_bookable = self._rate(pr_outcomes, "bookable") if pr_outcomes else self._history_defaults.get("provider_route_prior_rate_bookable", 0.25)
+            pr_rate_price_changed = self._rate(pr_outcomes, "price_changed") if pr_outcomes else self._history_defaults.get("provider_route_prior_rate_price_changed", 0.25)
+            pr_rate_unavailable = self._rate(pr_outcomes, "unavailable") if pr_outcomes else self._history_defaults.get("provider_route_prior_rate_unavailable", 0.25)
 
             p_last = self._provider_last_time.get(provider_key)
             r_last = self._route_last_time.get(route)
 
-            p_minutes = (now - p_last).total_seconds() / 60.0 if p_last else 60.0
-            r_minutes = (now - r_last).total_seconds() / 60.0 if r_last else 60.0
+            p_minutes = (now - p_last).total_seconds() / 60.0 if p_last else self._history_defaults.get("provider_minutes_since_prev", 60.0)
+            r_minutes = (now - r_last).total_seconds() / 60.0 if r_last else self._history_defaults.get("route_minutes_since_prev", 60.0)
+            pr_minutes = min(p_minutes, r_minutes)
+
+        provider_instability = (p_rate_price_changed + p_rate_unavailable + p_rate_technical) / 3.0
+        route_instability = (r_rate_price_changed + r_rate_unavailable) / 2.0
+        price_change_pressure = (
+            p_rate_price_changed + r_rate_price_changed + pr_rate_price_changed
+        ) / 3.0
+        technical_failure_pressure = p_rate_technical
+        unavailability_pressure = (
+            p_rate_unavailable + r_rate_unavailable + pr_rate_unavailable
+        ) / 3.0
 
         return {
             "provider_prior_count": float(p_count),
@@ -147,13 +178,22 @@ class InMemoryFeatureStore:
             "provider_prior_rate_technical_failure": p_rate_technical,    # FIX
             "route_prior_count": float(r_count),
             "route_prior_rate_bookable": r_rate_bookable,
+            "route_prior_rate_price_changed": r_rate_price_changed,
             "route_prior_rate_unavailable": r_rate_unavailable,
             "provider_route_prior_rate_bookable": pr_rate_bookable,        # FIX
+            "provider_route_prior_rate_price_changed": pr_rate_price_changed,
             "provider_route_prior_rate_unavailable": pr_rate_unavailable,  # FIX
+            "airline_route_prior_rate_bookable": r_rate_bookable,
+            "airline_route_prior_rate_price_changed": r_rate_price_changed,
             "airline_route_prior_rate_unavailable": r_rate_unavailable,
+            "provider_instability_score": provider_instability,
+            "route_instability_score": route_instability,
+            "price_change_pressure": price_change_pressure,
+            "technical_failure_pressure": technical_failure_pressure,
+            "unavailability_pressure": unavailability_pressure,
             "provider_minutes_since_prev": max(0.0, p_minutes),
             "route_minutes_since_prev": max(0.0, r_minutes),
-            "provider_route_minutes_since_prev": max(0.0, min(p_minutes, r_minutes)),
+            "provider_route_minutes_since_prev": max(0.0, pr_minutes),
         }
 
     def _apply_outcome_update(
@@ -342,12 +382,15 @@ def _force_single_thread_inference(estimator: object) -> None:
 
 
 def load_bundle() -> Optional[Dict]:
-    global _bundle, _drift_monitor
+    global _bundle, _drift_monitor, _feature_store
     if not BUNDLE_PATH.exists():
         return None
     try:
         _bundle = joblib.load(BUNDLE_PATH)
         _force_single_thread_inference(_bundle.get("estimator"))
+        inference_reference = _bundle.get("inference_reference", {})
+        if isinstance(inference_reference, dict):
+            _feature_store.bootstrap_defaults(inference_reference.get("history_defaults"))
         # Initialise online drift monitor with calibration reference probabilities
         ref_proba = _bundle.get("val_calib_proba")
         if ref_proba is not None:
@@ -888,4 +931,3 @@ if __name__ == "__main__":
     print("Health check:     http://localhost:5000/api/health")
     print("=" * 60)
     app.run(debug=False, host="0.0.0.0", port=5000)
-

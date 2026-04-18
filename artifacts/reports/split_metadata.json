@@ -1,10 +1,10 @@
 {
   "split_strategy": "temporal_four_way",
-  "n_rows": 366126,
-  "train_rows": 201369,
-  "val_model_rows": 73225,
-  "val_calibration_rows": 36613,
-  "test_rows": 54919,
+  "n_rows": 184536,
+  "train_rows": 101494,
+  "val_model_rows": 36908,
+  "val_calibration_rows": 18453,
+  "test_rows": 27681,
   "fractions": {
     "train": 0.55,
     "val_model": 0.2,
@@ -14,41 +14,41 @@
   "time_ranges": {
     "train": [
       "2025-12-11 03:01:10.020000",
-      "2026-01-15 00:56:27.620000"
+      "2026-01-15 21:50:51.207000"
     ],
     "val_model": [
-      "2026-01-15 00:56:33.117000",
-      "2026-01-25 16:16:11.633000"
+      "2026-01-15 21:51:03.977000",
+      "2026-01-26 10:37:07.707000"
     ],
     "val_calibration": [
-      "2026-01-25 16:16:20.480000",
-      "2026-01-31 07:38:17.440000"
+      "2026-01-26 10:37:19.223000",
+      "2026-01-31 10:28:41.647000"
     ],
     "test": [
-      "2026-01-31 07:38:43.037000",
-      "2026-02-10 18:27:18"
+      "2026-01-31 10:28:55.343000",
+      "2026-02-10 18:26:58"
     ]
   },
   "class_distribution": {
     "train": {
-      "bookable": 156997,
-      "unavailable": 29749,
-      "price_changed": 14623
+      "bookable": 55844,
+      "unavailable": 30592,
+      "price_changed": 15058
     },
     "val_model": {
-      "bookable": 58730,
-      "unavailable": 9626,
-      "price_changed": 4869
+      "bookable": 23010,
+      "unavailable": 9253,
+      "price_changed": 4645
     },
     "val_calibration": {
-      "bookable": 29362,
-      "unavailable": 4876,
-      "price_changed": 2375
+      "bookable": 11752,
+      "unavailable": 4496,
+      "price_changed": 2205
     },
     "test": {
-      "bookable": 43392,
-      "unavailable": 7652,
-      "price_changed": 3875
+      "bookable": 16285,
+      "unavailable": 7562,
+      "price_changed": 3834
     }
   },
   "double_dipping_eliminated": true,

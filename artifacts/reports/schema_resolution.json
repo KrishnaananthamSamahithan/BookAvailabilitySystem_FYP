@@ -2,99 +2,99 @@
   "rows": [
     {
       "logical_field": "status",
-      "resolved_raw_column": "raw_status",
-      "matched_alias": "raw_status",
+      "resolved_raw_column": "Status",
+      "matched_alias": "Status",
       "is_required": true,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "origin",
-      "resolved_raw_column": "origin_airport",
-      "matched_alias": "origin_airport",
+      "resolved_raw_column": "Origin",
+      "matched_alias": "Origin",
       "is_required": true,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "destination",
-      "resolved_raw_column": "destination_airport",
-      "matched_alias": "destination_airport",
+      "resolved_raw_column": "Destination",
+      "matched_alias": "Destination",
       "is_required": true,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "airline",
-      "resolved_raw_column": "airline_code",
-      "matched_alias": "airline_code",
+      "resolved_raw_column": "Airline",
+      "matched_alias": "Airline",
       "is_required": true,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "cabin",
-      "resolved_raw_column": "cabin_class",
-      "matched_alias": "cabin_class",
+      "resolved_raw_column": "Class",
+      "matched_alias": "Class",
       "is_required": true,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "departure_date",
-      "resolved_raw_column": "departure_date",
-      "matched_alias": "departure_date",
+      "resolved_raw_column": "DepDate",
+      "matched_alias": "DepDate",
       "is_required": true,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "prediction_time",
-      "resolved_raw_column": "prediction_time",
-      "matched_alias": "prediction_time",
+      "resolved_raw_column": "LandingTime",
+      "matched_alias": "LandingTime",
       "is_required": true,
       "selected_as_prediction_time": true
     },
     {
       "logical_field": "inserted_on",
-      "resolved_raw_column": "outcome_time",
-      "matched_alias": "outcome_time",
+      "resolved_raw_column": "InsertedOn",
+      "matched_alias": "InsertedOn",
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "trip_type",
-      "resolved_raw_column": "trip_type",
-      "matched_alias": "trip_type",
+      "resolved_raw_column": "SearchType",
+      "matched_alias": "SearchType",
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "previous_page",
-      "resolved_raw_column": null,
-      "matched_alias": null,
+      "resolved_raw_column": "PreviousPage",
+      "matched_alias": "PreviousPage",
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "landing_page",
-      "resolved_raw_column": null,
-      "matched_alias": null,
+      "resolved_raw_column": "LandingPage",
+      "matched_alias": "LandingPage",
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "fdtag",
-      "resolved_raw_column": null,
-      "matched_alias": null,
+      "resolved_raw_column": "FdTag",
+      "matched_alias": "FdTag",
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "user_agent",
-      "resolved_raw_column": null,
-      "matched_alias": null,
+      "resolved_raw_column": "UserAgent",
+      "matched_alias": "UserAgent",
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "flight_segments",
-      "resolved_raw_column": null,
-      "matched_alias": null,
+      "resolved_raw_column": "FlightSegments",
+      "matched_alias": "FlightSegments",
       "is_required": false,
       "selected_as_prediction_time": false
     },
@@ -121,22 +121,22 @@
     },
     {
       "logical_field": "stops",
-      "resolved_raw_column": "stop_count",
-      "matched_alias": "stop_count",
+      "resolved_raw_column": null,
+      "matched_alias": null,
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "market",
-      "resolved_raw_column": "market",
-      "matched_alias": "Market",
+      "resolved_raw_column": null,
+      "matched_alias": null,
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "locale",
-      "resolved_raw_column": "locale",
-      "matched_alias": "Locale",
+      "resolved_raw_column": null,
+      "matched_alias": null,
       "is_required": false,
       "selected_as_prediction_time": false
     },
@@ -149,28 +149,28 @@
     },
     {
       "logical_field": "adults",
-      "resolved_raw_column": "adults",
-      "matched_alias": "Adults",
+      "resolved_raw_column": null,
+      "matched_alias": null,
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "children",
-      "resolved_raw_column": "children",
-      "matched_alias": "Children",
+      "resolved_raw_column": null,
+      "matched_alias": null,
       "is_required": false,
       "selected_as_prediction_time": false
     },
     {
       "logical_field": "infants",
-      "resolved_raw_column": "infants",
-      "matched_alias": "Infants",
+      "resolved_raw_column": null,
+      "matched_alias": null,
       "is_required": false,
       "selected_as_prediction_time": false
     }
   ],
   "missing_required": [],
   "prediction_time_assumption": "LandingTime is used as the prediction-time proxy because it is the best available timestamp for the real-time decision moment in the current raw log export.",
-  "selected_prediction_time_raw_column": "prediction_time",
-  "selected_prediction_time_alias": "prediction_time"
+  "selected_prediction_time_raw_column": "LandingTime",
+  "selected_prediction_time_alias": "LandingTime"
 }

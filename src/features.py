@@ -49,6 +49,7 @@ def _package_feature_bundle(frame: pd.DataFrame) -> FeatureBundle:
         "market",
         "locale",
         "device_os",
+        "price_currency",
         "days_to_departure_bucket",
     ]
 
@@ -77,6 +78,7 @@ def _package_feature_bundle(frame: pd.DataFrame) -> FeatureBundle:
         "price_gap_to_min",
         "price_ratio_to_median",
         "price_rank_in_route_day",
+        "price_rank_pct_in_route_day",
         "offers_in_route_day",
         "provider_prior_count",
         "provider_prior_rate_bookable",
@@ -85,10 +87,19 @@ def _package_feature_bundle(frame: pd.DataFrame) -> FeatureBundle:
         "provider_prior_rate_technical_failure",
         "route_prior_count",
         "route_prior_rate_bookable",
+        "route_prior_rate_price_changed",
         "route_prior_rate_unavailable",
         "provider_route_prior_rate_bookable",
+        "provider_route_prior_rate_price_changed",
         "provider_route_prior_rate_unavailable",
+        "airline_route_prior_rate_bookable",
+        "airline_route_prior_rate_price_changed",
         "airline_route_prior_rate_unavailable",
+        "provider_instability_score",
+        "route_instability_score",
+        "price_change_pressure",
+        "technical_failure_pressure",
+        "unavailability_pressure",
         "provider_minutes_since_prev",
         "route_minutes_since_prev",
         "provider_route_minutes_since_prev",
@@ -114,6 +125,7 @@ def _package_feature_bundle(frame: pd.DataFrame) -> FeatureBundle:
             "market",
             "locale",
             "device_os",
+            "price_currency",
             "provider_airline",
             "passenger_count",
             "stop_count",
@@ -140,6 +152,7 @@ def _package_feature_bundle(frame: pd.DataFrame) -> FeatureBundle:
             "price_gap_to_min",
             "price_ratio_to_median",
             "price_rank_in_route_day",
+            "price_rank_pct_in_route_day",
             "offers_in_route_day",
             "missing_price",
         ],
@@ -151,10 +164,19 @@ def _package_feature_bundle(frame: pd.DataFrame) -> FeatureBundle:
             "provider_prior_rate_technical_failure",
             "route_prior_count",
             "route_prior_rate_bookable",
+            "route_prior_rate_price_changed",
             "route_prior_rate_unavailable",
             "provider_route_prior_rate_bookable",
+            "provider_route_prior_rate_price_changed",
             "provider_route_prior_rate_unavailable",
+            "airline_route_prior_rate_bookable",
+            "airline_route_prior_rate_price_changed",
             "airline_route_prior_rate_unavailable",
+            "provider_instability_score",
+            "route_instability_score",
+            "price_change_pressure",
+            "technical_failure_pressure",
+            "unavailability_pressure",
             "provider_minutes_since_prev",
             "route_minutes_since_prev",
             "provider_route_minutes_since_prev",
@@ -237,14 +259,11 @@ def add_price_features(frame: pd.DataFrame) -> pd.DataFrame:
     denom = frame["route_day_median_price"].replace(0, np.nan)
     frame["price_ratio_to_median"] = (frame["price_total"] / denom).replace([np.inf, -np.inf], np.nan).fillna(1.0)
 
-    def prior_rank(series: pd.Series) -> pd.Series:
-        shifted = series.shift(1)
-        return shifted.expanding().apply(
-            lambda values: float(np.sum(values <= values.iloc[-1])) if len(values) else 0.0,
-            raw=False,
-        )
-
-    frame["price_rank_in_route_day"] = prior_group.transform(prior_rank).fillna(0.0)
+    frame["price_rank_in_route_day"] = prior_group.transform(_prior_rank_against_current_value).fillna(0.0)
+    rank_denom = frame["offers_in_route_day"].replace(0, np.nan)
+    frame["price_rank_pct_in_route_day"] = (
+        frame["price_rank_in_route_day"] / rank_denom
+    ).replace([np.inf, -np.inf], np.nan).fillna(0.0)
     return frame
 
 
@@ -257,6 +276,10 @@ def finalize_price_features(frame: pd.DataFrame) -> pd.DataFrame:
     denom = frame["route_day_median_price"].replace(0, np.nan)
     frame["price_ratio_to_median"] = (frame["price_total"] / denom).replace([np.inf, -np.inf], np.nan).fillna(1.0)
     frame["price_rank_in_route_day"] = frame["price_rank_in_route_day"].fillna(0.0)
+    rank_denom = frame["offers_in_route_day"].replace(0, np.nan)
+    frame["price_rank_pct_in_route_day"] = (
+        frame["price_rank_in_route_day"] / rank_denom
+    ).replace([np.inf, -np.inf], np.nan).fillna(0.0)
     frame["offers_in_route_day"] = frame["offers_in_route_day"].fillna(0.0)
     return frame
 
@@ -276,9 +299,13 @@ def add_history_features(frame: pd.DataFrame) -> pd.DataFrame:
     frame["provider_prior_rate_unavailable"] = _prior_rate(frame, "provider_key", "is_unavailable")
     frame["provider_prior_rate_technical_failure"] = _prior_rate(frame, "provider_key", "is_technical_failure")
     frame["route_prior_rate_bookable"] = _prior_rate(frame, "route", "is_bookable")
+    frame["route_prior_rate_price_changed"] = _prior_rate(frame, "route", "is_price_changed")
     frame["route_prior_rate_unavailable"] = _prior_rate(frame, "route", "is_unavailable")
     frame["provider_route_prior_rate_bookable"] = _prior_rate(frame, "provider_route", "is_bookable")
+    frame["provider_route_prior_rate_price_changed"] = _prior_rate(frame, "provider_route", "is_price_changed")
     frame["provider_route_prior_rate_unavailable"] = _prior_rate(frame, "provider_route", "is_unavailable")
+    frame["airline_route_prior_rate_bookable"] = _prior_rate(frame, "airline_route", "is_bookable")
+    frame["airline_route_prior_rate_price_changed"] = _prior_rate(frame, "airline_route", "is_price_changed")
     frame["airline_route_prior_rate_unavailable"] = _prior_rate(frame, "airline_route", "is_unavailable")
 
     frame["provider_minutes_since_prev"] = _minutes_since_previous(frame, "provider_key")
@@ -299,12 +326,32 @@ def add_history_features(frame: pd.DataFrame) -> pd.DataFrame:
     frame["provider_prior_rate_unavailable"] = frame["provider_prior_rate_unavailable"].fillna(global_unavailable)
     frame["provider_prior_rate_technical_failure"] = frame["provider_prior_rate_technical_failure"].fillna(global_technical_failure)
     frame["route_prior_rate_bookable"] = frame["route_prior_rate_bookable"].fillna(global_bookable)
+    frame["route_prior_rate_price_changed"] = frame["route_prior_rate_price_changed"].fillna(global_price_changed)
     frame["route_prior_rate_unavailable"] = frame["route_prior_rate_unavailable"].fillna(global_unavailable)
     frame["provider_route_prior_rate_bookable"] = frame["provider_route_prior_rate_bookable"].fillna(global_bookable)
+    frame["provider_route_prior_rate_price_changed"] = frame["provider_route_prior_rate_price_changed"].fillna(global_price_changed)
     frame["provider_route_prior_rate_unavailable"] = frame["provider_route_prior_rate_unavailable"].fillna(global_unavailable)
+    frame["airline_route_prior_rate_bookable"] = frame["airline_route_prior_rate_bookable"].fillna(global_bookable)
+    frame["airline_route_prior_rate_price_changed"] = frame["airline_route_prior_rate_price_changed"].fillna(global_price_changed)
     frame["airline_route_prior_rate_unavailable"] = frame["airline_route_prior_rate_unavailable"].fillna(global_unavailable)
     for column, fill_value in time_fill.items():
         frame[column] = frame[column].fillna(fill_value)
+
+    frame["provider_instability_score"] = 1.0 - frame["provider_prior_rate_bookable"]
+    frame["route_instability_score"] = 1.0 - frame["route_prior_rate_bookable"]
+    frame["price_change_pressure"] = (
+        frame["provider_prior_rate_price_changed"]
+        + frame["route_prior_rate_price_changed"]
+        + frame["provider_route_prior_rate_price_changed"]
+        + frame["airline_route_prior_rate_price_changed"]
+    ) / 4.0
+    frame["technical_failure_pressure"] = frame["provider_prior_rate_technical_failure"]
+    frame["unavailability_pressure"] = (
+        frame["provider_prior_rate_unavailable"]
+        + frame["route_prior_rate_unavailable"]
+        + frame["provider_route_prior_rate_unavailable"]
+        + frame["airline_route_prior_rate_unavailable"]
+    ) / 4.0
 
     return frame.drop(columns=["is_bookable", "is_price_changed", "is_unavailable", "is_technical_failure"])
 
@@ -319,10 +366,19 @@ def add_inference_history_defaults(frame: pd.DataFrame) -> pd.DataFrame:
         "provider_prior_rate_technical_failure",
         "route_prior_count",
         "route_prior_rate_bookable",
+        "route_prior_rate_price_changed",
         "route_prior_rate_unavailable",
         "provider_route_prior_rate_bookable",
+        "provider_route_prior_rate_price_changed",
         "provider_route_prior_rate_unavailable",
+        "airline_route_prior_rate_bookable",
+        "airline_route_prior_rate_price_changed",
         "airline_route_prior_rate_unavailable",
+        "provider_instability_score",
+        "route_instability_score",
+        "price_change_pressure",
+        "technical_failure_pressure",
+        "unavailability_pressure",
         "provider_minutes_since_prev",
         "route_minutes_since_prev",
         "provider_route_minutes_since_prev",
@@ -341,10 +397,19 @@ def add_snapshot_defaults(frame: pd.DataFrame) -> pd.DataFrame:
         "provider_prior_rate_technical_failure",
         "route_prior_count",
         "route_prior_rate_bookable",
+        "route_prior_rate_price_changed",
         "route_prior_rate_unavailable",
         "provider_route_prior_rate_bookable",
+        "provider_route_prior_rate_price_changed",
         "provider_route_prior_rate_unavailable",
+        "airline_route_prior_rate_bookable",
+        "airline_route_prior_rate_price_changed",
         "airline_route_prior_rate_unavailable",
+        "provider_instability_score",
+        "route_instability_score",
+        "price_change_pressure",
+        "technical_failure_pressure",
+        "unavailability_pressure",
         "provider_minutes_since_prev",
         "route_minutes_since_prev",
         "provider_route_minutes_since_prev",
@@ -384,9 +449,13 @@ def apply_history_snapshot(target_frame: pd.DataFrame, history_df: pd.DataFrame)
         "provider_rate_unavailable": history.groupby("provider_key")["is_unavailable"].mean().to_dict(),
         "provider_rate_technical_failure": history.groupby("provider_key")["is_technical_failure"].mean().to_dict(),
         "route_rate_bookable": history.groupby("route")["is_bookable"].mean().to_dict(),
+        "route_rate_price_changed": history.groupby("route")["is_price_changed"].mean().to_dict(),
         "route_rate_unavailable": history.groupby("route")["is_unavailable"].mean().to_dict(),
         "provider_route_rate_bookable": history.groupby("provider_route")["is_bookable"].mean().to_dict(),
+        "provider_route_rate_price_changed": history.groupby("provider_route")["is_price_changed"].mean().to_dict(),
         "provider_route_rate_unavailable": history.groupby("provider_route")["is_unavailable"].mean().to_dict(),
+        "airline_route_rate_bookable": history.groupby("airline_route")["is_bookable"].mean().to_dict(),
+        "airline_route_rate_price_changed": history.groupby("airline_route")["is_price_changed"].mean().to_dict(),
         "airline_route_rate_unavailable": history.groupby("airline_route")["is_unavailable"].mean().to_dict(),
         "provider_last_time": history.groupby("provider_key")["prediction_time"].max().to_dict(),
         "route_last_time": history.groupby("route")["prediction_time"].max().to_dict(),
@@ -396,6 +465,11 @@ def apply_history_snapshot(target_frame: pd.DataFrame, history_df: pd.DataFrame)
         "route_day_min_price": history.groupby("route_day")["price_total"].min().to_dict() if history["price_total"].notna().any() else {},
         "route_day_median_price": history.groupby("route_day")["price_total"].median().to_dict() if history["price_total"].notna().any() else {},
         "route_day_offer_count": history.groupby("route_day").size().to_dict(),
+        "route_day_price_values": (
+            history.groupby("route_day")["price_total"].apply(lambda s: s.dropna().tolist()).to_dict()
+            if history["price_total"].notna().any()
+            else {}
+        ),
         "global_rates": {
             "bookable": float(history["is_bookable"].mean()) if len(history) else 0.0,
             "price_changed": float(history["is_price_changed"].mean()) if len(history) else 0.0,
@@ -412,9 +486,13 @@ def apply_history_snapshot(target_frame: pd.DataFrame, history_df: pd.DataFrame)
     target["provider_prior_rate_unavailable"] = target["provider_key"].map(snapshot["provider_rate_unavailable"]).fillna(snapshot["global_rates"]["unavailable"])
     target["provider_prior_rate_technical_failure"] = target["provider_key"].map(snapshot["provider_rate_technical_failure"]).fillna(snapshot["global_rates"]["technical_failure"])
     target["route_prior_rate_bookable"] = target["route"].map(snapshot["route_rate_bookable"]).fillna(snapshot["global_rates"]["bookable"])
+    target["route_prior_rate_price_changed"] = target["route"].map(snapshot["route_rate_price_changed"]).fillna(snapshot["global_rates"]["price_changed"])
     target["route_prior_rate_unavailable"] = target["route"].map(snapshot["route_rate_unavailable"]).fillna(snapshot["global_rates"]["unavailable"])
     target["provider_route_prior_rate_bookable"] = target["provider_route"].map(snapshot["provider_route_rate_bookable"]).fillna(snapshot["global_rates"]["bookable"])
+    target["provider_route_prior_rate_price_changed"] = target["provider_route"].map(snapshot["provider_route_rate_price_changed"]).fillna(snapshot["global_rates"]["price_changed"])
     target["provider_route_prior_rate_unavailable"] = target["provider_route"].map(snapshot["provider_route_rate_unavailable"]).fillna(snapshot["global_rates"]["unavailable"])
+    target["airline_route_prior_rate_bookable"] = target["airline_route"].map(snapshot["airline_route_rate_bookable"]).fillna(snapshot["global_rates"]["bookable"])
+    target["airline_route_prior_rate_price_changed"] = target["airline_route"].map(snapshot["airline_route_rate_price_changed"]).fillna(snapshot["global_rates"]["price_changed"])
     target["airline_route_prior_rate_unavailable"] = target["airline_route"].map(snapshot["airline_route_rate_unavailable"]).fillna(snapshot["global_rates"]["unavailable"])
     target["provider_minutes_since_prev"] = _minutes_since_snapshot(target, "provider_key", snapshot["provider_last_time"])
     target["route_minutes_since_prev"] = _minutes_since_snapshot(target, "route", snapshot["route_last_time"])
@@ -424,7 +502,26 @@ def apply_history_snapshot(target_frame: pd.DataFrame, history_df: pd.DataFrame)
     target["route_day_min_price"] = target["route_day"].map(snapshot["route_day_min_price"]).fillna(target["price_total"])
     target["route_day_median_price"] = target["route_day"].map(snapshot["route_day_median_price"]).fillna(target["price_total"])
     target["offers_in_route_day"] = target["route_day"].map(snapshot["route_day_offer_count"]).fillna(0.0)
-    target["price_rank_in_route_day"] = target["offers_in_route_day"]
+    target["price_rank_in_route_day"] = _snapshot_price_rank(
+        target["route_day"],
+        target["price_total"],
+        snapshot["route_day_price_values"],
+    )
+    target["provider_instability_score"] = 1.0 - target["provider_prior_rate_bookable"]
+    target["route_instability_score"] = 1.0 - target["route_prior_rate_bookable"]
+    target["price_change_pressure"] = (
+        target["provider_prior_rate_price_changed"]
+        + target["route_prior_rate_price_changed"]
+        + target["provider_route_prior_rate_price_changed"]
+        + target["airline_route_prior_rate_price_changed"]
+    ) / 4.0
+    target["technical_failure_pressure"] = target["provider_prior_rate_technical_failure"]
+    target["unavailability_pressure"] = (
+        target["provider_prior_rate_unavailable"]
+        + target["route_prior_rate_unavailable"]
+        + target["provider_route_prior_rate_unavailable"]
+        + target["airline_route_prior_rate_unavailable"]
+    ) / 4.0
     return finalize_price_features(target)
 
 
@@ -437,10 +534,19 @@ def build_inference_reference(frame: pd.DataFrame) -> Dict[str, object]:
         "provider_prior_rate_technical_failure",
         "route_prior_count",
         "route_prior_rate_bookable",
+        "route_prior_rate_price_changed",
         "route_prior_rate_unavailable",
         "provider_route_prior_rate_bookable",
+        "provider_route_prior_rate_price_changed",
         "provider_route_prior_rate_unavailable",
+        "airline_route_prior_rate_bookable",
+        "airline_route_prior_rate_price_changed",
         "airline_route_prior_rate_unavailable",
+        "provider_instability_score",
+        "route_instability_score",
+        "price_change_pressure",
+        "technical_failure_pressure",
+        "unavailability_pressure",
         "provider_minutes_since_prev",
         "route_minutes_since_prev",
         "provider_route_minutes_since_prev",
@@ -523,6 +629,20 @@ def _prior_rate(frame: pd.DataFrame, key: str, indicator: str) -> pd.Series:
     return cumulative / prior_count
 
 
+def _prior_rank_against_current_value(series: pd.Series) -> pd.Series:
+    values = pd.to_numeric(series, errors="coerce").to_numpy(dtype=float)
+    output = np.zeros(len(values), dtype=float)
+    history: List[float] = []
+    for idx, current_value in enumerate(values):
+        if np.isnan(current_value) or not history:
+            output[idx] = 0.0
+        else:
+            output[idx] = float(np.sum(np.asarray(history) <= current_value))
+        if not np.isnan(current_value):
+            history.append(float(current_value))
+    return pd.Series(output, index=series.index)
+
+
 def _minutes_since_previous(frame: pd.DataFrame, key: str) -> pd.Series:
     previous = frame.groupby(key)["prediction_time"].shift(1)
     return (frame["prediction_time"] - previous).dt.total_seconds() / 60.0
@@ -547,3 +667,23 @@ def _density_from_snapshot(target: pd.DataFrame, key: str, count_map: Dict[str, 
     first_times = pd.to_datetime(target[key].map(first_time_map))
     elapsed_days = (target["prediction_time"] - first_times).dt.total_seconds() / 86400.0
     return counts / elapsed_days.fillna(1.0).clip(lower=1.0)
+
+
+def _snapshot_price_rank(
+    route_day_series: pd.Series,
+    price_series: pd.Series,
+    route_day_price_values: Dict[str, List[float]],
+) -> pd.Series:
+    ranks = []
+    for route_day, current_price in zip(route_day_series.astype("string"), pd.to_numeric(price_series, errors="coerce")):
+        history_prices = route_day_price_values.get(str(route_day), [])
+        if np.isnan(current_price) or not history_prices:
+            ranks.append(0.0)
+            continue
+        history_array = np.asarray(history_prices, dtype=float)
+        history_array = history_array[~np.isnan(history_array)]
+        if len(history_array) == 0:
+            ranks.append(0.0)
+            continue
+        ranks.append(float(np.sum(history_array <= current_price)))
+    return pd.Series(ranks, index=route_day_series.index, dtype=float)

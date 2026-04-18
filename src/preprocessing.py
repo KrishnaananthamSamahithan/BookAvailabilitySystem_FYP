@@ -30,11 +30,10 @@ class PreprocessingResult:
 def preprocess_raw_file(config: ProjectConfig) -> PreprocessingResult:
     config.ensure_directories()
     source_path = config.raw_data_path
-    if not source_path.exists() and config.processed_data_path.exists():
-        source_path = config.processed_data_path
-        print(
-            f"[WARNING] Raw data not found at {config.raw_data_path}. "
-            f"Falling back to {source_path}."
+    if not source_path.exists():
+        raise FileNotFoundError(
+            f"Raw data not found at {config.raw_data_path}. "
+            "The research pipeline must run from the raw dataset to preserve reproducibility."
         )
     raw = pd.read_csv(source_path)
     result = preprocess_raw_frame(raw, config)
@@ -104,6 +103,7 @@ def preprocess_raw_frame(raw: pd.DataFrame, config: ProjectConfig) -> Preprocess
     flight_segments = _optional_series(raw, schema, "flight_segments")
     provider_id = _optional_series(raw, schema, "provider_id")
     price = _optional_series(raw, schema, "price")
+    currency = _optional_series(raw, schema, "currency")
     market = _optional_series(raw, schema, "market")
     locale = _optional_series(raw, schema, "locale")
     device = _optional_series(raw, schema, "device")
@@ -130,7 +130,18 @@ def preprocess_raw_frame(raw: pd.DataFrame, config: ProjectConfig) -> Preprocess
     frame = pd.concat([frame, passenger_frame], axis=1)
 
     frame["stop_count"] = _build_stop_count(stops, fdtag, flight_segments, len(raw))
-    frame["price_total"] = safe_to_numeric(price) if price is not None else np.nan
+    raw_price_total = safe_to_numeric(price) if price is not None else pd.Series(np.nan, index=frame.index)
+    inferred_currency = _build_currency_series(
+        currency_series=currency,
+        market_series=market,
+        locale_series=locale,
+        origin_series=frame["origin_airport"],
+        destination_series=frame["destination_airport"],
+        length=len(raw),
+    )
+    frame["raw_price_total"] = raw_price_total
+    frame["price_currency"] = inferred_currency
+    frame["price_total"] = _normalize_price_to_usd(raw_price_total, inferred_currency)
 
     label_frame = build_label_frame(raw[schema.required["status"]])
     frame = pd.concat([frame, label_frame], axis=1)
@@ -293,3 +304,170 @@ def _build_stop_count(
         segments = pd.Series([1] * length)
 
     return (segments - 1).clip(lower=0)
+
+
+FX_TO_USD = {
+    "USD": 1.0,
+    "EUR": 1.09,
+    "GBP": 1.27,
+    "JPY": 0.0067,
+    "CNY": 0.138,
+    "HKD": 0.128,
+    "SGD": 0.74,
+    "AUD": 0.66,
+    "CAD": 0.74,
+    "CHF": 1.11,
+    "SEK": 0.094,
+    "NOK": 0.094,
+    "DKK": 0.146,
+    "AED": 0.2723,
+    "SAR": 0.2667,
+    "QAR": 0.2747,
+    "INR": 0.012,
+    "LKR": 0.0033,
+}
+
+LOCALE_TO_CURRENCY = {
+    "en-us": "USD",
+    "en-gb": "GBP",
+    "en-lk": "LKR",
+    "si-lk": "LKR",
+    "ta-lk": "LKR",
+    "en-in": "INR",
+    "hi-in": "INR",
+    "en-ae": "AED",
+    "ar-ae": "AED",
+    "en-sa": "SAR",
+    "ar-sa": "SAR",
+    "en-qa": "QAR",
+    "en-sg": "SGD",
+    "zh-cn": "CNY",
+    "zh-hk": "HKD",
+    "ja-jp": "JPY",
+    "en-au": "AUD",
+    "en-ca": "CAD",
+    "fr-fr": "EUR",
+    "de-de": "EUR",
+    "it-it": "EUR",
+    "es-es": "EUR",
+    "pt-pt": "EUR",
+    "nl-nl": "EUR",
+    "sv-se": "SEK",
+    "nb-no": "NOK",
+    "da-dk": "DKK",
+    "de-ch": "CHF",
+    "fr-ch": "CHF",
+}
+
+MARKET_TO_CURRENCY = {
+    "US": "USD",
+    "GB": "GBP",
+    "LK": "LKR",
+    "IN": "INR",
+    "AE": "AED",
+    "SA": "SAR",
+    "QA": "QAR",
+    "SG": "SGD",
+    "CN": "CNY",
+    "HK": "HKD",
+    "JP": "JPY",
+    "AU": "AUD",
+    "CA": "CAD",
+    "FR": "EUR",
+    "DE": "EUR",
+    "IT": "EUR",
+    "ES": "EUR",
+    "PT": "EUR",
+    "NL": "EUR",
+    "SE": "SEK",
+    "NO": "NOK",
+    "DK": "DKK",
+    "CH": "CHF",
+}
+
+AIRPORT_TO_CURRENCY = {
+    "LHR": "GBP",
+    "LGW": "GBP",
+    "STN": "GBP",
+    "MAN": "GBP",
+    "JFK": "USD",
+    "EWR": "USD",
+    "LAX": "USD",
+    "SFO": "USD",
+    "ORD": "USD",
+    "YYZ": "CAD",
+    "YVR": "CAD",
+    "SYD": "AUD",
+    "MEL": "AUD",
+    "NRT": "JPY",
+    "HND": "JPY",
+    "PEK": "CNY",
+    "PVG": "CNY",
+    "HKG": "HKD",
+    "SIN": "SGD",
+    "DXB": "AED",
+    "AUH": "AED",
+    "RUH": "SAR",
+    "JED": "SAR",
+    "DOH": "QAR",
+    "CMB": "LKR",
+    "MAA": "INR",
+    "DEL": "INR",
+    "BOM": "INR",
+    "CDG": "EUR",
+    "FRA": "EUR",
+    "AMS": "EUR",
+    "MAD": "EUR",
+    "ZRH": "CHF",
+    "ARN": "SEK",
+    "OSL": "NOK",
+    "CPH": "DKK",
+}
+
+
+def _build_currency_series(
+    currency_series: Optional[pd.Series],
+    market_series: Optional[pd.Series],
+    locale_series: Optional[pd.Series],
+    origin_series: pd.Series,
+    destination_series: pd.Series,
+    length: int,
+) -> pd.Series:
+    explicit = (
+        normalize_text(currency_series, default="Unknown").str.upper()
+        if currency_series is not None
+        else pd.Series(["Unknown"] * length)
+    )
+    market_norm = (
+        normalize_text(market_series, default="Unknown").str.upper()
+        if market_series is not None
+        else pd.Series(["Unknown"] * length)
+    )
+    locale_norm = (
+        normalize_text(locale_series, default="Unknown").str.lower()
+        if locale_series is not None
+        else pd.Series(["unknown"] * length)
+    )
+
+    inferred = explicit.copy()
+    unknown_mask = inferred.eq("UNKNOWN")
+    inferred.loc[unknown_mask] = market_norm.loc[unknown_mask].map(MARKET_TO_CURRENCY).fillna("Unknown")
+
+    unknown_mask = inferred.eq("Unknown") | inferred.eq("UNKNOWN")
+    inferred.loc[unknown_mask] = locale_norm.loc[unknown_mask].map(LOCALE_TO_CURRENCY).fillna("Unknown")
+
+    unknown_mask = inferred.eq("Unknown") | inferred.eq("UNKNOWN")
+    inferred.loc[unknown_mask] = origin_series.loc[unknown_mask].map(AIRPORT_TO_CURRENCY).fillna("Unknown")
+
+    unknown_mask = inferred.eq("Unknown") | inferred.eq("UNKNOWN")
+    inferred.loc[unknown_mask] = destination_series.loc[unknown_mask].map(AIRPORT_TO_CURRENCY).fillna("Unknown")
+
+    return inferred.astype("string").fillna("Unknown").str.upper().replace({"UNKNOWN": "Unknown"})
+
+
+def _normalize_price_to_usd(price_series: pd.Series, currency_series: pd.Series) -> pd.Series:
+    fx = currency_series.map(FX_TO_USD).astype(float)
+    normalized = price_series.astype(float) * fx
+    fallback_mask = fx.isna() | price_series.isna()
+    normalized.loc[fallback_mask] = price_series.loc[fallback_mask]
+    return normalized
