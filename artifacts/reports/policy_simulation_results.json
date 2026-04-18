@@ -1,55 +1,178 @@
 {
   "suppression_policy": [
     {
-      "threshold": 0.2,
-      "suppressed_rows": 54738,
-      "retained_rows": 18488,
-      "suppressed_true_bookable": 39831,
-      "suppressed_true_unbookable": 14907,
-      "retained_true_bookable": 18330,
-      "retained_true_unbookable": 158,
-      "retained_bookable_rate": 0.9914539160536564
+      "threshold": 0.3,
+      "suppressed_rows": 30222,
+      "retained_rows": 24697,
+      "suppressed_pct": 0.5503,
+      "suppressed_true_bookable": 21501,
+      "suppressed_true_unbookable": 8721,
+      "retained_true_bookable": 21891,
+      "retained_true_unbookable": 2806,
+      "retained_bookable_rate": 0.8864,
+      "precision_suppression": 0.2886,
+      "recall_suppression": 0.7566,
+      "f1_suppression": 0.4178
     },
     {
       "threshold": 0.4,
-      "suppressed_rows": 51803,
-      "retained_rows": 21423,
-      "suppressed_true_bookable": 36938,
-      "suppressed_true_unbookable": 14865,
-      "retained_true_bookable": 21223,
-      "retained_true_unbookable": 200,
-      "retained_bookable_rate": 0.9906642393689026
+      "suppressed_rows": 23787,
+      "retained_rows": 31132,
+      "suppressed_pct": 0.4331,
+      "suppressed_true_bookable": 16911,
+      "suppressed_true_unbookable": 6876,
+      "retained_true_bookable": 26481,
+      "retained_true_unbookable": 4651,
+      "retained_bookable_rate": 0.8506,
+      "precision_suppression": 0.2891,
+      "recall_suppression": 0.5965,
+      "f1_suppression": 0.3894
+    },
+    {
+      "threshold": 0.5,
+      "suppressed_rows": 16901,
+      "retained_rows": 38018,
+      "suppressed_pct": 0.3077,
+      "suppressed_true_bookable": 12003,
+      "suppressed_true_unbookable": 4898,
+      "retained_true_bookable": 31389,
+      "retained_true_unbookable": 6629,
+      "retained_bookable_rate": 0.8256,
+      "precision_suppression": 0.2898,
+      "recall_suppression": 0.4249,
+      "f1_suppression": 0.3446
     },
     {
       "threshold": 0.6,
-      "suppressed_rows": 49934,
-      "retained_rows": 23292,
-      "suppressed_true_bookable": 35598,
-      "suppressed_true_unbookable": 14336,
-      "retained_true_bookable": 22563,
-      "retained_true_unbookable": 729,
-      "retained_bookable_rate": 0.9687017001545595
+      "suppressed_rows": 10329,
+      "retained_rows": 44590,
+      "suppressed_pct": 0.1881,
+      "suppressed_true_bookable": 7308,
+      "suppressed_true_unbookable": 3021,
+      "retained_true_bookable": 36084,
+      "retained_true_unbookable": 8506,
+      "retained_bookable_rate": 0.8092,
+      "precision_suppression": 0.2925,
+      "recall_suppression": 0.2621,
+      "f1_suppression": 0.2764
+    },
+    {
+      "threshold": 0.7,
+      "suppressed_rows": 4961,
+      "retained_rows": 49958,
+      "suppressed_pct": 0.0903,
+      "suppressed_true_bookable": 3521,
+      "suppressed_true_unbookable": 1440,
+      "retained_true_bookable": 39871,
+      "retained_true_unbookable": 10087,
+      "retained_bookable_rate": 0.7981,
+      "precision_suppression": 0.2903,
+      "recall_suppression": 0.1249,
+      "f1_suppression": 0.1747
     },
     {
       "threshold": 0.8,
-      "suppressed_rows": 0,
-      "retained_rows": 73226,
-      "suppressed_true_bookable": 0,
-      "suppressed_true_unbookable": 0,
-      "retained_true_bookable": 58161,
-      "retained_true_unbookable": 15065,
-      "retained_bookable_rate": 0.7942670636112856
+      "suppressed_rows": 1453,
+      "retained_rows": 53466,
+      "suppressed_pct": 0.0265,
+      "suppressed_true_bookable": 1049,
+      "suppressed_true_unbookable": 404,
+      "retained_true_bookable": 42343,
+      "retained_true_unbookable": 11123,
+      "retained_bookable_rate": 0.792,
+      "precision_suppression": 0.278,
+      "recall_suppression": 0.035,
+      "f1_suppression": 0.0622
     }
   ],
   "reranking_proxy": {
     "grouping_key": "search_group_proxy",
     "baseline_name": "cheapest_offer_baseline",
-    "num_groups": 54194,
-    "baseline_top1_bookable_rate": 0.7802339742406909,
-    "ml_top1_bookable_rate": 0.7836107318153301,
-    "baseline_top1_unavailable_rate": 0.14711960733660553,
-    "ml_top1_unavailable_rate": 0.14488688784736317,
-    "baseline_top1_technical_failure_rate": 0.0,
-    "ml_top1_technical_failure_rate": 0.0
+    "num_groups": 40929,
+    "baseline_top1_bookable_rate": 0.777,
+    "ml_top1_bookable_rate": 0.7797,
+    "bookable_rate_lift_absolute": 0.0026,
+    "bookable_rate_lift_pct": 0.33,
+    "baseline_top1_unavailable_rate": 0.1488,
+    "ml_top1_unavailable_rate": 0.1468,
+    "baseline_top1_price_changed_rate": 0.0742,
+    "ml_top1_price_changed_rate": 0.0735,
+    "rank_score_formula": "p_bookable - 0.35 * risk_unbookable - 0.05 * price_penalty"
+  },
+  "cost_sensitive": {
+    "cost_matrix_labels": [
+      "bookable",
+      "price_changed",
+      "unavailable"
+    ],
+    "cost_matrix": [
+      [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      [
+        3.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        5.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      [
+        4.0,
+        2.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "default_argmax_total_cost": 48744.0,
+    "default_cost_per_sample": 0.8876,
+    "threshold_sweep": [
+      {
+        "bookable_threshold": 0.3,
+        "total_cost": 49343.0,
+        "cost_per_sample": 0.8985,
+        "cost_vs_default": 599.0
+      },
+      {
+        "bookable_threshold": 0.4,
+        "total_cost": 48702.0,
+        "cost_per_sample": 0.8868,
+        "cost_vs_default": -42.0
+      },
+      {
+        "bookable_threshold": 0.5,
+        "total_cost": 48265.0,
+        "cost_per_sample": 0.8788,
+        "cost_vs_default": -479.0
+      },
+      {
+        "bookable_threshold": 0.6,
+        "total_cost": 47975.0,
+        "cost_per_sample": 0.8736,
+        "cost_vs_default": -769.0
+      },
+      {
+        "bookable_threshold": 0.7,
+        "total_cost": 47700.0,
+        "cost_per_sample": 0.8686,
+        "cost_vs_default": -1044.0
+      },
+      {
+        "bookable_threshold": 0.8,
+        "total_cost": 47556.0,
+        "cost_per_sample": 0.8659,
+        "cost_vs_default": -1188.0
+      }
+    ],
+    "optimal_bookable_threshold": 0.8,
+    "optimal_total_cost": 47556.0,
+    "note": "Cost matrix is [true_class, pred_class]. Predicting 'bookable' when truly 'unavailable' incurs cost 5 (highest \u2014 misleads user). Missing a bookable offer costs 2 (lost sale)."
   }
 }

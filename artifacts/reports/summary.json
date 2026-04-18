@@ -1,12 +1,48 @@
 {
-  "best_model": "random_forest",
-  "best_model_selection_score": 0.28838459999905286,
-  "best_calibrator": "temperature_scaling",
-  "final_test_macro_f1": 0.32813283173952534,
-  "final_test_log_loss": 0.9210996158664307,
-  "final_test_balanced_accuracy": 0.43826298738197383,
-  "final_test_weighted_f1": 0.5122354858817536,
+  "best_model": "lightgbm",
+  "best_model_selection_score": 0.3392344952120366,
+  "best_calibrator": "none",
+  "final_test_macro_f1": 0.3378351818670257,
+  "final_test_macro_f1_present_classes": 0.3378351818670257,
+  "final_test_log_loss": 0.7447336591452464,
+  "final_test_balanced_accuracy": 0.36254084679858783,
+  "final_test_weighted_f1": 0.6661429304260877,
+  "final_test_roc_auc_macro": 0.6581978308613334,
+  "final_test_pr_auc_macro": 0.39643333333333336,
+  "final_test_ece_macro": 0.11821930601369629,
+  "best_baseline_macro_f1": 0.3320308601324402,
+  "lift_over_best_baseline": 0.0058,
+  "labels_evaluated": [
+    "bookable",
+    "price_changed",
+    "unavailable"
+  ],
+  "zero_support_classes": [
+    "technical_failure"
+  ],
+  "split_strategy": "temporal_four_way_no_double_dipping",
+  "drift_status": "significant_drift",
+  "shap_status": "failed",
+  "significance_tests_run": 10,
+  "bonferroni_correction_applied": true,
+  "rolling_backtest_windows": 5,
+  "ablation_configs_run": 9,
+  "learning_curve_points": 5,
   "processed_rows": 366126,
   "supervised_rows": 366126,
-  "artifacts_dir": "/Users/samahithan/Desktop/Fyp/20210863_IPD/artifacts"
+  "artifacts_dir": "/Users/samahithan/Desktop/Fyp/20210863_IPD/artifacts",
+  "pipeline_phases_completed": 24,
+  "pipeline_version": "v2.1_research_evidence_hardened",
+  "generated_at_utc": "2026-04-17T13:43:36.664713+00:00",
+  "reproducibility": {
+    "random_state": 42,
+    "ablation_random_seeds": [
+      13,
+      42,
+      77
+    ],
+    "rolling_backtest_windows": 5,
+    "git_commit": "unknown",
+    "code_entrypoint": "python -m src.train"
+  }
 }

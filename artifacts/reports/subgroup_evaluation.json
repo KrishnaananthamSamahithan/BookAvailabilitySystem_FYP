@@ -1,770 +1,668 @@
 {
-  "meta_engine": [
+  "provider_key": [
     {
-      "group_column": "meta_engine",
-      "group_value": "Skyscanner",
-      "row_count": 8425,
-      "macro_f1": 0.3109325827554413,
-      "balanced_accuracy": 0.3322880573124212,
-      "log_loss": 0.9568584769074695,
+      "group_column": "provider_key",
+      "group_value": "carltonleisure.com",
+      "row_count": 54919,
+      "macro_f1": 0.3378351818670257,
+      "balanced_accuracy": 0.36254084679858783,
+      "log_loss": 0.7447336591452464,
       "classwise_ece": {
-        "bookable": 0.038772498299021275,
-        "price_changed": 0.160802719375809,
-        "unavailable": 0.12214502998548117
+        "bookable": 0.1542393034897347,
+        "price_changed": 0.141493909322683,
+        "unavailable": 0.05892470522867116
       },
-      "ece_macro": 0.10724008255343714
-    },
-    {
-      "group_column": "meta_engine",
-      "group_value": "Google",
-      "row_count": 7693,
-      "macro_f1": 0.3298084291187739,
-      "balanced_accuracy": 0.3333333333333333,
-      "log_loss": 0.12536625038804658,
-      "classwise_ece": {
-        "bookable": 0.014244413563545333,
-        "price_changed": 0.0029038416134004683,
-        "unavailable": 0.01134057195014489
-      },
-      "ece_macro": 0.00949627570903023
-    },
-    {
-      "group_column": "meta_engine",
-      "group_value": "Direct",
-      "row_count": 4092,
-      "macro_f1": 0.5801573425465217,
-      "balanced_accuracy": 0.6279801480583417,
-      "log_loss": 0.42732089920884053,
-      "classwise_ece": {
-        "bookable": 0.010818163654367711,
-        "price_changed": 0.06814825342565237,
-        "unavailable": 0.07417143131663602
-      },
-      "ece_macro": 0.05104594946555204
+      "ece_macro": 0.11821930601369629
     }
   ],
   "route": [
     {
       "group_column": "route",
       "group_value": "LHR_DEL",
-      "row_count": 1047,
-      "macro_f1": 0.6015908497111505,
-      "balanced_accuracy": 0.5975185796581615,
-      "log_loss": 0.24336688951396113,
+      "row_count": 1753,
+      "macro_f1": 0.38838834502873315,
+      "balanced_accuracy": 0.3864635320900096,
+      "log_loss": 0.295781938862421,
       "classwise_ece": {
-        "bookable": 0.023991004099904928,
-        "price_changed": 0.018585564627692005,
-        "unavailable": 0.016736277332716685
+        "bookable": 0.04684869459885674,
+        "price_changed": 0.01715308260887798,
+        "unavailable": 0.03474230964946302
       },
-      "ece_macro": 0.019770948686771206
+      "ece_macro": 0.03291469561906591
     },
     {
       "group_column": "route",
       "group_value": "LHR_BOM",
-      "row_count": 693,
-      "macro_f1": 0.6091652344264065,
-      "balanced_accuracy": 0.6117161001155466,
-      "log_loss": 0.2913049336999979,
+      "row_count": 1300,
+      "macro_f1": 0.3258953168044077,
+      "balanced_accuracy": 0.33875277463667963,
+      "log_loss": 0.40046093058950577,
       "classwise_ece": {
-        "bookable": 0.015468127414855459,
-        "price_changed": 0.031661375701431,
-        "unavailable": 0.03708479540208733
+        "bookable": 0.05021894089541773,
+        "price_changed": 0.016893924753067925,
+        "unavailable": 0.04148592645245572
       },
-      "ece_macro": 0.02807143283945793
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_HKG",
-      "row_count": 560,
-      "macro_f1": 0.6430165310404831,
-      "balanced_accuracy": 0.6479835045781785,
-      "log_loss": 0.15578609321011638,
-      "classwise_ece": {
-        "bookable": 0.011699236229053313,
-        "price_changed": 0.015454409610411099,
-        "unavailable": 0.020773418955729192
-      },
-      "ece_macro": 0.015975688265064535
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_BKK",
-      "row_count": 448,
-      "macro_f1": 0.626952239229025,
-      "balanced_accuracy": 0.6491261824595158,
-      "log_loss": 0.19374320173369217,
-      "classwise_ece": {
-        "bookable": 0.0072742682536171156,
-        "price_changed": 0.04916854313729975,
-        "unavailable": 0.049118257123652705
-      },
-      "ece_macro": 0.035187022838189856
+      "ece_macro": 0.03619959736698045
     },
     {
       "group_column": "route",
       "group_value": "LHR_CMB",
-      "row_count": 412,
-      "macro_f1": 0.6293104405973766,
-      "balanced_accuracy": 0.6310755029371073,
-      "log_loss": 0.3440946101190537,
+      "row_count": 881,
+      "macro_f1": 0.3779683459218521,
+      "balanced_accuracy": 0.40577686886797154,
+      "log_loss": 0.5762663048167844,
       "classwise_ece": {
-        "bookable": 0.01563041032664775,
-        "price_changed": 0.06635796848096895,
-        "unavailable": 0.08164108288849735
+        "bookable": 0.13161796567470543,
+        "price_changed": 0.10584951191502302,
+        "unavailable": 0.036256844388848374
       },
-      "ece_macro": 0.05454315389870468
+      "ece_macro": 0.09124144065952561
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_BKK",
+      "row_count": 795,
+      "macro_f1": 0.3353854522078821,
+      "balanced_accuracy": 0.34909520516366993,
+      "log_loss": 0.3148217726844523,
+      "classwise_ece": {
+        "bookable": 0.05560089532616665,
+        "price_changed": 0.04311978678693461,
+        "unavailable": 0.03998847562989041
+      },
+      "ece_macro": 0.046236385914330554
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_HKG",
+      "row_count": 782,
+      "macro_f1": 0.3922978027115474,
+      "balanced_accuracy": 0.37788816136072856,
+      "log_loss": 0.2625239375936201,
+      "classwise_ece": {
+        "bookable": 0.05324317164517612,
+        "price_changed": 0.022361047289835387,
+        "unavailable": 0.02728791921553182
+      },
+      "ece_macro": 0.034297379383514445
     },
     {
       "group_column": "route",
       "group_value": "MAN_ISB",
-      "row_count": 299,
-      "macro_f1": 0.6512738024987468,
-      "balanced_accuracy": 0.6585990338164252,
-      "log_loss": 0.2501037335382601,
+      "row_count": 695,
+      "macro_f1": 0.3715778438284832,
+      "balanced_accuracy": 0.3681661113167962,
+      "log_loss": 0.4608105043588563,
       "classwise_ece": {
-        "bookable": 0.008795348721517195,
-        "price_changed": 0.02468249641477781,
-        "unavailable": 0.030788624169069783
+        "bookable": 0.04632520447520202,
+        "price_changed": 0.028781963828356644,
+        "unavailable": 0.03811328324423016
       },
-      "ece_macro": 0.0214221564351216
+      "ece_macro": 0.03774015051592961
+    },
+    {
+      "group_column": "route",
+      "group_value": "LON_BKK",
+      "row_count": 658,
+      "macro_f1": 0.2906575562098433,
+      "balanced_accuracy": 0.33099082934609253,
+      "log_loss": 0.9929934652213084,
+      "classwise_ece": {
+        "bookable": 0.26461969886805986,
+        "price_changed": 0.2549373353308108,
+        "unavailable": 0.037145914023432654
+      },
+      "ece_macro": 0.18556764940743445
     },
     {
       "group_column": "route",
       "group_value": "LHR_DXB",
-      "row_count": 274,
-      "macro_f1": 0.6261111551819564,
-      "balanced_accuracy": 0.6286824286824286,
-      "log_loss": 0.24369414613121268,
+      "row_count": 611,
+      "macro_f1": 0.3348562085216889,
+      "balanced_accuracy": 0.3400800905371289,
+      "log_loss": 0.40550233795451557,
       "classwise_ece": {
-        "bookable": 0.01452528298156751,
-        "price_changed": 0.029859054125371896,
-        "unavailable": 0.03202182290805344
+        "bookable": 0.09241871485663276,
+        "price_changed": 0.021044825022364225,
+        "unavailable": 0.07432789625429932
       },
-      "ece_macro": 0.025468720004997614
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_LHE",
-      "row_count": 243,
-      "macro_f1": 0.6534239299584569,
-      "balanced_accuracy": 0.645460632706691,
-      "log_loss": 0.27626952249769043,
-      "classwise_ece": {
-        "bookable": 0.022002470649445934,
-        "price_changed": 0.02690807616601355,
-        "unavailable": 0.03970489316097653
-      },
-      "ece_macro": 0.029538479992145334
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_BLR",
-      "row_count": 239,
-      "macro_f1": 0.6498834498834498,
-      "balanced_accuracy": 0.6473214285714285,
-      "log_loss": 0.23473512078937842,
-      "classwise_ece": {
-        "bookable": 0.011861785083123709,
-        "price_changed": 0.03326952112003472,
-        "unavailable": 0.05146599390829935
-      },
-      "ece_macro": 0.032199100037152595
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_COK",
-      "row_count": 232,
-      "macro_f1": 0.6540112994350283,
-      "balanced_accuracy": 0.6549688057040998,
-      "log_loss": 0.26506970861550533,
-      "classwise_ece": {
-        "bookable": 0.01715965384255104,
-        "price_changed": 0.028835632538182793,
-        "unavailable": 0.03530689527270625
-      },
-      "ece_macro": 0.02710072721781336
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_MAA",
-      "row_count": 225,
-      "macro_f1": 0.6304481792717086,
-      "balanced_accuracy": 0.6324786324786325,
-      "log_loss": 0.22304688808658438,
-      "classwise_ece": {
-        "bookable": 0.017222149193052864,
-        "price_changed": 0.05413704073823235,
-        "unavailable": 0.06854692689495315
-      },
-      "ece_macro": 0.046635372275412784
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_TYO",
-      "row_count": 213,
-      "macro_f1": 0.5349391807123766,
-      "balanced_accuracy": 0.561965811965812,
-      "log_loss": 0.7299257905118353,
-      "classwise_ece": {
-        "bookable": 0.039787753414951714,
-        "price_changed": 0.16743554123006374,
-        "unavailable": 0.19994053813565116
-      },
-      "ece_macro": 0.13572127759355554
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_KUL",
-      "row_count": 190,
-      "macro_f1": 0.6099270626124847,
-      "balanced_accuracy": 0.6294677544677545,
-      "log_loss": 0.3147468085655264,
-      "classwise_ece": {
-        "bookable": 0.033503219394727085,
-        "price_changed": 0.06031906449467678,
-        "unavailable": 0.031930237115571775
-      },
-      "ece_macro": 0.04191750700165855
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_SIN",
-      "row_count": 182,
-      "macro_f1": 0.689487467265245,
-      "balanced_accuracy": 0.7605316973415133,
-      "log_loss": 0.14881954561854518,
-      "classwise_ece": {
-        "bookable": 0.018610576064979845,
-        "price_changed": 0.0287923015944917,
-        "unavailable": 0.021624243147460986
-      },
-      "ece_macro": 0.023009040268977512
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_ISB",
-      "row_count": 181,
-      "macro_f1": 0.5295864890125157,
-      "balanced_accuracy": 0.5341880341880342,
-      "log_loss": 0.23417683965728675,
-      "classwise_ece": {
-        "bookable": 0.018245536054644827,
-        "price_changed": 0.023281009446164645,
-        "unavailable": 0.04152654550080961
-      },
-      "ece_macro": 0.027684363667206363
-    },
-    {
-      "group_column": "route",
-      "group_value": "LHR_JFK",
-      "row_count": 177,
-      "macro_f1": 0.5313008130081301,
-      "balanced_accuracy": 0.5555555555555555,
-      "log_loss": 0.12512543932781217,
-      "classwise_ece": {
-        "bookable": 0.01017931788648722,
-        "price_changed": 0.005593181761927872,
-        "unavailable": 0.02143591853953444
-      },
-      "ece_macro": 0.012402806062649846
-    },
-    {
-      "group_column": "route",
-      "group_value": "MAN_JED",
-      "row_count": 175,
-      "macro_f1": 0.6247213651154537,
-      "balanced_accuracy": 0.6248981467034206,
-      "log_loss": 0.5833244013908628,
-      "classwise_ece": {
-        "bookable": 0.016206927640870634,
-        "price_changed": 0.11385340682409123,
-        "unavailable": 0.10071434451237192
-      },
-      "ece_macro": 0.0769248929924446
+      "ece_macro": 0.06259714537776544
     },
     {
       "group_column": "route",
       "group_value": "LHR_JED",
-      "row_count": 172,
-      "macro_f1": 0.6110704110704112,
-      "balanced_accuracy": 0.6173225791498633,
-      "log_loss": 0.5667024567208199,
+      "row_count": 552,
+      "macro_f1": 0.31438172043010754,
+      "balanced_accuracy": 0.34045149481391096,
+      "log_loss": 0.6239173137780815,
       "classwise_ece": {
-        "bookable": 0.024970294348265157,
-        "price_changed": 0.07114348803375221,
-        "unavailable": 0.0678370785124502
+        "bookable": 0.036494166207702766,
+        "price_changed": 0.06292250509670169,
+        "unavailable": 0.07562070157874567
       },
-      "ece_macro": 0.05465028696482253
+      "ece_macro": 0.05834579096105005
     },
     {
       "group_column": "route",
-      "group_value": "LON_JED",
-      "row_count": 171,
-      "macro_f1": 0.576427494074553,
-      "balanced_accuracy": 0.6152922957801007,
-      "log_loss": 0.76557832658668,
+      "group_value": "MAN_JED",
+      "row_count": 549,
+      "macro_f1": 0.2936600670777886,
+      "balanced_accuracy": 0.33036144578313253,
+      "log_loss": 0.7166032803096019,
       "classwise_ece": {
-        "bookable": 0.07298498707105852,
-        "price_changed": 0.0764949780527075,
-        "unavailable": 0.08581206071077846
+        "bookable": 0.08153847719329625,
+        "price_changed": 0.06396059672345439,
+        "unavailable": 0.04793322064411128
       },
-      "ece_macro": 0.0784306752781815
+      "ece_macro": 0.0644774315202873
+    },
+    {
+      "group_column": "route",
+      "group_value": "LON_BOM",
+      "row_count": 540,
+      "macro_f1": 0.3074417984838619,
+      "balanced_accuracy": 0.3283298195115998,
+      "log_loss": 1.0207749685859897,
+      "classwise_ece": {
+        "bookable": 0.23494113458818175,
+        "price_changed": 0.20919663728431032,
+        "unavailable": 0.07132009973117497
+      },
+      "ece_macro": 0.17181929053455566
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_LHE",
+      "row_count": 530,
+      "macro_f1": 0.314390162844799,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 0.4095892844595311,
+      "classwise_ece": {
+        "bookable": 0.03878157721367042,
+        "price_changed": 0.04998763456516155,
+        "unavailable": 0.044244979553663195
+      },
+      "ece_macro": 0.04433806377749839
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_COK",
+      "row_count": 528,
+      "macro_f1": 0.3482463923784616,
+      "balanced_accuracy": 0.3909153765982867,
+      "log_loss": 0.5705537393623409,
+      "classwise_ece": {
+        "bookable": 0.13695754828172188,
+        "price_changed": 0.1255140379468458,
+        "unavailable": 0.04796652240459391
+      },
+      "ece_macro": 0.1034793695443872
     },
     {
       "group_column": "route",
       "group_value": "LON_CMB",
-      "row_count": 166,
-      "macro_f1": 0.5826728826728828,
-      "balanced_accuracy": 0.5591507124748667,
-      "log_loss": 0.7883914074188978,
+      "row_count": 522,
+      "macro_f1": 0.30458198223600735,
+      "balanced_accuracy": 0.34076054664289956,
+      "log_loss": 0.8689243178201203,
       "classwise_ece": {
-        "bookable": 0.00988925220723772,
-        "price_changed": 0.1539284159431911,
-        "unavailable": 0.15166606922143383
+        "bookable": 0.09225248429564155,
+        "price_changed": 0.12390400078124889,
+        "unavailable": 0.10700243106555199
       },
-      "ece_macro": 0.10516124579062087
+      "ece_macro": 0.10771963871414747
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_BLR",
+      "row_count": 481,
+      "macro_f1": 0.3269071555292727,
+      "balanced_accuracy": 0.34015909674108286,
+      "log_loss": 0.35125737704303067,
+      "classwise_ece": {
+        "bookable": 0.06503632145269529,
+        "price_changed": 0.043059762897527026,
+        "unavailable": 0.03718328849138908
+      },
+      "ece_macro": 0.04842645761387047
+    },
+    {
+      "group_column": "route",
+      "group_value": "LON_TYO",
+      "row_count": 473,
+      "macro_f1": 0.32597054886211513,
+      "balanced_accuracy": 0.37859477124183005,
+      "log_loss": 0.8747801651199683,
+      "classwise_ece": {
+        "bookable": 0.22242165442790812,
+        "price_changed": 0.22547469852290522,
+        "unavailable": 0.04207239950241782
+      },
+      "ece_macro": 0.16332291748441038
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_MAA",
+      "row_count": 470,
+      "macro_f1": 0.3122171945701358,
+      "balanced_accuracy": 0.3325301204819277,
+      "log_loss": 0.392537997822857,
+      "classwise_ece": {
+        "bookable": 0.05538781279542596,
+        "price_changed": 0.03177451605243657,
+        "unavailable": 0.042246302210344554
+      },
+      "ece_macro": 0.0431362103527357
+    },
+    {
+      "group_column": "route",
+      "group_value": "LHR_KUL",
+      "row_count": 412,
+      "macro_f1": 0.3167134746082115,
+      "balanced_accuracy": 0.33794459702302243,
+      "log_loss": 0.5096508494331562,
+      "classwise_ece": {
+        "bookable": 0.07290017071153519,
+        "price_changed": 0.04573584375666598,
+        "unavailable": 0.04108999556031362
+      },
+      "ece_macro": 0.05324200334283826
+    },
+    {
+      "group_column": "route",
+      "group_value": "LON_KUL",
+      "row_count": 406,
+      "macro_f1": 0.27889207258834764,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 0.8604550581218319,
+      "classwise_ece": {
+        "bookable": 0.07934585966861397,
+        "price_changed": 0.0798309736119797,
+        "unavailable": 0.10593553959921143
+      },
+      "ece_macro": 0.08837079095993504
+    },
+    {
+      "group_column": "route",
+      "group_value": "LON_DEL",
+      "row_count": 404,
+      "macro_f1": 0.2538838057561201,
+      "balanced_accuracy": 0.2710526315789474,
+      "log_loss": 0.9542590473674838,
+      "classwise_ece": {
+        "bookable": 0.2386917248900731,
+        "price_changed": 0.2735926251800123,
+        "unavailable": 0.058073046608086994
+      },
+      "ece_macro": 0.19011913222605747
     }
   ],
   "airline_code": [
     {
       "group_column": "airline_code",
       "group_value": "BA",
-      "row_count": 2638,
-      "macro_f1": 0.6053606642404168,
-      "balanced_accuracy": 0.6002359571413654,
-      "log_loss": 0.6781855459316937,
+      "row_count": 8240,
+      "macro_f1": 0.304158874375647,
+      "balanced_accuracy": 0.3488855925691827,
+      "log_loss": 0.9453323893159321,
       "classwise_ece": {
-        "bookable": 0.015072913631138446,
-        "price_changed": 0.09636208016506323,
-        "unavailable": 0.08868340047727577
+        "bookable": 0.20881979564515973,
+        "price_changed": 0.21103638167530644,
+        "unavailable": 0.062475665667248576
       },
-      "ece_macro": 0.06670613142449248
+      "ece_macro": 0.16077728099590494
     },
     {
       "group_column": "airline_code",
       "group_value": "AI",
-      "row_count": 1888,
-      "macro_f1": 0.6373995859452437,
-      "balanced_accuracy": 0.649682221242648,
-      "log_loss": 0.37458668832438824,
+      "row_count": 4040,
+      "macro_f1": 0.3659337488886616,
+      "balanced_accuracy": 0.40304932050694764,
+      "log_loss": 0.5628585287601856,
       "classwise_ece": {
-        "bookable": 0.02481823749358252,
-        "price_changed": 0.04991120610763496,
-        "unavailable": 0.028965344131979452
+        "bookable": 0.12583935004287566,
+        "price_changed": 0.11484683734401054,
+        "unavailable": 0.0352685038155664
       },
-      "ece_macro": 0.034564929244398974
-    },
-    {
-      "group_column": "airline_code",
-      "group_value": "ALL",
-      "row_count": 1869,
-      "macro_f1": 0.3284473398479913,
-      "balanced_accuracy": 0.3333333333333333,
-      "log_loss": 0.15683455111284922,
-      "classwise_ece": {
-        "bookable": 0.019810944905799044,
-        "price_changed": 0.002900416805502342,
-        "unavailable": 0.016910528100296536
-      },
-      "ece_macro": 0.013207296603865973
-    },
-    {
-      "group_column": "airline_code",
-      "group_value": "EY",
-      "row_count": 1408,
-      "macro_f1": 0.6098093011252,
-      "balanced_accuracy": 0.6106812994912159,
-      "log_loss": 0.428892231681429,
-      "classwise_ece": {
-        "bookable": 0.014686115521696618,
-        "price_changed": 0.06549759188632048,
-        "unavailable": 0.07739520831013758
-      },
-      "ece_macro": 0.052526305239384896
-    },
-    {
-      "group_column": "airline_code",
-      "group_value": "QR",
-      "row_count": 1155,
-      "macro_f1": 0.6086295854668182,
-      "balanced_accuracy": 0.6082170988001483,
-      "log_loss": 0.4952017205939295,
-      "classwise_ece": {
-        "bookable": 0.03415647550708736,
-        "price_changed": 0.06362782846227945,
-        "unavailable": 0.07484646704575745
-      },
-      "ece_macro": 0.05754359033837475
+      "ece_macro": 0.0919848970674842
     },
     {
       "group_column": "airline_code",
       "group_value": "EK",
-      "row_count": 1150,
-      "macro_f1": 0.6591488535304832,
-      "balanced_accuracy": 0.656387829076516,
-      "log_loss": 0.5953243852500285,
+      "row_count": 3836,
+      "macro_f1": 0.3424414944584902,
+      "balanced_accuracy": 0.3565474014792976,
+      "log_loss": 0.7955245629453209,
       "classwise_ece": {
-        "bookable": 0.01812739607342117,
-        "price_changed": 0.0960346691007131,
-        "unavailable": 0.08079773008736094
+        "bookable": 0.16209993147120272,
+        "price_changed": 0.13666755561475918,
+        "unavailable": 0.0737867538788748
       },
-      "ece_macro": 0.0649865984204984
+      "ece_macro": 0.1241847469882789
     },
     {
       "group_column": "airline_code",
-      "group_value": "CX",
-      "row_count": 928,
-      "macro_f1": 0.6317970470674606,
-      "balanced_accuracy": 0.6561199036796809,
-      "log_loss": 0.483931560044078,
+      "group_value": "EY",
+      "row_count": 3690,
+      "macro_f1": 0.34279739441381657,
+      "balanced_accuracy": 0.3653199544962531,
+      "log_loss": 0.6881572417147274,
       "classwise_ece": {
-        "bookable": 0.023502847520258455,
-        "price_changed": 0.10200249357765477,
-        "unavailable": 0.08488055212343672
+        "bookable": 0.1374043503848815,
+        "price_changed": 0.1279610871693106,
+        "unavailable": 0.05536353287394497
       },
-      "ece_macro": 0.07012863107378331
+      "ece_macro": 0.10690965680937901
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "ALL",
+      "row_count": 2745,
+      "macro_f1": 0.3308252278705573,
+      "balanced_accuracy": 0.3333333333333333,
+      "log_loss": 0.1271762704872255,
+      "classwise_ece": {
+        "bookable": 0.014509935109244254,
+        "price_changed": 0.0037681123695761055,
+        "unavailable": 0.010741822739668224
+      },
+      "ece_macro": 0.009673290072829528
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "QR",
+      "row_count": 2562,
+      "macro_f1": 0.3443930909279051,
+      "balanced_accuracy": 0.35807478327928227,
+      "log_loss": 0.670627683324953,
+      "classwise_ece": {
+        "bookable": 0.10867972282104721,
+        "price_changed": 0.08960297981161383,
+        "unavailable": 0.059477012477526375
+      },
+      "ece_macro": 0.08591990503672914
     },
     {
       "group_column": "airline_code",
       "group_value": "VS",
-      "row_count": 847,
-      "macro_f1": 0.6100651089757295,
-      "balanced_accuracy": 0.6130216953610567,
-      "log_loss": 0.5120899042443263,
+      "row_count": 2226,
+      "macro_f1": 0.3430532605763484,
+      "balanced_accuracy": 0.3715324014687218,
+      "log_loss": 0.7311096161492191,
       "classwise_ece": {
-        "bookable": 0.02533722270628374,
-        "price_changed": 0.06880605755541769,
-        "unavailable": 0.0689986857037425
+        "bookable": 0.18241608443047422,
+        "price_changed": 0.15467523983217077,
+        "unavailable": 0.058654914007769426
       },
-      "ece_macro": 0.05438065532181465
+      "ece_macro": 0.13191541275680482
     },
     {
       "group_column": "airline_code",
       "group_value": "TK",
-      "row_count": 710,
-      "macro_f1": 0.6148470014744697,
-      "balanced_accuracy": 0.6091116595689766,
-      "log_loss": 0.6656629954562434,
+      "row_count": 2118,
+      "macro_f1": 0.33707462224788737,
+      "balanced_accuracy": 0.35335310653706875,
+      "log_loss": 0.8829444122626231,
       "classwise_ece": {
-        "bookable": 0.02658434295665959,
-        "price_changed": 0.11616917712206515,
-        "unavailable": 0.10104170668622978
+        "bookable": 0.19784210289171492,
+        "price_changed": 0.1790182799984929,
+        "unavailable": 0.07618517112563283
       },
-      "ece_macro": 0.08126507558831818
+      "ece_macro": 0.15101518467194688
     },
     {
       "group_column": "airline_code",
       "group_value": "SV",
-      "row_count": 553,
-      "macro_f1": 0.62116699845167,
-      "balanced_accuracy": 0.6304843304843305,
-      "log_loss": 0.5130312948140862,
+      "row_count": 1640,
+      "macro_f1": 0.35145113102859576,
+      "balanced_accuracy": 0.35932738406409587,
+      "log_loss": 0.6359463005699466,
       "classwise_ece": {
-        "bookable": 0.02011006073867482,
-        "price_changed": 0.07621337514193922,
-        "unavailable": 0.058540571431827906
+        "bookable": 0.08661961750471234,
+        "price_changed": 0.08505079819402257,
+        "unavailable": 0.06230072003334823
       },
-      "ece_macro": 0.05162133577081398
+      "ece_macro": 0.07799037857736106
     },
     {
       "group_column": "airline_code",
-      "group_value": "6E",
-      "row_count": 425,
-      "macro_f1": 0.6263806237149353,
-      "balanced_accuracy": 0.6220258854529954,
-      "log_loss": 0.18132045866132682,
+      "group_value": "CX",
+      "row_count": 1497,
+      "macro_f1": 0.3504237567563917,
+      "balanced_accuracy": 0.3643625532233398,
+      "log_loss": 0.6237619248880497,
       "classwise_ece": {
-        "bookable": 0.016071333274127603,
-        "price_changed": 0.024004292113682997,
-        "unavailable": 0.015463138654445817
+        "bookable": 0.13367467036123953,
+        "price_changed": 0.12490986763944312,
+        "unavailable": 0.04516228248308478
       },
-      "ece_macro": 0.018512921347418807
+      "ece_macro": 0.10124894016125581
     },
     {
       "group_column": "airline_code",
       "group_value": "SQ",
-      "row_count": 391,
-      "macro_f1": 0.5618988635571581,
-      "balanced_accuracy": 0.5689647787427782,
-      "log_loss": 0.6286004056789252,
+      "row_count": 1167,
+      "macro_f1": 0.3160645999584397,
+      "balanced_accuracy": 0.3440360024147961,
+      "log_loss": 0.7315534566102491,
       "classwise_ece": {
-        "bookable": 0.06986841297415086,
-        "price_changed": 0.09613681585034227,
-        "unavailable": 0.03698717761178344
+        "bookable": 0.20554462690572983,
+        "price_changed": 0.1842822521774551,
+        "unavailable": 0.051609917037440896
       },
-      "ece_macro": 0.06766413547875887
-    },
-    {
-      "group_column": "airline_code",
-      "group_value": "GF",
-      "row_count": 328,
-      "macro_f1": 0.5774464455614524,
-      "balanced_accuracy": 0.5960900367680029,
-      "log_loss": 0.44598277074532205,
-      "classwise_ece": {
-        "bookable": 0.04564899566927156,
-        "price_changed": 0.049142063789641297,
-        "unavailable": 0.022596698512009284
-      },
-      "ece_macro": 0.03912925265697405
+      "ece_macro": 0.14714559870687527
     },
     {
       "group_column": "airline_code",
       "group_value": "CZ",
-      "row_count": 303,
-      "macro_f1": 0.5897117933659227,
-      "balanced_accuracy": 0.5798687379021006,
-      "log_loss": 0.6677200212742372,
+      "row_count": 977,
+      "macro_f1": 0.32222956248637813,
+      "balanced_accuracy": 0.35499246759296116,
+      "log_loss": 0.7944198478685088,
       "classwise_ece": {
-        "bookable": 0.021248187103893222,
-        "price_changed": 0.0951561596074878,
-        "unavailable": 0.07235854262363159
+        "bookable": 0.17087921526673128,
+        "price_changed": 0.15564708074308592,
+        "unavailable": 0.04932962734139935
       },
-      "ece_macro": 0.06292096311167088
+      "ece_macro": 0.12528530778373884
     },
     {
       "group_column": "airline_code",
       "group_value": "MU",
-      "row_count": 294,
-      "macro_f1": 0.5641695287561664,
-      "balanced_accuracy": 0.5659678012619189,
-      "log_loss": 0.6860015649930836,
+      "row_count": 912,
+      "macro_f1": 0.33269459152365477,
+      "balanced_accuracy": 0.3546187594448724,
+      "log_loss": 0.8212134869467682,
       "classwise_ece": {
-        "bookable": 0.06196711253325546,
-        "price_changed": 0.11829730391552697,
-        "unavailable": 0.08373842557513766
+        "bookable": 0.18293533730153247,
+        "price_changed": 0.18200777152373665,
+        "unavailable": 0.05507750197470574
       },
-      "ece_macro": 0.0880009473413067
+      "ece_macro": 0.14000687026665828
     },
     {
       "group_column": "airline_code",
-      "group_value": "RJ",
-      "row_count": 265,
-      "macro_f1": 0.64618589123629,
-      "balanced_accuracy": 0.646776042178341,
-      "log_loss": 0.5238624088524225,
+      "group_value": "GF",
+      "row_count": 749,
+      "macro_f1": 0.32841782348517223,
+      "balanced_accuracy": 0.34034102408419353,
+      "log_loss": 0.5789671085536521,
       "classwise_ece": {
-        "bookable": 0.02652415928509844,
-        "price_changed": 0.07512636585618225,
-        "unavailable": 0.09122738483719574
+        "bookable": 0.15423917791119995,
+        "price_changed": 0.10367566369387812,
+        "unavailable": 0.05551410734329145
       },
-      "ece_macro": 0.06429263665949214
+      "ece_macro": 0.10447631631612316
     },
     {
       "group_column": "airline_code",
       "group_value": "KL",
-      "row_count": 222,
-      "macro_f1": 0.5877903432488586,
-      "balanced_accuracy": 0.5935983208710481,
-      "log_loss": 0.5452895847445937,
+      "row_count": 727,
+      "macro_f1": 0.323843959179218,
+      "balanced_accuracy": 0.3631587033338455,
+      "log_loss": 0.8005607088280886,
       "classwise_ece": {
-        "bookable": 0.03300475889239734,
-        "price_changed": 0.1273659946974837,
-        "unavailable": 0.11742819145698034
+        "bookable": 0.18746197982517707,
+        "price_changed": 0.1663460236900785,
+        "unavailable": 0.06514098959582858
       },
-      "ece_macro": 0.09259964834895379
+      "ece_macro": 0.1396496643703614
     },
     {
       "group_column": "airline_code",
-      "group_value": "UL",
-      "row_count": 197,
-      "macro_f1": 0.6385846902642768,
-      "balanced_accuracy": 0.6442995108491157,
-      "log_loss": 0.5574559684298944,
+      "group_value": "6E",
+      "row_count": 699,
+      "macro_f1": 0.32065622669649513,
+      "balanced_accuracy": 0.329249617151608,
+      "log_loss": 0.2549893393087124,
       "classwise_ece": {
-        "bookable": 0.03935576183455843,
-        "price_changed": 0.11549750203509934,
-        "unavailable": 0.07935287839000847
+        "bookable": 0.04317631656685677,
+        "price_changed": 0.024439141120469243,
+        "unavailable": 0.028365643754823328
       },
-      "ece_macro": 0.07806871408655541
+      "ece_macro": 0.031993700480716446
     },
     {
       "group_column": "airline_code",
       "group_value": "BA/CZ",
-      "row_count": 187,
-      "macro_f1": 0.5918909764561127,
-      "balanced_accuracy": 0.5981035357511503,
-      "log_loss": 0.7086023696605037,
+      "row_count": 687,
+      "macro_f1": 0.3043943400082107,
+      "balanced_accuracy": 0.3660529617197301,
+      "log_loss": 0.8936731514776861,
       "classwise_ece": {
-        "bookable": 0.06933492965861414,
-        "price_changed": 0.16823329212930938,
-        "unavailable": 0.09086149775750763
+        "bookable": 0.21807002323647928,
+        "price_changed": 0.22829867232898204,
+        "unavailable": 0.04944057687578133
       },
-      "ece_macro": 0.10947657318181038
+      "ece_macro": 0.16526975748041423
     },
     {
       "group_column": "airline_code",
       "group_value": "ET",
-      "row_count": 183,
-      "macro_f1": 0.4538220551378447,
-      "balanced_accuracy": 0.43280138956738856,
-      "log_loss": 1.018782680115065,
+      "row_count": 598,
+      "macro_f1": 0.3033307409756763,
+      "balanced_accuracy": 0.31746797818226385,
+      "log_loss": 0.9645263603590608,
       "classwise_ece": {
-        "bookable": 0.10643617326681674,
-        "price_changed": 0.16903238339021426,
-        "unavailable": 0.06365219006217067
+        "bookable": 0.27200269976610036,
+        "price_changed": 0.22103460212164552,
+        "unavailable": 0.06636259259310719
       },
-      "ece_macro": 0.11304024890640056
+      "ece_macro": 0.18646663149361767
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "RJ",
+      "row_count": 582,
+      "macro_f1": 0.3648981685286345,
+      "balanced_accuracy": 0.386528326745718,
+      "log_loss": 0.7377800841342053,
+      "classwise_ece": {
+        "bookable": 0.1402927512317135,
+        "price_changed": 0.12649951901129383,
+        "unavailable": 0.05587875955777999
+      },
+      "ece_macro": 0.10755700993359578
+    },
+    {
+      "group_column": "airline_code",
+      "group_value": "TP",
+      "row_count": 546,
+      "macro_f1": 0.27838497905043574,
+      "balanced_accuracy": 0.3364958967884479,
+      "log_loss": 0.9559300129500237,
+      "classwise_ece": {
+        "bookable": 0.2953553147110387,
+        "price_changed": 0.2503733805910415,
+        "unavailable": 0.07040694010637102
+      },
+      "ece_macro": 0.2053785451361504
     }
   ],
   "days_to_departure_bucket": [
     {
       "group_column": "days_to_departure_bucket",
-      "group_value": "121_plus",
-      "row_count": 6320,
-      "macro_f1": 0.6258981084937472,
-      "balanced_accuracy": 0.625078647328499,
-      "log_loss": 0.5889236558616486,
+      "group_value": "90_365_days",
+      "row_count": 22621,
+      "macro_f1": 0.33235474265507586,
+      "balanced_accuracy": 0.3581596084291963,
+      "log_loss": 0.8044644296706442,
       "classwise_ece": {
-        "bookable": 0.021776544077637967,
-        "price_changed": 0.09383358413159984,
-        "unavailable": 0.0857270673476045
+        "bookable": 0.1690100452194951,
+        "price_changed": 0.15616099288692173,
+        "unavailable": 0.05755399753510302
       },
-      "ece_macro": 0.06711239851894744
+      "ece_macro": 0.1275750118805066
     },
     {
       "group_column": "days_to_departure_bucket",
-      "group_value": "31_60",
-      "row_count": 4643,
-      "macro_f1": 0.6093547882906213,
-      "balanced_accuracy": 0.6161743424271595,
-      "log_loss": 0.48862098234569906,
+      "group_value": "30_90_days",
+      "row_count": 17842,
+      "macro_f1": 0.34212332649952854,
+      "balanced_accuracy": 0.3678826442981704,
+      "log_loss": 0.7086542397009424,
       "classwise_ece": {
-        "bookable": 0.024023209400574858,
-        "price_changed": 0.07723824844035489,
-        "unavailable": 0.061044544470952776
+        "bookable": 0.1442479973530177,
+        "price_changed": 0.13351813281030392,
+        "unavailable": 0.05792644593800511
       },
-      "ece_macro": 0.05410200077062751
+      "ece_macro": 0.11189752536710891
     },
     {
       "group_column": "days_to_departure_bucket",
-      "group_value": "61_120",
-      "row_count": 3599,
-      "macro_f1": 0.6221618653985262,
-      "balanced_accuracy": 0.6228010190213021,
-      "log_loss": 0.5652343884040384,
+      "group_value": "14_30_days",
+      "row_count": 6813,
+      "macro_f1": 0.33770181531337723,
+      "balanced_accuracy": 0.3717518948780809,
+      "log_loss": 0.7223808127771059,
       "classwise_ece": {
-        "bookable": 0.02124309209411178,
-        "price_changed": 0.08442125886087984,
-        "unavailable": 0.08222351754628118
+        "bookable": 0.16065506459876702,
+        "price_changed": 0.15378429686178827,
+        "unavailable": 0.06054284145116464
       },
-      "ece_macro": 0.06262928950042428
+      "ece_macro": 0.12499406763723997
     },
     {
       "group_column": "days_to_departure_bucket",
-      "group_value": "15_30",
-      "row_count": 2763,
-      "macro_f1": 0.6186280648719814,
-      "balanced_accuracy": 0.6261017115480242,
-      "log_loss": 0.48845521119319824,
+      "group_value": "7_14_days",
+      "row_count": 3377,
+      "macro_f1": 0.3550086435166208,
+      "balanced_accuracy": 0.37550398360239123,
+      "log_loss": 0.6634535871098239,
       "classwise_ece": {
-        "bookable": 0.03168800087489359,
-        "price_changed": 0.06783555472391757,
-        "unavailable": 0.049752699443473415
+        "bookable": 0.13189466372638825,
+        "price_changed": 0.1168314419628272,
+        "unavailable": 0.06020723721718629
       },
-      "ece_macro": 0.04975875168076152
+      "ece_macro": 0.10297778096880057
     },
     {
       "group_column": "days_to_departure_bucket",
-      "group_value": "8_14",
-      "row_count": 1411,
-      "macro_f1": 0.6292201866733568,
-      "balanced_accuracy": 0.6388944921579917,
-      "log_loss": 0.41310840575556507,
+      "group_value": "3_7_days",
+      "row_count": 2689,
+      "macro_f1": 0.3194513330241873,
+      "balanced_accuracy": 0.3282484594315005,
+      "log_loss": 0.6902855975486871,
       "classwise_ece": {
-        "bookable": 0.01098556155374131,
-        "price_changed": 0.05905793991102442,
-        "unavailable": 0.056406252272677294
+        "bookable": 0.13556011642117063,
+        "price_changed": 0.10309525943169398,
+        "unavailable": 0.0613728158410625
       },
-      "ece_macro": 0.04214991791248101
+      "ece_macro": 0.10000939723130904
     },
     {
       "group_column": "days_to_departure_bucket",
-      "group_value": "4_7",
-      "row_count": 895,
-      "macro_f1": 0.5892226942558055,
-      "balanced_accuracy": 0.5979741836315542,
-      "log_loss": 0.5341535580332472,
+      "group_value": "1_3_days",
+      "row_count": 1551,
+      "macro_f1": 0.3277771387892423,
+      "balanced_accuracy": 0.34000885022158656,
+      "log_loss": 0.65786060747851,
       "classwise_ece": {
-        "bookable": 0.03181902415701671,
-        "price_changed": 0.07995647778447917,
-        "unavailable": 0.05317155926081073
+        "bookable": 0.10636225760149513,
+        "price_changed": 0.08644107195200695,
+        "unavailable": 0.07529567774129445
       },
-      "ece_macro": 0.05498235373410221
-    },
-    {
-      "group_column": "days_to_departure_bucket",
-      "group_value": "0_3",
-      "row_count": 661,
-      "macro_f1": 0.6053276148193318,
-      "balanced_accuracy": 0.6121584348084211,
-      "log_loss": 0.5218409140015803,
-      "classwise_ece": {
-        "bookable": 0.03358468109285343,
-        "price_changed": 0.0919297891048874,
-        "unavailable": 0.06611763070663661
-      },
-      "ece_macro": 0.0638773669681258
-    }
-  ],
-  "trip_type": [
-    {
-      "group_column": "trip_type",
-      "group_value": "Return",
-      "row_count": 11787,
-      "macro_f1": 0.6270368578875062,
-      "balanced_accuracy": 0.6275833482450992,
-      "log_loss": 0.515749973536494,
-      "classwise_ece": {
-        "bookable": 0.014171643664073755,
-        "price_changed": 0.08198690603040294,
-        "unavailable": 0.0790330456248606
-      },
-      "ece_macro": 0.058397198439779106
-    },
-    {
-      "group_column": "trip_type",
-      "group_value": "Multicity",
-      "row_count": 4544,
-      "macro_f1": 0.6011193982163714,
-      "balanced_accuracy": 0.6049618232811026,
-      "log_loss": 0.6447013925475833,
-      "classwise_ece": {
-        "bookable": 0.049636574065433745,
-        "price_changed": 0.0968572229329368,
-        "unavailable": 0.06181088630057814
-      },
-      "ece_macro": 0.0694348944329829
-    },
-    {
-      "group_column": "trip_type",
-      "group_value": "Oneway",
-      "row_count": 3961,
-      "macro_f1": 0.6167978286874191,
-      "balanced_accuracy": 0.6250351231637822,
-      "log_loss": 0.44730553187949273,
-      "classwise_ece": {
-        "bookable": 0.021537017905027628,
-        "price_changed": 0.0632570971194289,
-        "unavailable": 0.052320676790246365
-      },
-      "ece_macro": 0.04570493060490096
-    }
-  ],
-  "cache_age_bucket": [
-    {
-      "group_column": "cache_age_bucket",
-      "group_value": "subhour",
-      "row_count": 20292,
-      "macro_f1": 0.6204449623001729,
-      "balanced_accuracy": 0.6228131201889747,
-      "log_loss": 0.531265783441038,
-      "classwise_ece": {
-        "bookable": 0.02350021117131523,
-        "price_changed": 0.0815814391058581,
-        "unavailable": 0.06992220362959939
-      },
-      "ece_macro": 0.058334617968924245
+      "ece_macro": 0.08936633576493218
     }
   ]
 }

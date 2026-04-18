@@ -1,0 +1,38 @@
+{
+  "generated_at_utc": "2026-04-17T13:43:36.664713+00:00",
+  "pipeline_version": "v2.1_research_evidence_hardened",
+  "labels_evaluated": [
+    "bookable",
+    "price_changed",
+    "unavailable"
+  ],
+  "data_rows": {
+    "processed": 366126,
+    "supervised": 366126
+  },
+  "artifacts_expected": [
+    "summary.json",
+    "model_comparison.json",
+    "calibration_comparison.json",
+    "final_test_metrics.json",
+    "naive_baselines.json",
+    "significance_tests.json",
+    "drift_analysis.json",
+    "provider_holdout_evaluation.json",
+    "class_presence.json",
+    "experiment_manifest.json"
+  ],
+  "artifacts_present": [
+    "summary.json",
+    "model_comparison.json",
+    "calibration_comparison.json",
+    "final_test_metrics.json",
+    "naive_baselines.json",
+    "significance_tests.json",
+    "drift_analysis.json",
+    "provider_holdout_evaluation.json",
+    "class_presence.json",
+    "experiment_manifest.json"
+  ],
+  "artifacts_missing": []
+}

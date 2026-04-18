@@ -1,0 +1,4 @@
+{
+  "status": "failed",
+  "error": "property 'feature_names_in_' of 'Pipeline' object has no setter"
+}

@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "results": [
+    {
+      "class": "bookable",
+      "saved_to": "/Users/samahithan/Desktop/Fyp/20210863_IPD/artifacts/reports/pdp_bookable.png",
+      "features": [
+        "days_to_departure",
+        "search_hour",
+        "search_dayofweek",
+        "search_month",
+        "departure_month",
+        "is_weekend_search"
+      ]
+    },
+    {
+      "class": "price_changed",
+      "saved_to": "/Users/samahithan/Desktop/Fyp/20210863_IPD/artifacts/reports/pdp_price_changed.png",
+      "features": [
+        "days_to_departure",
+        "search_hour",
+        "search_dayofweek",
+        "search_month",
+        "departure_month",
+        "is_weekend_search"
+      ]
+    }
+  ]
+}

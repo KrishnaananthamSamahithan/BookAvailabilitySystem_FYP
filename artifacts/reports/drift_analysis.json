@@ -1,0 +1,424 @@
+{
+  "numeric": {
+    "days_to_departure": {
+      "psi": 0.0755,
+      "psi_status": "stable",
+      "ks_statistic": 0.0637,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "search_hour": {
+      "psi": 0.0041,
+      "psi_status": "stable",
+      "ks_statistic": 0.0186,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "search_dayofweek": {
+      "psi": 0.1017,
+      "psi_status": "monitor",
+      "ks_statistic": 0.141,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "search_month": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.5076,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "departure_month": {
+      "psi": 0.8178,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.2403,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "is_weekend_search": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.141,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "passenger_count": {
+      "psi": 0.0026,
+      "psi_status": "stable",
+      "ks_statistic": 0.019,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "stop_count": {
+      "psi": 0.0016,
+      "psi_status": "stable",
+      "ks_statistic": 0.0178,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "is_multi_stop": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.017,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "is_short_lead": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0146,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "is_long_lead": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0113,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "route_search_density": {
+      "psi": 0.0136,
+      "psi_status": "stable",
+      "ks_statistic": 0.0301,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_offer_density": {
+      "psi": 8.5637,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.7031,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "missing_price": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "unknown_provider": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "price_total": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "route_day_min_price": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "route_day_median_price": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "price_gap_to_min": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "price_ratio_to_median": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "price_rank_in_route_day": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.6966,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "offers_in_route_day": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.6966,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_prior_count": {
+      "psi": 12.4339,
+      "psi_status": "drift_detected",
+      "ks_statistic": 1.0,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_prior_rate_bookable": {
+      "psi": 12.4339,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.9999,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_prior_rate_price_changed": {
+      "psi": 12.4339,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.9997,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_prior_rate_unavailable": {
+      "psi": 12.4339,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.9999,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_prior_rate_technical_failure": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "ks_statistic": 0.0,
+      "ks_p_value": 1.0,
+      "is_drifted": false
+    },
+    "route_prior_count": {
+      "psi": 0.4999,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.2893,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "route_prior_rate_bookable": {
+      "psi": 0.1174,
+      "psi_status": "monitor",
+      "ks_statistic": 0.0984,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "route_prior_rate_unavailable": {
+      "psi": 0.1082,
+      "psi_status": "monitor",
+      "ks_statistic": 0.0804,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_route_prior_rate_bookable": {
+      "psi": 0.117,
+      "psi_status": "monitor",
+      "ks_statistic": 0.0984,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_route_prior_rate_unavailable": {
+      "psi": 0.1081,
+      "psi_status": "monitor",
+      "ks_statistic": 0.0804,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "airline_route_prior_rate_unavailable": {
+      "psi": 0.2655,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.1142,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_minutes_since_prev": {
+      "psi": 12.1381,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.9996,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "route_minutes_since_prev": {
+      "psi": 8.1548,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.8505,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    },
+    "provider_route_minutes_since_prev": {
+      "psi": 8.1542,
+      "psi_status": "drift_detected",
+      "ks_statistic": 0.8505,
+      "ks_p_value": 0.0,
+      "is_drifted": true
+    }
+  },
+  "categorical": {
+    "trip_type": {
+      "psi": 0.0091,
+      "psi_status": "stable",
+      "unique_train": 3,
+      "unique_current": 3,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "cabin_class": {
+      "psi": 0.0016,
+      "psi_status": "stable",
+      "unique_train": 7,
+      "unique_current": 5,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "origin_airport": {
+      "psi": 0.0149,
+      "psi_status": "stable",
+      "unique_train": 83,
+      "unique_current": 50,
+      "new_categories": 14,
+      "is_drifted": false
+    },
+    "destination_airport": {
+      "psi": 0.2336,
+      "psi_status": "monitor",
+      "unique_train": 1022,
+      "unique_current": 643,
+      "new_categories": 31,
+      "is_drifted": false
+    },
+    "airline_code": {
+      "psi": 0.4606,
+      "psi_status": "drift_detected",
+      "unique_train": 4074,
+      "unique_current": 1729,
+      "new_categories": 814,
+      "is_drifted": true
+    },
+    "route": {
+      "psi": 0.4892,
+      "psi_status": "drift_detected",
+      "unique_train": 4603,
+      "unique_current": 2598,
+      "new_categories": 505,
+      "is_drifted": true
+    },
+    "airline_route": {
+      "psi": 1.7459,
+      "psi_status": "drift_detected",
+      "unique_train": 21989,
+      "unique_current": 9570,
+      "new_categories": 4100,
+      "is_drifted": true
+    },
+    "provider_key": {
+      "psi": 0.0006,
+      "psi_status": "stable",
+      "unique_train": 3,
+      "unique_current": 1,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "provider_airline": {
+      "psi": 0.4612,
+      "psi_status": "drift_detected",
+      "unique_train": 4077,
+      "unique_current": 1729,
+      "new_categories": 814,
+      "is_drifted": true
+    },
+    "meta_engine": {
+      "psi": 0.0116,
+      "psi_status": "stable",
+      "unique_train": 4,
+      "unique_current": 4,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "referrer_domain": {
+      "psi": 0.0136,
+      "psi_status": "stable",
+      "unique_train": 14,
+      "unique_current": 7,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "market": {
+      "psi": 0.0,
+      "psi_status": "stable",
+      "unique_train": 1,
+      "unique_current": 1,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "locale": {
+      "psi": 0.1424,
+      "psi_status": "monitor",
+      "unique_train": 1421,
+      "unique_current": 669,
+      "new_categories": 189,
+      "is_drifted": false
+    },
+    "device_os": {
+      "psi": 0.008,
+      "psi_status": "stable",
+      "unique_train": 6,
+      "unique_current": 6,
+      "new_categories": 0,
+      "is_drifted": false
+    },
+    "days_to_departure_bucket": {
+      "psi": 0.0217,
+      "psi_status": "stable",
+      "unique_train": 7,
+      "unique_current": 7,
+      "new_categories": 0,
+      "is_drifted": false
+    }
+  },
+  "summary": {
+    "total_features_checked": 51,
+    "drifted_features_count": 32,
+    "drifted_features": [
+      "days_to_departure",
+      "search_hour",
+      "search_dayofweek",
+      "search_month",
+      "departure_month",
+      "is_weekend_search",
+      "passenger_count",
+      "stop_count",
+      "is_multi_stop",
+      "is_short_lead",
+      "is_long_lead",
+      "route_search_density",
+      "provider_offer_density",
+      "price_rank_in_route_day",
+      "offers_in_route_day",
+      "provider_prior_count",
+      "provider_prior_rate_bookable",
+      "provider_prior_rate_price_changed",
+      "provider_prior_rate_unavailable",
+      "route_prior_count",
+      "route_prior_rate_bookable",
+      "route_prior_rate_unavailable",
+      "provider_route_prior_rate_bookable",
+      "provider_route_prior_rate_unavailable",
+      "airline_route_prior_rate_unavailable",
+      "provider_minutes_since_prev",
+      "route_minutes_since_prev",
+      "provider_route_minutes_since_prev",
+      "airline_code",
+      "route",
+      "airline_route",
+      "provider_airline"
+    ],
+    "drift_rate": 0.6275,
+    "overall_status": "significant_drift",
+    "recommendation": "Significant drift detected. Retrain the model as soon as possible.",
+    "psi_thresholds": {
+      "stable": "< 0.1",
+      "monitor": "0.1\u20130.25",
+      "retrain": "> 0.25"
+    }
+  }
+}

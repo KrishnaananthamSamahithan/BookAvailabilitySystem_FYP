@@ -1,0 +1,131 @@
+{
+  "status": "completed",
+  "scoring": "f1_macro",
+  "rows": [
+    {
+      "feature": "meta_engine",
+      "importance_mean": 0.02281896086883901,
+      "importance_std": 0.0006654425833306636
+    },
+    {
+      "feature": "referrer_domain",
+      "importance_mean": 0.0025620714811264377,
+      "importance_std": 0.0002862550197696693
+    },
+    {
+      "feature": "route_search_density",
+      "importance_mean": 0.0009881147331680662,
+      "importance_std": 0.0008735655740167568
+    },
+    {
+      "feature": "route_prior_count",
+      "importance_mean": 0.0007817680997614041,
+      "importance_std": 0.0012268847133327001
+    },
+    {
+      "feature": "stop_count",
+      "importance_mean": 0.00037997337823940657,
+      "importance_std": 0.000652987283477471
+    },
+    {
+      "feature": "provider_route_prior_rate_unavailable",
+      "importance_mean": 6.863937070726856e-05,
+      "importance_std": 0.00039228790817051406
+    },
+    {
+      "feature": "passenger_count",
+      "importance_mean": 1.0287398808361824e-05,
+      "importance_std": 0.0006634239278853994
+    },
+    {
+      "feature": "provider_prior_rate_bookable",
+      "importance_mean": 2.7244945774218542e-06,
+      "importance_std": 3.2863830597934145e-06
+    },
+    {
+      "feature": "provider_prior_count",
+      "importance_mean": 1.3498183110471905e-06,
+      "importance_std": 2.699636622094381e-06
+    },
+    {
+      "feature": "provider_key",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "market",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "unknown_provider",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "search_month",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "is_short_lead",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "price_total",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "route_day_min_price",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "route_day_median_price",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "price_gap_to_min",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "price_ratio_to_median",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "price_rank_in_route_day",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "offers_in_route_day",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "missing_price",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "provider_prior_rate_technical_failure",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "provider_prior_rate_price_changed",
+      "importance_mean": -1.3498578154691465e-06,
+      "importance_std": 2.699715630938293e-06
+    },
+    {
+      "feature": "provider_prior_rate_unavailable",
+      "importance_mean": -1.3498578154691465e-06,
+      "importance_std": 2.699715630938293e-06
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "bookable": {
+    "psi": 0.0045,
+    "psi_status": "stable",
+    "ks_statistic": 0.028,
+    "ks_p_value": 0.0,
+    "is_drifted": true
+  },
+  "price_changed": {
+    "psi": 0.0042,
+    "psi_status": "stable",
+    "ks_statistic": 0.0273,
+    "ks_p_value": 0.0,
+    "is_drifted": true
+  },
+  "unavailable": {
+    "psi": 0.0052,
+    "psi_status": "stable",
+    "ks_statistic": 0.0302,
+    "ks_p_value": 0.0,
+    "is_drifted": true
+  },
+  "summary": {
+    "drifted_classes": [
+      "bookable",
+      "price_changed",
+      "unavailable"
+    ],
+    "overall_status": "significant_drift"
+  }
+}
